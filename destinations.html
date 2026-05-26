@@ -385,7 +385,7 @@ main {
     <div class="header-title">🌍 Destinations</div>
     <div class="header-sub">Programmes 10 jours pour 7</div>
   </div>
-  <div class="budget-badge" id="globalBadge">💸 Budget maîtrisé</div>
+  <div class="budget-badge">💸 Budget maîtrisé</div>
 </header>
 
 <!-- ═══ HERO ═══ -->
@@ -398,7 +398,6 @@ main {
     <button class="filter-pill" onclick="filterDest('asie',this)">🌏 Asie</button>
     <button class="filter-pill" onclick="filterDest('europe',this)">🇪🇺 Europe</button>
     <button class="filter-pill" onclick="filterDest('afrique',this)">🌍 Afrique</button>
-    <button class="filter-pill" onclick="filterDest('premium',this)">💎 Premium</button>
   </div>
 </div>
 
@@ -418,853 +417,428 @@ main {
 // ══════════════════════════════════════════════════════
 const DESTINATIONS = [
   {
-    id: "bali",
-    name: "Bali",
-    country: "Indonésie",
-    flag: "🇮🇩",
-    emoji: "🌺",
-    region: "asie",
-    color: "#f59e0b",
-    colorDark: "#92400e",
-    budget: "~1 200€",
-    budgetDetail: { vol: "550€", hotel: "280€", repas: "200€", activites: "170€" },
-    duration: "10 jours",
-    bestSeason: "Avr.–Oct.",
-    tags: ["Plages", "Temples", "Rizières", "Surf", "Fêtes"],
-    description: "L\'île des Dieux entre plages de rêve, jungle luxuriante et culture hindoue unique.",
+    id: 'bali',
+    name: 'Bali',
+    country: 'Indonésie',
+    flag: '🇮🇩',
+    emoji: '🌺',
+    region: 'asie',
+    color: '#f59e0b',
+    colorDark: '#92400e',
+    budget: '~1 200€',
+    budgetDetail: { vol: '550€', hotel: '280€', repas: '200€', activites: '170€' },
+    duration: '10 jours',
+    bestSeason: 'Avr.–Oct.',
+    tags: ['Plages', 'Temples', 'Rizières', 'Surf', 'Fêtes'],
+    description: 'L\'île des Dieux entre plages de rêve, jungle luxuriante et culture hindoue unique.',
     tips: [
-      "Réservez vos vols 3-4 mois à l\'avance sur Skyscanner (escale Singapour ou KL = moins cher)",
-      "Louer des scooters à Ubud : 5€/j — idéal pour 7 dans les rizières",
-      "Budget repas : 2-4€ le warung local, évitez les restaurants touristiques du centre de Kuta",
-      "Négociez le logement en villa privée pour 7 : 50-80€/nuit total sur Airbnb",
-      "La période avril-octobre = saison sèche, idéale. Juillet-août = plus fréquenté mais festif'
+      'Réservez vos vols 3-4 mois à l\'avance sur Skyscanner (escale Singapour ou KL = moins cher)',
+      'Louer des scooters à Ubud : 5€/j — idéal pour 7 dans les rizières',
+      'Budget repas : 2-4€ le warung local, évitez les restaurants touristiques du centre de Kuta',
+      'Négociez le logement en villa privée pour 7 : 50-80€/nuit total sur Airbnb',
+      'La période avril-octobre = saison sèche, idéale. Juillet-août = plus fréquenté mais festif'
     ],
     days: [
-      { title: 'Arrivée & Seminyak", location: "📍 Seminyak", color: "#f59e0b", activities: [
-        { icon: "✈️", name: "Vol & Arrivée", detail: "Atterrissage à Ngurah Rai (DPS). Transfer en taxi fixe vers l\'hôtel.", cost: "Inclus" },
-        { icon: "🏠", name: "Check-in villa", detail: "Installation dans votre villa 7 personnes avec piscine privée à Seminyak.", cost: "~55€/nuit" },
-        { icon: "🌅", name: "Premier coucher de soleil", detail: "Plage de Seminyak — bintang à la main, coucher de soleil légendaire.", cost: "~2€" },
-        { icon: "🍜", name: "Dîner Warung Sunset", detail: "Nasi goreng, mie goreng, sate ayam — le vrai goût de Bali à 2€/plat.", cost: "~4€/pers" }
+      { title: 'Arrivée & Seminyak', location: '📍 Seminyak', color: '#f59e0b', activities: [
+        { icon: '✈️', name: 'Vol & Arrivée', detail: 'Atterrissage à Ngurah Rai (DPS). Transfer en taxi fixe vers l\'hôtel.', cost: 'Inclus' },
+        { icon: '🏠', name: 'Check-in villa', detail: 'Installation dans votre villa 7 personnes avec piscine privée à Seminyak.', cost: '~55€/nuit' },
+        { icon: '🌅', name: 'Premier coucher de soleil', detail: 'Plage de Seminyak — bintang à la main, coucher de soleil légendaire.', cost: '~2€' },
+        { icon: '🍜', name: 'Dîner Warung Sunset', detail: 'Nasi goreng, mie goreng, sate ayam — le vrai goût de Bali à 2€/plat.', cost: '~4€/pers' }
       ]},
-      { title: "Kuta & Surf", location: "📍 Kuta Beach", color: "#ef4444", activities: [
-        { icon: "🏄", name: "Cours de surf", detail: "École de surf à Kuta — parfait pour débutants, 2h de cours avec moniteur.", cost: "~12€" },
-        { icon: "🌊", name: "Après-midi plage", detail: "Kuta, Legian ou Double Six — eaux chaudes, palmiers, ambiance décontractée.", cost: "Gratuit" },
-        { icon: "🛍️", name: "Shopping Kuta", detail: "Barang, vêtements locaux, sarongs et souvenirs dans les marchés couverts.", cost: "~10-20€" },
-        { icon: "🍹", name: "Soirée Bintang", detail: "Quelques bars à Seminyak — terrasses rooftop, cocktails tropicaux.", cost: "~10€" }
+      { title: 'Kuta & Surf', location: '📍 Kuta Beach', color: '#ef4444', activities: [
+        { icon: '🏄', name: 'Cours de surf', detail: 'École de surf à Kuta — parfait pour débutants, 2h de cours avec moniteur.', cost: '~12€' },
+        { icon: '🌊', name: 'Après-midi plage', detail: 'Kuta, Legian ou Double Six — eaux chaudes, palmiers, ambiance décontractée.', cost: 'Gratuit' },
+        { icon: '🛍️', name: 'Shopping Kuta', detail: 'Barang, vêtements locaux, sarongs et souvenirs dans les marchés couverts.', cost: '~10-20€' },
+        { icon: '🍹', name: 'Soirée Bintang', detail: 'Quelques bars à Seminyak — terrasses rooftop, cocktails tropicaux.', cost: '~10€' }
       ]},
-      { title: "Uluwatu & Falaises", location: "📍 Péninsule de Bukit", color: "#8b5cf6", activities: [
-        { icon: "🛵", name: "Route en scooter", detail: "Louer scooters pour descendre la péninsule de Bukit — routes côtières spectaculaires.", cost: "~5€/j" },
-        { icon: "🏯", name: "Temple Uluwatu", detail: "Temple perché sur la falaise à 70m, singes sacrés et vues à couper le souffle.", cost: "~3€" },
-        { icon: "🎭", name: "Danse Kecak", detail: "Spectacle de danse Kecak au coucher du soleil sur la falaise — incontournable.", cost: "~8€" },
-        { icon: "🐠", name: "Snorkeling Nusa Dua", detail: "Eaux cristallines, poissons tropicaux, pas besoin d\'équipement coûteux.", cost: "~10€" }
+      { title: 'Uluwatu & Falaises', location: '📍 Péninsule de Bukit', color: '#8b5cf6', activities: [
+        { icon: '🛵', name: 'Route en scooter', detail: 'Louer scooters pour descendre la péninsule de Bukit — routes côtières spectaculaires.', cost: '~5€/j' },
+        { icon: '🏯', name: 'Temple Uluwatu', detail: 'Temple perché sur la falaise à 70m, singes sacrés et vues à couper le souffle.', cost: '~3€' },
+        { icon: '🎭', name: 'Danse Kecak', detail: 'Spectacle de danse Kecak au coucher du soleil sur la falaise — incontournable.', cost: '~8€' },
+        { icon: '🐠', name: 'Snorkeling Nusa Dua', detail: 'Eaux cristallines, poissons tropicaux, pas besoin d\'équipement coûteux.', cost: '~10€' }
       ]},
-      { title: "Ubud — Cœur culturel", location: "📍 Ubud", color: "#10b981", activities: [
-        { icon: "🌾", name: "Rizières de Tegallalang", detail: "Les terrasses en escalier emblématiques de Bali, tôt le matin pour éviter la foule.", cost: "~1€" },
-        { icon: "🐒", name: "Sacred Monkey Forest", detail: "Forêt sacrée avec 700 macaques — expérience unique et un peu chaotique !", cost: "~4€" },
-        { icon: "🧘", name: "Cours de yoga", detail: "Ubud est la capitale mondiale du yoga. Une session dans un shala en bambou.", cost: "~8€" },
-        { icon: "🎨", name: "Musée Neka", detail: "Art balinais et indonésien — peintres locaux contemporains fascinants.", cost: "~3€" }
+      { title: 'Ubud — Cœur culturel', location: '📍 Ubud', color: '#10b981', activities: [
+        { icon: '🌾', name: 'Rizières de Tegallalang', detail: 'Les terrasses en escalier emblématiques de Bali, tôt le matin pour éviter la foule.', cost: '~1€' },
+        { icon: '🐒', name: 'Sacred Monkey Forest', detail: 'Forêt sacrée avec 700 macaques — expérience unique et un peu chaotique !', cost: '~4€' },
+        { icon: '🧘', name: 'Cours de yoga', detail: 'Ubud est la capitale mondiale du yoga. Une session dans un shala en bambou.', cost: '~8€' },
+        { icon: '🎨', name: 'Musée Neka', detail: 'Art balinais et indonésien — peintres locaux contemporains fascinants.', cost: '~3€' }
       ]},
-      { title: "Volcan Batur", location: "📍 Kintamani", color: "#f97316", activities: [
-        { icon: "🌋", name: "Trek volcan Batur (départ 4h)", detail: "Lever du soleil depuis le sommet du volcan actif (1717m) — vue inoubliable.", cost: "~25€ guide" },
-        { icon: "♨️", name: "Sources chaudes", detail: "Bain dans les sources chaudes naturelles au pied du volcan — bien mérité !", cost: "~7€" },
-        { icon: "☕", name: "Plantation de café Kopi Luwak", detail: "Dégustation de café balinais, dont le fameux kopi luwak. Visite de plantation gratuite.", cost: "Gratuit" },
-        { icon: "🛕", name: "Temple Pura Ulun Danu Beratan", detail: "Temple flottant sur le lac Beratan — l\'un des plus photographiés d\'Indonésie.", cost: "~2€" }
+      { title: 'Volcan Batur', location: '📍 Kintamani', color: '#f97316', activities: [
+        { icon: '🌋', name: 'Trek volcan Batur (départ 4h)', detail: 'Lever du soleil depuis le sommet du volcan actif (1717m) — vue inoubliable.', cost: '~25€ guide' },
+        { icon: '♨️', name: 'Sources chaudes', detail: 'Bain dans les sources chaudes naturelles au pied du volcan — bien mérité !', cost: '~7€' },
+        { icon: '☕', name: 'Plantation de café Kopi Luwak', detail: 'Dégustation de café balinais, dont le fameux kopi luwak. Visite de plantation gratuite.', cost: 'Gratuit' },
+        { icon: '🛕', name: 'Temple Pura Ulun Danu Beratan', detail: 'Temple flottant sur le lac Beratan — l\'un des plus photographiés d\'Indonésie.', cost: '~2€' }
       ]},
-      { title: "Nusa Penida", location: "📍 Île de Nusa Penida", color: "#06b6d4", activities: [
-        { icon: "⛵", name: "Bateau rapide", detail: "Speed boat depuis Sanur — 30 min pour l\'île sauvage et préservée.", cost: "~10€ aller-retour" },
-        { icon: "🦅", name: "Kelingking Beach", detail: "La plage en forme de T-Rex — vue depuis la falaise parmi les plus belles au monde.", cost: "Gratuit" },
-        { icon: "💧", name: "Angel\'s Billabong", detail: "Piscine naturelle dans la roche volcanique avec eaux turquoise — magique.", cost: "Gratuit" },
-        { icon: "🐢", name: "Crystal Bay", detail: "Snorkeling avec raies manta (saison) et tortues — paradis sous-marin.", cost: "~8€ équipement" }
+      { title: 'Nusa Penida', location: '📍 Île de Nusa Penida', color: '#06b6d4', activities: [
+        { icon: '⛵', name: 'Bateau rapide', detail: 'Speed boat depuis Sanur — 30 min pour l\'île sauvage et préservée.', cost: '~10€ aller-retour' },
+        { icon: '🦅', name: 'Kelingking Beach', detail: 'La plage en forme de T-Rex — vue depuis la falaise parmi les plus belles au monde.', cost: 'Gratuit' },
+        { icon: '💧', name: 'Angel\'s Billabong', detail: 'Piscine naturelle dans la roche volcanique avec eaux turquoise — magique.', cost: 'Gratuit' },
+        { icon: '🐢', name: 'Crystal Bay', detail: 'Snorkeling avec raies manta (saison) et tortues — paradis sous-marin.', cost: '~8€ équipement' }
       ]},
-      { title: "Lovina & Nord de Bali", location: "📍 Lovina Beach", color: "#a78bfa", activities: [
-        { icon: "🐬", name: "Dauphin au lever du soleil", detail: "Bateau de pêcheur à 6h du matin pour observer les dauphins dans leur milieu naturel.", cost: "~10€" },
-        { icon: "🌊", name: "Cascade Gitgit", detail: "Randonnée jungle jusqu\'à la plus haute cascade de Bali (35m).", cost: "~2€" },
-        { icon: "🧿", name: "Village de Munduk", detail: "Village perché dans les montagnes, clous de girofle et caféiers sauvages.", cost: "Gratuit" },
-        { icon: "🍛", name: "Cours de cuisine balinaise", detail: "Apprenez le bumbu (pâte d\'épices), le lawar et le babi guling avec une famille locale.", cost: "~15€" }
+      { title: 'Lovina & Nord de Bali', location: '📍 Lovina Beach', color: '#a78bfa', activities: [
+        { icon: '🐬', name: 'Dauphin au lever du soleil', detail: 'Bateau de pêcheur à 6h du matin pour observer les dauphins dans leur milieu naturel.', cost: '~10€' },
+        { icon: '🌊', name: 'Cascade Gitgit', detail: 'Randonnée jungle jusqu\'à la plus haute cascade de Bali (35m).', cost: '~2€' },
+        { icon: '🧿', name: 'Village de Munduk', detail: 'Village perché dans les montagnes, clous de girofle et caféiers sauvages.', cost: 'Gratuit' },
+        { icon: '🍛', name: 'Cours de cuisine balinaise', detail: 'Apprenez le bumbu (pâte d\'épices), le lawar et le babi guling avec une famille locale.', cost: '~15€' }
       ]},
-      { title: "Relaxation & Spa", location: "📍 Seminyak / Ubud", color: "#ec4899", activities: [
-        { icon: "💆", name: "Spa balinais", detail: "Massage 1h + lulur (gommage à la poudre de riz) dans un spa traditionnel.", cost: "~12-18€" },
-        { icon: "🛍️", name: "Marché d\'Ubud", detail: "Artisanat local, bijoux en argent, sculptures et tissus ikat. Marchander est la règle !", cost: "~10-30€" },
-        { icon: "🌺", name: "Cérémonie temple", detail: "Assister à une cérémonie balinaise (demander l\'autorisation et s\'habiller en kebaya).", cost: "Gratuit" },
-        { icon: "🍜", name: "Nuit de warungs", detail: "Festin de street food : sate, bakso, es campur, pisang goreng…", cost: "~5€/pers" }
+      { title: 'Relaxation & Spa', location: '📍 Seminyak / Ubud', color: '#ec4899', activities: [
+        { icon: '💆', name: 'Spa balinais', detail: 'Massage 1h + lulur (gommage à la poudre de riz) dans un spa traditionnel.', cost: '~12-18€' },
+        { icon: '🛍️', name: 'Marché d\'Ubud', detail: 'Artisanat local, bijoux en argent, sculptures et tissus ikat. Marchander est la règle !', cost: '~10-30€' },
+        { icon: '🌺', name: 'Cérémonie temple', detail: 'Assister à une cérémonie balinaise (demander l\'autorisation et s\'habiller en kebaya).', cost: 'Gratuit' },
+        { icon: '🍜', name: 'Nuit de warungs', detail: 'Festin de street food : sate, bakso, es campur, pisang goreng…', cost: '~5€/pers' }
       ]},
-      { title: "Plages secrètes", location: "📍 Balangan & Padang Padang", color: "#14b8a6", activities: [
-        { icon: "🏝️", name: "Balangan Beach", detail: "Plage secrète peu connue des touristes — sable blanc, eaux calmes, grotte naturelle.", cost: "Gratuit" },
-        { icon: "🎬", name: "Padang Padang", detail: "La plage du film \"Mange, Prie, Aime\" — cachée, intime, sublime.", cost: "~1€" },
-        { icon: "🤿", name: "Plongée Amed", detail: "Site de plongée de classe mondiale : épaves de WWII et coraux intacts.", cost: "~35€ 2 plongées" },
-        { icon: "📸", name: "Golden Hour Canggu", detail: "Surf, cafés hipster, galeries d\'art — la scène la plus tendance de Bali en 2026.", cost: "~5€ café" }
+      { title: 'Plages secrètes', location: '📍 Balangan & Padang Padang', color: '#14b8a6', activities: [
+        { icon: '🏝️', name: 'Balangan Beach', detail: 'Plage secrète peu connue des touristes — sable blanc, eaux calmes, grotte naturelle.', cost: 'Gratuit' },
+        { icon: '🎬', name: 'Padang Padang', detail: 'La plage du film "Mange, Prie, Aime" — cachée, intime, sublime.', cost: '~1€' },
+        { icon: '🤿', name: 'Plongée Amed', detail: 'Site de plongée de classe mondiale : épaves de WWII et coraux intacts.', cost: '~35€ 2 plongées' },
+        { icon: '📸', name: 'Golden Hour Canggu', detail: 'Surf, cafés hipster, galeries d\'art — la scène la plus tendance de Bali en 2026.', cost: '~5€ café' }
       ]},
-      { title: "Dernier jour & Départ", location: "📍 Airport DPS", color: "#6366f1", activities: [
-        { icon: "🎁", name: "Shopping souvenirs", detail: "Derniers achats : batik, café Bali, épices, bracelets — aéroport ou marché.", cost: "~20-40€" },
-        { icon: "🍽️", name: "Dernier grand repas", detail: "Rijsttafel (festin indonésien de 15 plats) dans un bon restaurant — adieu Bali en beauté.", cost: "~12€/pers" },
-        { icon: "✈️", name: "Départ DPS", detail: "Transfer à l\'aéroport. Prévoyez 3h à l\'avance — contrôles parfois longs.", cost: "~8€ taxi" },
-        { icon: "🌅", name: "See you Bali 🙏", detail: "Selamat jalan ! On repart avec la tête pleine de rizières, de temples et de bintangs.", cost: "❤️" }
+      { title: 'Dernier jour & Départ', location: '📍 Airport DPS', color: '#6366f1', activities: [
+        { icon: '🎁', name: 'Shopping souvenirs', detail: 'Derniers achats : batik, café Bali, épices, bracelets — aéroport ou marché.', cost: '~20-40€' },
+        { icon: '🍽️', name: 'Dernier grand repas', detail: 'Rijsttafel (festin indonésien de 15 plats) dans un bon restaurant — adieu Bali en beauté.', cost: '~12€/pers' },
+        { icon: '✈️', name: 'Départ DPS', detail: 'Transfer à l\'aéroport. Prévoyez 3h à l\'avance — contrôles parfois longs.', cost: '~8€ taxi' },
+        { icon: '🌅', name: 'See you Bali 🙏', detail: 'Selamat jalan ! On repart avec la tête pleine de rizières, de temples et de bintangs.', cost: '❤️' }
       ]}
     ]
   },
 
   {
-    id: "vietnam",
-    name: "Vietnam",
-    country: "Vietnam",
-    flag: "🇻🇳",
-    emoji: "🛖",
-    region: "asie",
-    color: "#ef4444",
-    colorDark: "#7f1d1d",
-    budget: "~950€",
-    budgetDetail: { vol: "420€", hotel: "200€", repas: "150€", activites: "180€" },
-    duration: "10 jours",
-    bestSeason: "Nov.–Avr.",
-    tags: ["Pagodes", "Ha Long Bay", "Street food", "Scooter", "Culture"],
-    description: "Du nord au sud : Hanoi la frénétique, la baie d\'Ha Long, Hoi An la romantique et la mer de Chine.",
+    id: 'vietnam',
+    name: 'Vietnam',
+    country: 'Vietnam',
+    flag: '🇻🇳',
+    emoji: '🛖',
+    region: 'asie',
+    color: '#ef4444',
+    colorDark: '#7f1d1d',
+    budget: '~950€',
+    budgetDetail: { vol: '420€', hotel: '200€', repas: '150€', activites: '180€' },
+    duration: '10 jours',
+    bestSeason: 'Nov.–Avr.',
+    tags: ['Pagodes', 'Ha Long Bay', 'Street food', 'Scooter', 'Culture'],
+    description: 'Du nord au sud : Hanoi la frénétique, la baie d\'Ha Long, Hoi An la romantique et la mer de Chine.',
     tips: [
-      "Le Vietnam du nord au sud = train de nuit entre Hanoi et Hoi An (35h, 40€, couchette), économique et expérience unique",
-      "Grab (l\'Uber asiatique) remplace les taxis — 5x moins cher, pas de négociation",
-      "Budget repas : pho et banh mi à 1-2€, bière Bia Hoi à 0.30€ le verre dans Hanoi vieille ville",
-      "Réservez Ha Long Bay en catamaran (pas les bateaux bondés) — écart de prix faible, confort incomparable",
-      "Évitez la saison des typhons (août-octobre dans le centre) — privilégiez novembre à avril'
+      'Le Vietnam du nord au sud = train de nuit entre Hanoi et Hoi An (35h, 40€, couchette), économique et expérience unique',
+      'Grab (l\'Uber asiatique) remplace les taxis — 5x moins cher, pas de négociation',
+      'Budget repas : pho et banh mi à 1-2€, bière Bia Hoi à 0.30€ le verre dans Hanoi vieille ville',
+      'Réservez Ha Long Bay en catamaran (pas les bateaux bondés) — écart de prix faible, confort incomparable',
+      'Évitez la saison des typhons (août-octobre dans le centre) — privilégiez novembre à avril'
     ],
     days: [
-      { title: 'Hanoi — Vieille Ville", location: "📍 Hoan Kiem District", color: "#ef4444", activities: [
-        { icon: "✈️", name: "Arrivée Hanoi (HAN)", detail: "Atterrissage, Bus 86 vers centre-ville (1€) ou minibus 5€.", cost: "~1-5€" },
-        { icon: "🏮", name: "Hoan Kiem & Temple Ngoc Son", detail: "Le lac sacré et son temple sur l\'île — cœur battant de Hanoi.", cost: "~0.20€" },
-        { icon: "🍜", name: "Pho Bo & Bun Cha", detail: "Premier dîner dans la vieille ville : pho au bœuf et bun cha (plat préféré d\'Obama !).", cost: "~2€/plat" },
-        { icon: "🍺", name: "Bia Hoi Corner", detail: "Le carrefour des fûts de bière — 0.30€ le verre, ambiance unique au monde.", cost: "~1€" }
+      { title: 'Hanoi — Vieille Ville', location: '📍 Hoan Kiem District', color: '#ef4444', activities: [
+        { icon: '✈️', name: 'Arrivée Hanoi (HAN)', detail: 'Atterrissage, Bus 86 vers centre-ville (1€) ou minibus 5€.', cost: '~1-5€' },
+        { icon: '🏮', name: 'Hoan Kiem & Temple Ngoc Son', detail: 'Le lac sacré et son temple sur l\'île — cœur battant de Hanoi.', cost: '~0.20€' },
+        { icon: '🍜', name: 'Pho Bo & Bun Cha', detail: 'Premier dîner dans la vieille ville : pho au bœuf et bun cha (plat préféré d\'Obama !).', cost: '~2€/plat' },
+        { icon: '🍺', name: 'Bia Hoi Corner', detail: 'Le carrefour des fûts de bière — 0.30€ le verre, ambiance unique au monde.', cost: '~1€' }
       ]},
-      { title: "Hanoi Culture", location: "📍 Hanoi", color: "#f97316", activities: [
-        { icon: "⛪", name: "Mausolée Hô Chi Minh", detail: "Visite du mausolée et de la maison sur pilotis — moment de recueillement.", cost: "Gratuit" },
-        { icon: "🏺", name: "Musée d\'Ethnographie", detail: "Le meilleur musée du Vietnam — 54 ethnies, maisons traditionnelles reconstituées.", cost: "~3€" },
-        { icon: "🎭", name: "Théâtre de marionnettes sur l\'eau", detail: "Art traditionnel vietnamien du Xᵉ siècle — dragons, poissons, combats aquatiques.", cost: "~5€" },
-        { icon: "🛵", name: "Tour scooter vieille ville", detail: "Les 36 rues des guildes en scooter avec guide local — chaos organisé fascinant.", cost: "~8€" }
+      { title: 'Hanoi Culture', location: '📍 Hanoi', color: '#f97316', activities: [
+        { icon: '⛪', name: 'Mausolée Hô Chi Minh', detail: 'Visite du mausolée et de la maison sur pilotis — moment de recueillement.', cost: 'Gratuit' },
+        { icon: '🏺', name: 'Musée d\'Ethnographie', detail: 'Le meilleur musée du Vietnam — 54 ethnies, maisons traditionnelles reconstituées.', cost: '~3€' },
+        { icon: '🎭', name: 'Théâtre de marionnettes sur l\'eau', detail: 'Art traditionnel vietnamien du Xᵉ siècle — dragons, poissons, combats aquatiques.', cost: '~5€' },
+        { icon: '🛵', name: 'Tour scooter vieille ville', detail: 'Les 36 rues des guildes en scooter avec guide local — chaos organisé fascinant.', cost: '~8€' }
       ]},
-      { title: "Ha Long Bay Jour 1", location: "📍 Baie d\'Ha Long", color: "#06b6d4", activities: [
-        { icon: "🚌", name: "Transfer Hanoi → Ha Long", detail: "Bus touristique direct (4h) ou limousine partagée — départ 8h du matin.", cost: "~8-12€" },
-        { icon: "⛵", name: "Montée sur le bateau", detail: "Embarquement dans votre jonque — briefing, apéro et premier panorama sur 1969 îlots karstiques.", cost: "~95€ 2j/1n" },
-        { icon: "🚣", name: "Kayak dans les grottes", detail: "Grotte de la Surprise ou grotte des Merveilles en kayak — lumières irréelles.", cost: "Inclus" },
-        { icon: "🌅", name: "Coucher de soleil en mer", detail: "Dîner de fruits de mer sur le pont, coucher de soleil sur les rochers — image de carte postale.", cost: "Inclus" }
+      { title: 'Ha Long Bay Jour 1', location: '📍 Baie d\'Ha Long', color: '#06b6d4', activities: [
+        { icon: '🚌', name: 'Transfer Hanoi → Ha Long', detail: 'Bus touristique direct (4h) ou limousine partagée — départ 8h du matin.', cost: '~8-12€' },
+        { icon: '⛵', name: 'Montée sur le bateau', detail: 'Embarquement dans votre jonque — briefing, apéro et premier panorama sur 1969 îlots karstiques.', cost: '~95€ 2j/1n' },
+        { icon: '🚣', name: 'Kayak dans les grottes', detail: 'Grotte de la Surprise ou grotte des Merveilles en kayak — lumières irréelles.', cost: 'Inclus' },
+        { icon: '🌅', name: 'Coucher de soleil en mer', detail: 'Dîner de fruits de mer sur le pont, coucher de soleil sur les rochers — image de carte postale.', cost: 'Inclus' }
       ]},
-      { title: "Ha Long Bay Jour 2", location: "📍 Baie d\'Ha Long", color: "#0ea5e9", activities: [
-        { icon: "🌄", name: "Lever de soleil sur le pont", detail: "Réveil à 5h30 — brume matinale sur les îlots, moment de silence absolu.", cost: "Inclus" },
-        { icon: "🏊", name: "Natation & snorkeling", detail: "Baignade dans une crique secrète, eaux transparentes et étoiles de mer.", cost: "Inclus" },
-        { icon: "🦞", name: "Pêche & Cuisine", detail: "Atelier cuisine avec le chef du bateau — apprendre les rouleaux de printemps frais.", cost: "Inclus" },
-        { icon: "🚌", name: "Retour Hanoi → Train de nuit", detail: "Départ le soir pour Hue en train de nuit couchette 4 personnes.", cost: "~40€" }
+      { title: 'Ha Long Bay Jour 2', location: '📍 Baie d\'Ha Long', color: '#0ea5e9', activities: [
+        { icon: '🌄', name: 'Lever de soleil sur le pont', detail: 'Réveil à 5h30 — brume matinale sur les îlots, moment de silence absolu.', cost: 'Inclus' },
+        { icon: '🏊', name: 'Natation & snorkeling', detail: 'Baignade dans une crique secrète, eaux transparentes et étoiles de mer.', cost: 'Inclus' },
+        { icon: '🦞', name: 'Pêche & Cuisine', detail: 'Atelier cuisine avec le chef du bateau — apprendre les rouleaux de printemps frais.', cost: 'Inclus' },
+        { icon: '🚌', name: 'Retour Hanoi → Train de nuit', detail: 'Départ le soir pour Hue en train de nuit couchette 4 personnes.', cost: '~40€' }
       ]},
-      { title: "Hue — Cité Impériale", location: "📍 Hue", color: "#a78bfa", activities: [
-        { icon: "🏯", name: "Citadelle Impériale", detail: "La Cité Pourpre Interdite vietnamienne — 9 empereurs Nguyen l\'ont habitée.", cost: "~7€" },
-        { icon: "⛪", name: "Tombeau de Minh Mang", detail: "Mausolée impérial au milieu de la forêt — architecture et sérénité.", cost: "~3€" },
-        { icon: "🛵", name: "Col des Nuages (Hai Van Pass)", detail: "La route côtière la plus spectaculaire d\'Asie en scooter — vue mer + montagne.", cost: "~8€ scooter" },
-        { icon: "🍲", name: "Cuisine de Hue", detail: "Bun bo hue (soupe épicée) et banh khoai (crêpe croustillante) — gastronomie impériale.", cost: "~2€/plat" }
+      { title: 'Hue — Cité Impériale', location: '📍 Hue', color: '#a78bfa', activities: [
+        { icon: '🏯', name: 'Citadelle Impériale', detail: 'La Cité Pourpre Interdite vietnamienne — 9 empereurs Nguyen l\'ont habitée.', cost: '~7€' },
+        { icon: '⛪', name: 'Tombeau de Minh Mang', detail: 'Mausolée impérial au milieu de la forêt — architecture et sérénité.', cost: '~3€' },
+        { icon: '🛵', name: 'Col des Nuages (Hai Van Pass)', detail: 'La route côtière la plus spectaculaire d\'Asie en scooter — vue mer + montagne.', cost: '~8€ scooter' },
+        { icon: '🍲', name: 'Cuisine de Hue', detail: 'Bun bo hue (soupe épicée) et banh khoai (crêpe croustillante) — gastronomie impériale.', cost: '~2€/plat' }
       ]},
-      { title: "Hoi An — Vieille Ville", location: "📍 Hoi An", color: "#f59e0b", activities: [
-        { icon: "🏮", name: "Vieille Ville UNESCO", detail: "Rues pavées, lanternes de soie, maisons chinoises du XVIIe — romantisme absolu.", cost: "~5€ pass" },
-        { icon: "👗", name: "Tailleur sur mesure", detail: "Hoi An = capitale mondiale de la confection rapide. Chemise, robe ou costume en 24h.", cost: "~20-40€" },
-        { icon: "🌊", name: "An Bang Beach", detail: "La plage la plus belle du centre Vietnam — transats, cocktails, filets de pêche colorés.", cost: "~2€ transat" },
-        { icon: "🚴", name: "Vélo dans les rizières", detail: "Sortir de la ville à vélo le matin — villages de potiers, forêts de cocotiers.", cost: "~1€ vélo" }
+      { title: 'Hoi An — Vieille Ville', location: '📍 Hoi An', color: '#f59e0b', activities: [
+        { icon: '🏮', name: 'Vieille Ville UNESCO', detail: 'Rues pavées, lanternes de soie, maisons chinoises du XVIIe — romantisme absolu.', cost: '~5€ pass' },
+        { icon: '👗', name: 'Tailleur sur mesure', detail: 'Hoi An = capitale mondiale de la confection rapide. Chemise, robe ou costume en 24h.', cost: '~20-40€' },
+        { icon: '🌊', name: 'An Bang Beach', detail: 'La plage la plus belle du centre Vietnam — transats, cocktails, filets de pêche colorés.', cost: '~2€ transat' },
+        { icon: '🚴', name: 'Vélo dans les rizières', detail: 'Sortir de la ville à vélo le matin — villages de potiers, forêts de cocotiers.', cost: '~1€ vélo' }
       ]},
-      { title: "Hoi An activités", location: "📍 Hoi An & alentours", color: "#10b981", activities: [
-        { icon: "🍜", name: "Cours de cuisine Hoi An", detail: "Marché local + cours dans une école reconnue — cao lau, white rose, mi quang.", cost: "~18€" },
-        { icon: "⛵", name: "Coracles en bambou", detail: "Les paniers-bateaux ronds des pêcheurs — balade dans la forêt de cocotiers de Bay Mau.", cost: "~6€" },
-        { icon: "🏛️", name: "My Son Sanctuary", detail: "Temples cham du IVe-XIVe siècle dans la jungle — Angkor vietnamien moins fréquenté.", cost: "~10€" },
-        { icon: "🌅", name: "Cua Dai Beach sunset", detail: "La plage au coucher du soleil avec les bateaux de pêche qui rentrent au port.", cost: "Gratuit" }
+      { title: 'Hoi An activités', location: '📍 Hoi An & alentours', color: '#10b981', activities: [
+        { icon: '🍜', name: 'Cours de cuisine Hoi An', detail: 'Marché local + cours dans une école reconnue — cao lau, white rose, mi quang.', cost: '~18€' },
+        { icon: '⛵', name: 'Coracles en bambou', detail: 'Les paniers-bateaux ronds des pêcheurs — balade dans la forêt de cocotiers de Bay Mau.', cost: '~6€' },
+        { icon: '🏛️', name: 'My Son Sanctuary', detail: 'Temples cham du IVe-XIVe siècle dans la jungle — Angkor vietnamien moins fréquenté.', cost: '~10€' },
+        { icon: '🌅', name: 'Cua Dai Beach sunset', detail: 'La plage au coucher du soleil avec les bateaux de pêche qui rentrent au port.', cost: 'Gratuit' }
       ]},
-      { title: "Ho Chi Minh City", location: "📍 Saigon", color: "#ec4899", activities: [
-        { icon: "✈️", name: "Vol Hoi An → Saigon (DA Nang)", detail: "Vol domestique VietJet ou Bamboo Airways depuis Da Nang.", cost: "~20-40€" },
-        { icon: "🏙️", name: "Quartier 1 & Palais Réunification", detail: "La Saigon coloniale française — cathédrale Notre-Dame rose, poste centrale, ben thanh.", cost: "~2€ musée" },
-        { icon: "🌃", name: "Bui Vien Walking Street", detail: "La rue la plus animée d\'Asie du Sud-Est — bars, néons, fêtards du monde entier.", cost: "~5€ boissons" },
-        { icon: "🍢", name: "Street food Saigon", detail: "Banh mi, com tam, hu tieu, ca phe trung — le meilleur de la cuisine de rue.", cost: "~3€" }
+      { title: 'Ho Chi Minh City', location: '📍 Saigon', color: '#ec4899', activities: [
+        { icon: '✈️', name: 'Vol Hoi An → Saigon (DA Nang)', detail: 'Vol domestique VietJet ou Bamboo Airways depuis Da Nang.', cost: '~20-40€' },
+        { icon: '🏙️', name: 'Quartier 1 & Palais Réunification', detail: 'La Saigon coloniale française — cathédrale Notre-Dame rose, poste centrale, ben thanh.', cost: '~2€ musée' },
+        { icon: '🌃', name: 'Bui Vien Walking Street', detail: 'La rue la plus animée d\'Asie du Sud-Est — bars, néons, fêtards du monde entier.', cost: '~5€ boissons' },
+        { icon: '🍢', name: 'Street food Saigon', detail: 'Banh mi, com tam, hu tieu, ca phe trung — le meilleur de la cuisine de rue.', cost: '~3€' }
       ]},
-      { title: "Tunnels Cu Chi & Mékong", location: "📍 Alentours Saigon", color: "#84cc16", activities: [
-        { icon: "🪖", name: "Tunnels de Cu Chi", detail: "L\'incroyable réseau souterrain de la guerre du Vietnam — 250km de tunnels. Saisissant.", cost: "~8€" },
-        { icon: "🚤", name: "Delta du Mékong", detail: "Excursion en bateau dans les canaux — marché flottant, fruits exotiques, grenouilles sauteuses.", cost: "~22€ journée" },
-        { icon: "🏯", name: "Pagode des Ambassadeurs de Jade", detail: "Temple taoïste du XVIIe dans un jardin — tortues sacrées et encens millénaire.", cost: "Gratuit" },
-        { icon: "🍰", name: "Café egg coffee & bánh mì", detail: "Le café à l\'œuf inventé à Hanoi, et le sandwich vietnamien (meilleur du monde ?).", cost: "~2€" }
+      { title: 'Tunnels Cu Chi & Mékong', location: '📍 Alentours Saigon', color: '#84cc16', activities: [
+        { icon: '🪖', name: 'Tunnels de Cu Chi', detail: 'L\'incroyable réseau souterrain de la guerre du Vietnam — 250km de tunnels. Saisissant.', cost: '~8€' },
+        { icon: '🚤', name: 'Delta du Mékong', detail: 'Excursion en bateau dans les canaux — marché flottant, fruits exotiques, grenouilles sauteuses.', cost: '~22€ journée' },
+        { icon: '🏯', name: 'Pagode des Ambassadeurs de Jade', detail: 'Temple taoïste du XVIIe dans un jardin — tortues sacrées et encens millénaire.', cost: 'Gratuit' },
+        { icon: '🍰', name: 'Café egg coffee & bánh mì', detail: 'Le café à l\'œuf inventé à Hanoi, et le sandwich vietnamien (meilleur du monde ?).', cost: '~2€' }
       ]},
-      { title: "Dernier jour & Départ", location: "📍 Tan Son Nhat (SGN)", color: "#6366f1", activities: [
-        { icon: "🛍️", name: "Ben Thanh Market", detail: "Épices, laque, soieries, café et thé — les souvenirs parfaits, à négocier.", cost: "~15-30€" },
-        { icon: "☕", name: "Trung Nguyen Coffee", detail: "Le café le plus renommé du Vietnam — cà phê sữa đá, glacé et sucré au lait concentré.", cost: "~1€" },
-        { icon: "✈️", name: "Départ SGN", detail: "Transfer à l\'aéroport Tan Son Nhat — prévoir 3h avant le vol.", cost: "~6€ Grab" },
-        { icon: "🌺", name: "Xin chào Vietnam ! 🙏", detail: "On repart avec la tête pleine de pho, de lanternes et de baie d\'Ha Long.", cost: "❤️" }
+      { title: 'Dernier jour & Départ', location: '📍 Tan Son Nhat (SGN)', color: '#6366f1', activities: [
+        { icon: '🛍️', name: 'Ben Thanh Market', detail: 'Épices, laque, soieries, café et thé — les souvenirs parfaits, à négocier.', cost: '~15-30€' },
+        { icon: '☕', name: 'Trung Nguyen Coffee', detail: 'Le café le plus renommé du Vietnam — cà phê sữa đá, glacé et sucré au lait concentré.', cost: '~1€' },
+        { icon: '✈️', name: 'Départ SGN', detail: 'Transfer à l\'aéroport Tan Son Nhat — prévoir 3h avant le vol.', cost: '~6€ Grab' },
+        { icon: '🌺', name: 'Xin chào Vietnam ! 🙏', detail: 'On repart avec la tête pleine de pho, de lanternes et de baie d\'Ha Long.', cost: '❤️' }
       ]}
     ]
   },
 
   {
-    id: "maroc",
-    name: "Maroc",
-    country: "Maroc",
-    flag: "🇲🇦",
-    emoji: "🕌",
-    region: "afrique",
-    color: "#dc2626",
-    colorDark: "#7f1d1d",
-    budget: "~700€",
-    budgetDetail: { vol: "180€", hotel: "220€", repas: "150€", activites: "150€" },
-    duration: "10 jours",
-    bestSeason: "Mars–Mai / Sep.–Nov.",
-    tags: ["Médinas", "Désert", "Riad", "Tagine", "Montagnes"],
-    description: "De Marrakech au Sahara en passant par Fès, un voyage dans mille et une nuits depuis la France.",
+    id: 'maroc',
+    name: 'Maroc',
+    country: 'Maroc',
+    flag: '🇲🇦',
+    emoji: '🕌',
+    region: 'afrique',
+    color: '#dc2626',
+    colorDark: '#7f1d1d',
+    budget: '~700€',
+    budgetDetail: { vol: '180€', hotel: '220€', repas: '150€', activites: '150€' },
+    duration: '10 jours',
+    bestSeason: 'Mars–Mai / Sep.–Nov.',
+    tags: ['Médinas', 'Désert', 'Riad', 'Tagine', 'Montagnes'],
+    description: 'De Marrakech au Sahara en passant par Fès, un voyage dans mille et une nuits depuis la France.',
     tips: [
-      "Vol Paris-Marrakech depuis 60€ sur easyJet ou Ryanair — réservez 2-3 mois à l\'avance",
-      "Négocier est une règle sociale, pas une agression — pratiquez-vous sur les souks avec le sourire",
-      "Pas d\'alcool dans les médinas — les terrasses de riad sont là pour les soirées",
-      "CTM (bus marocain) entre les villes = 5-8€ et très fiables. Mieux que le taxi collectif",
-      "Le meilleur repas du Maroc = tajine chez l\'habitant via Airbnb Experiences (12-15€)'
+      'Vol Paris-Marrakech depuis 60€ sur easyJet ou Ryanair — réservez 2-3 mois à l\'avance',
+      'Négocier est une règle sociale, pas une agression — pratiquez-vous sur les souks avec le sourire',
+      'Pas d\'alcool dans les médinas — les terrasses de riad sont là pour les soirées',
+      'CTM (bus marocain) entre les villes = 5-8€ et très fiables. Mieux que le taxi collectif',
+      'Le meilleur repas du Maroc = tajine chez l\'habitant via Airbnb Experiences (12-15€)'
     ],
     days: [
-      { title: 'Marrakech — La Perle Rouge", location: "📍 Médina de Marrakech", color: "#dc2626", activities: [
-        { icon: "✈️", name: "Arrivée Marrakech (RAK)", detail: "Bus numéro 19 depuis l\'aéroport (0.50€) ou taxi fixe 8€ vers la Médina.", cost: "~0.50€" },
-        { icon: "🏮", name: "Jemaa el-Fna au crépuscule", detail: "La place mythique s\'anime : conteurs, charmeurs de serpents, musiciens gnawa.", cost: "Gratuit" },
-        { icon: "🕌", name: "Koutoubia", detail: "La mosquée-minaret emblématique du XIIe — l\'horizon de Marrakech.", cost: "Extérieur gratuit" },
-        { icon: "🍢", name: "Dîner Jemaa el-Fna", detail: "Kefta, harira, escargots en brochette, jus fraîchement pressé sur la place.", cost: "~4€" }
+      { title: 'Marrakech — La Perle Rouge', location: '📍 Médina de Marrakech', color: '#dc2626', activities: [
+        { icon: '✈️', name: 'Arrivée Marrakech (RAK)', detail: 'Bus numéro 19 depuis l\'aéroport (0.50€) ou taxi fixe 8€ vers la Médina.', cost: '~0.50€' },
+        { icon: '🏮', name: 'Jemaa el-Fna au crépuscule', detail: 'La place mythique s\'anime : conteurs, charmeurs de serpents, musiciens gnawa.', cost: 'Gratuit' },
+        { icon: '🕌', name: 'Koutoubia', detail: 'La mosquée-minaret emblématique du XIIe — l\'horizon de Marrakech.', cost: 'Extérieur gratuit' },
+        { icon: '🍢', name: 'Dîner Jemaa el-Fna', detail: 'Kefta, harira, escargots en brochette, jus fraîchement pressé sur la place.', cost: '~4€' }
       ]},
-      { title: "Souks & Palais", location: "📍 Médina de Marrakech", color: "#f97316", activities: [
-        { icon: "🧶", name: "Souks des artisans", detail: "Cuir à la tannerie, babouches, poterie, ferronnerie — labyrinthe de couleurs.", cost: "Shopping: ~10-30€" },
-        { icon: "🏛️", name: "Palais de la Bahia", detail: "Chef-d\'œuvre de l\'architecture arabo-andalouse du XIXe siècle.", cost: "~2€" },
-        { icon: "🌿", name: "Jardin Majorelle", detail: "L\'ancienne propriété d\'Yves Saint Laurent — bleu cobalt, cactus, musée berbère.", cost: "~7€" },
-        { icon: "🛁", name: "Hammam traditionnel", detail: "Soin complet dans un hammam de la médina — gommage, savon beldi, massage.", cost: "~12€" }
+      { title: 'Souks & Palais', location: '📍 Médina de Marrakech', color: '#f97316', activities: [
+        { icon: '🧶', name: 'Souks des artisans', detail: 'Cuir à la tannerie, babouches, poterie, ferronnerie — labyrinthe de couleurs.', cost: 'Shopping: ~10-30€' },
+        { icon: '🏛️', name: 'Palais de la Bahia', detail: 'Chef-d\'œuvre de l\'architecture arabo-andalouse du XIXe siècle.', cost: '~2€' },
+        { icon: '🌿', name: 'Jardin Majorelle', detail: 'L\'ancienne propriété d\'Yves Saint Laurent — bleu cobalt, cactus, musée berbère.', cost: '~7€' },
+        { icon: '🛁', name: 'Hammam traditionnel', detail: 'Soin complet dans un hammam de la médina — gommage, savon beldi, massage.', cost: '~12€' }
       ]},
-      { title: "Atlas & Cascades", location: "📍 Vallée de l\'Ourika", color: "#10b981", activities: [
-        { icon: "🚐", name: "Day-trip Ourika", detail: "Minibus partagé vers la vallée berbère de l\'Ourika au pied du Toubkal.", cost: "~3€ transport" },
-        { icon: "💧", name: "Cascades de Setti Fatma", detail: "Randonnée dans les cascades — 7 bassins naturels, fraîcheur bienvenue.", cost: "Gratuit" },
-        { icon: "🧀", name: "Déjeuner berbère", detail: "Couscous aux légumes dans un restaurant de village avec vue sur les montagnes.", cost: "~5€" },
-        { icon: "🐐", name: "Village d\'Aït Benhaddou (option)", detail: "Ksar UNESCO, décor de films (Game of Thrones, Gladiator). Si vous avez le temps.", cost: "~2€ entrée" }
+      { title: 'Atlas & Cascades', location: '📍 Vallée de l\'Ourika', color: '#10b981', activities: [
+        { icon: '🚐', name: 'Day-trip Ourika', detail: 'Minibus partagé vers la vallée berbère de l\'Ourika au pied du Toubkal.', cost: '~3€ transport' },
+        { icon: '💧', name: 'Cascades de Setti Fatma', detail: 'Randonnée dans les cascades — 7 bassins naturels, fraîcheur bienvenue.', cost: 'Gratuit' },
+        { icon: '🧀', name: 'Déjeuner berbère', detail: 'Couscous aux légumes dans un restaurant de village avec vue sur les montagnes.', cost: '~5€' },
+        { icon: '🐐', name: 'Village d\'Aït Benhaddou (option)', detail: 'Ksar UNESCO, décor de films (Game of Thrones, Gladiator). Si vous avez le temps.', cost: '~2€ entrée' }
       ]},
-      { title: "Route vers Fès", location: "📍 Fès el-Bali", color: "#8b5cf6", activities: [
-        { icon: "🚌", name: "Bus CTM Marrakech → Fès", detail: "Trajet 7h à travers les plaines et les montagnes du Moyen Atlas.", cost: "~8€" },
-        { icon: "🏯", name: "Bab Bou Jeloud", detail: "La porte bleue de Fès — entrée dans la médina la plus grande du monde.", cost: "Gratuit" },
-        { icon: "🕌", name: "Médersa Bou Inania", detail: "École coranique du XIVe — mosaïques de zellij et stuc sculpté époustouflants.", cost: "~1€" },
-        { icon: "🌙", name: "Riad et mint tea", detail: "Installation dans un riad typique — terrasse étoilée, thé à la menthe et pâtisseries.", cost: "~15€/nuit" }
+      { title: 'Route vers Fès', location: '📍 Fès el-Bali', color: '#8b5cf6', activities: [
+        { icon: '🚌', name: 'Bus CTM Marrakech → Fès', detail: 'Trajet 7h à travers les plaines et les montagnes du Moyen Atlas.', cost: '~8€' },
+        { icon: '🏯', name: 'Bab Bou Jeloud', detail: 'La porte bleue de Fès — entrée dans la médina la plus grande du monde.', cost: 'Gratuit' },
+        { icon: '🕌', name: 'Médersa Bou Inania', detail: 'École coranique du XIVe — mosaïques de zellij et stuc sculpté époustouflants.', cost: '~1€' },
+        { icon: '🌙', name: 'Riad et mint tea', detail: 'Installation dans un riad typique — terrasse étoilée, thé à la menthe et pâtisseries.', cost: '~15€/nuit' }
       ]},
-      { title: "Fès — Médina UNESCO", location: "📍 Fès el-Bali", color: "#06b6d4", activities: [
-        { icon: "🎨", name: "Tanneries Chouara", detail: "La plus ancienne tannerie du monde — cuves de couleurs vues depuis les terrasses (accès gratuit avec guide).", cost: "Gratuit (pourboire)" },
-        { icon: "📿", name: "Marché aux épices Seffarine", detail: "Cumin, ras el-hanout, henné, eau de rose — tout le parfum du Maroc.", cost: "~5-10€ achats" },
-        { icon: "🎻", name: "Musée Batha", detail: "Art berbère et arabe, poterie de Fès, instruments de musique traditionnels.", cost: "~2€" },
-        { icon: "🍲", name: "Tajine au citron confit", detail: "Le meilleur tajine de votre vie dans un restaurant de la médina.", cost: "~5€" }
+      { title: 'Fès — Médina UNESCO', location: '📍 Fès el-Bali', color: '#06b6d4', activities: [
+        { icon: '🎨', name: 'Tanneries Chouara', detail: 'La plus ancienne tannerie du monde — cuves de couleurs vues depuis les terrasses (accès gratuit avec guide).', cost: 'Gratuit (pourboire)' },
+        { icon: '📿', name: 'Marché aux épices Seffarine', detail: 'Cumin, ras el-hanout, henné, eau de rose — tout le parfum du Maroc.', cost: '~5-10€ achats' },
+        { icon: '🎻', name: 'Musée Batha', detail: 'Art berbère et arabe, poterie de Fès, instruments de musique traditionnels.', cost: '~2€' },
+        { icon: '🍲', name: 'Tajine au citron confit', detail: 'Le meilleur tajine de votre vie dans un restaurant de la médina.', cost: '~5€' }
       ]},
-      { title: "Merzouga — Portes du Sahara", location: "📍 Erg Chebbi", color: "#f59e0b", activities: [
-        { icon: "🚐", name: "Route des mille kasbahs", detail: "Minivan privé depuis Fès — gorges du Todra, vallée du Draa. Jour de route spectaculaire.", cost: "~25€/pers transport" },
-        { icon: "🐪", name: "Dromadaires au coucher de soleil", detail: "Montée à dos de dromadaire jusqu\'au camp au cœur des dunes de l\'Erg Chebbi (150m).", cost: "~20€" },
-        { icon: "⭐", name: "Nuit sous les étoiles", detail: "Camp berbère au milieu des dunes — silence absolu, ciel étoilé incroyable, feu de camp.", cost: "~25€ camp compris" },
-        { icon: "🥁", name: "Musique gnawa", detail: "Les musiciens du camp jouent les rythmes gnawa autour du feu jusqu\'au bout de la nuit.", cost: "Inclus" }
+      { title: 'Merzouga — Portes du Sahara', location: '📍 Erg Chebbi', color: '#f59e0b', activities: [
+        { icon: '🚐', name: 'Route des mille kasbahs', detail: 'Minivan privé depuis Fès — gorges du Todra, vallée du Draa. Jour de route spectaculaire.', cost: '~25€/pers transport' },
+        { icon: '🐪', name: 'Dromadaires au coucher de soleil', detail: 'Montée à dos de dromadaire jusqu\'au camp au cœur des dunes de l\'Erg Chebbi (150m).', cost: '~20€' },
+        { icon: '⭐', name: 'Nuit sous les étoiles', detail: 'Camp berbère au milieu des dunes — silence absolu, ciel étoilé incroyable, feu de camp.', cost: '~25€ camp compris' },
+        { icon: '🥁', name: 'Musique gnawa', detail: 'Les musiciens du camp jouent les rythmes gnawa autour du feu jusqu\'au bout de la nuit.', cost: 'Inclus' }
       ]},
-      { title: "Lever de soleil sur les dunes", location: "📍 Erg Chebbi", color: "#f97316", activities: [
-        { icon: "🌅", name: "Lever de soleil depuis les dunes", detail: "Réveillé à 5h30 — le soleil colore les dunes en or et orange depuis le sommet à pied.", cost: "Inclus" },
-        { icon: "🏄", name: "Sandboard", detail: "Descente des grandes dunes en sandboard — comme le snowboard mais chaud et ensablé.", cost: "~3€ planche" },
-        { icon: "🌊", name: "Gorges du Todra", detail: "Failles dans la roche de 300m de haut — randonnée et baignade dans l\'oued.", cost: "Gratuit" },
-        { icon: "🚐", name: "Route vers Marrakech", detail: "Retour par les kasbahs de Ouarzazate — décor de Game of Thrones à chaque virage.", cost: "Inclus transport" }
+      { title: 'Lever de soleil sur les dunes', location: '📍 Erg Chebbi', color: '#f97316', activities: [
+        { icon: '🌅', name: 'Lever de soleil depuis les dunes', detail: 'Réveillé à 5h30 — le soleil colore les dunes en or et orange depuis le sommet à pied.', cost: 'Inclus' },
+        { icon: '🏄', name: 'Sandboard', detail: 'Descente des grandes dunes en sandboard — comme le snowboard mais chaud et ensablé.', cost: '~3€ planche' },
+        { icon: '🌊', name: 'Gorges du Todra', detail: 'Failles dans la roche de 300m de haut — randonnée et baignade dans l\'oued.', cost: 'Gratuit' },
+        { icon: '🚐', name: 'Route vers Marrakech', detail: 'Retour par les kasbahs de Ouarzazate — décor de Game of Thrones à chaque virage.', cost: 'Inclus transport' }
       ]},
-      { title: "Essaouira — Cité des Vents", location: "📍 Essaouira", color: "#14b8a6", activities: [
-        { icon: "🚌", name: "Bus Marrakech → Essaouira", detail: "Supratours depuis la gare routière (2h30 de route côtière) — départ le matin.", cost: "~7€" },
-        { icon: "🐟", name: "Port de pêche", detail: "Thon, sardines et calamars grillés directement chez les pêcheurs du port.", cost: "~3-5€ repas" },
-        { icon: "🌊", name: "Remparts face à l\'Atlantique", detail: "Promenade sur les remparts du XVIIIe — vent de l\'Atlantique, mouettes et parfum de sel.", cost: "Gratuit" },
-        { icon: "🎸", name: "Festival de Gnawa (si saison)", detail: "Essaouira est la capitale mondiale du gnawa — concerts gratuits dans toute la ville en juin.", cost: "Gratuit" }
+      { title: 'Essaouira — Cité des Vents', location: '📍 Essaouira', color: '#14b8a6', activities: [
+        { icon: '🚌', name: 'Bus Marrakech → Essaouira', detail: 'Supratours depuis la gare routière (2h30 de route côtière) — départ le matin.', cost: '~7€' },
+        { icon: '🐟', name: 'Port de pêche', detail: 'Thon, sardines et calamars grillés directement chez les pêcheurs du port.', cost: '~3-5€ repas' },
+        { icon: '🌊', name: 'Remparts face à l\'Atlantique', detail: 'Promenade sur les remparts du XVIIIe — vent de l\'Atlantique, mouettes et parfum de sel.', cost: 'Gratuit' },
+        { icon: '🎸', name: 'Festival de Gnawa (si saison)', detail: 'Essaouira est la capitale mondiale du gnawa — concerts gratuits dans toute la ville en juin.', cost: 'Gratuit' }
       ]},
-      { title: "Asilah & Côte Atlantique", location: "📍 Asilah", color: "#ec4899", activities: [
-        { icon: "🚌", name: "Train vers Tanger (via Rabat)", detail: "ONCF depuis Casa ou Rabat — train confortable et ponctuel au Maroc.", cost: "~10€" },
-        { icon: "🎨", name: "Médina peinte d\'Asilah", detail: "La ville dont les murs deviennent des toiles — fresques géantes dans les ruelles bleues.", cost: "Gratuit" },
-        { icon: "🏖️", name: "Plage El Rmilat", detail: "Plage sauvage propre au pied des remparts — baignade en Atlantique rafraîchissant.", cost: "Gratuit" },
-        { icon: "🌊", name: "Cap Spartel", detail: "Là où la Méditerranée rencontre l\'Atlantique — vue et phare historique.", cost: "~2€" }
+      { title: 'Asilah & Côte Atlantique', location: '📍 Asilah', color: '#ec4899', activities: [
+        { icon: '🚌', name: 'Train vers Tanger (via Rabat)', detail: 'ONCF depuis Casa ou Rabat — train confortable et ponctuel au Maroc.', cost: '~10€' },
+        { icon: '🎨', name: 'Médina peinte d\'Asilah', detail: 'La ville dont les murs deviennent des toiles — fresques géantes dans les ruelles bleues.', cost: 'Gratuit' },
+        { icon: '🏖️', name: 'Plage El Rmilat', detail: 'Plage sauvage propre au pied des remparts — baignade en Atlantique rafraîchissant.', cost: 'Gratuit' },
+        { icon: '🌊', name: 'Cap Spartel', detail: 'Là où la Méditerranée rencontre l\'Atlantique — vue et phare historique.', cost: '~2€' }
       ]},
-      { title: "Retour & Tanger", location: "📍 Tanger Ibn Battuta (TNG)", color: "#6366f1", activities: [
-        { icon: "☕", name: "Café maure", detail: "Le café à la marocaine dans la Kasbah de Tanger — atay (thé), baghrir et msemen.", cost: "~1€" },
-        { icon: "🏛️", name: "Musée de la Kasbah", detail: "Ancien palais du sultan — mosaïques, armes berbères et vue sur le détroit de Gibraltar.", cost: "~2€" },
-        { icon: "🛍️", name: "Souvenirs de Tanger", detail: "Derniers achats en médina : savon beldi, argan, babouches, thé menthe.", cost: "~15-25€" },
-        { icon: "✈️", name: "Départ TNG ou retour en ferry", detail: "Vol depuis Tanger ou ferry Tanger-Algésiras + train. Le Maroc, déjà un souvenir.", cost: "❤️" }
+      { title: 'Retour & Tanger', location: '📍 Tanger Ibn Battuta (TNG)', color: '#6366f1', activities: [
+        { icon: '☕', name: 'Café maure', detail: 'Le café à la marocaine dans la Kasbah de Tanger — atay (thé), baghrir et msemen.', cost: '~1€' },
+        { icon: '🏛️', name: 'Musée de la Kasbah', detail: 'Ancien palais du sultan — mosaïques, armes berbères et vue sur le détroit de Gibraltar.', cost: '~2€' },
+        { icon: '🛍️', name: 'Souvenirs de Tanger', detail: 'Derniers achats en médina : savon beldi, argan, babouches, thé menthe.', cost: '~15-25€' },
+        { icon: '✈️', name: 'Départ TNG ou retour en ferry', detail: 'Vol depuis Tanger ou ferry Tanger-Algésiras + train. Le Maroc, déjà un souvenir.', cost: '❤️' }
       ]}
     ]
   },
 
   {
-    id: "albanie",
-    name: "Albanie",
-    country: "Albanie",
-    flag: "🇦🇱",
-    emoji: "🏔️",
-    region: "europe",
-    color: "#e11d48",
-    colorDark: "#881337",
-    budget: "~650€",
-    budgetDetail: { vol: "150€", hotel: "200€", repas: "130€", activites: "170€" },
-    duration: "10 jours",
-    bestSeason: "Mai–Sep.",
-    tags: ["Plages secrètes", "Montagnes", "Bunkers", "Raki", "Randonnée"],
-    description: "La perle cachée des Balkans : côte ionienne turquoise, montagnes des Alpes albanaises et prix défiant toute concurrence.",
+    id: 'albanie',
+    name: 'Albanie',
+    country: 'Albanie',
+    flag: '🇦🇱',
+    emoji: '🏔️',
+    region: 'europe',
+    color: '#e11d48',
+    colorDark: '#881337',
+    budget: '~650€',
+    budgetDetail: { vol: '150€', hotel: '200€', repas: '130€', activites: '170€' },
+    duration: '10 jours',
+    bestSeason: 'Mai–Sep.',
+    tags: ['Plages secrètes', 'Montagnes', 'Bunkers', 'Raki', 'Randonnée'],
+    description: 'La perle cachée des Balkans : côte ionienne turquoise, montagnes des Alpes albanaises et prix défiant toute concurrence.',
     tips: [
-      "L\'Albanie est 3-4x moins chère que la France — budget journalier 35-50€/pers tout compris",
-      "Le lek albanais (ALL) — 1€ = 100 ALL. Les paiements en cash sont la norme",
-      "Furgon (minibus) entre les villes : 1-3€, part quand c\'est plein — flexibilité requise",
-      "La côte albanaise (Riviera) = les Grèce des années 80 — sans les touristes et 5x moins cher",
-      "L\'hospitalité albanaise (Besa) est légendaire — on vous offrira du raki à chaque maison visitée !'
+      'L\'Albanie est 3-4x moins chère que la France — budget journalier 35-50€/pers tout compris',
+      'Le lek albanais (ALL) — 1€ = 100 ALL. Les paiements en cash sont la norme',
+      'Furgon (minibus) entre les villes : 1-3€, part quand c\'est plein — flexibilité requise',
+      'La côte albanaise (Riviera) = les Grèce des années 80 — sans les touristes et 5x moins cher',
+      'L\'hospitalité albanaise (Besa) est légendaire — on vous offrira du raki à chaque maison visitée !'
     ],
     days: [
-      { title: 'Tirana — Capitale Colorée", location: "📍 Tirana", color: "#e11d48", activities: [
-        { icon: "✈️", name: "Arrivée Tirana (TIA)", detail: "Bus depuis aéroport (3€) ou taxi fixe 20€. Le centre est à 20 min.", cost: "~3€" },
-        { icon: "🎨", name: "Place Skanderbeg", detail: "La grande place colorée de Tirana — statues de l\'aigle bicéphale et mosquée Et\'hem Bey.", cost: "Gratuit" },
-        { icon: "🏯", name: "Bunk\'Art 2", detail: "L\'ancien bunker souterrain d\'Enver Hoxha transformé en musée d\'art contemporain — fascinant.", cost: "~2€" },
-        { icon: "🥂", name: "Bloku — Le quartier branché", detail: "Cafés, bars et restaurants — l\'ancien quartier réservé à la nomenclature communiste.", cost: "~8€ soirée" }
+      { title: 'Tirana — Capitale Colorée', location: '📍 Tirana', color: '#e11d48', activities: [
+        { icon: '✈️', name: 'Arrivée Tirana (TIA)', detail: 'Bus depuis aéroport (3€) ou taxi fixe 20€. Le centre est à 20 min.', cost: '~3€' },
+        { icon: '🎨', name: 'Place Skanderbeg', detail: 'La grande place colorée de Tirana — statues de l\'aigle bicéphale et mosquée Et\'hem Bey.', cost: 'Gratuit' },
+        { icon: '🏯', name: 'Bunk\'Art 2', detail: 'L\'ancien bunker souterrain d\'Enver Hoxha transformé en musée d\'art contemporain — fascinant.', cost: '~2€' },
+        { icon: '🥂', name: 'Bloku — Le quartier branché', detail: 'Cafés, bars et restaurants — l\'ancien quartier réservé à la nomenclature communiste.', cost: '~8€ soirée' }
       ]},
-      { title: "Tirana Museums & Daytrip", location: "📍 Tirana & Krujë", color: "#f97316", activities: [
-        { icon: "🏰", name: "Krujë & Château de Skanderbeg", detail: "Ville sacrée de l\'héros national, château médiéval et bazaar ottoman en contrebas.", cost: "~3€ château" },
-        { icon: "🏺", name: "Musée National d\'Histoire", detail: "Histoire albanaise de l\'Illyrie à nos jours — la mosaïque en façade est un chef-d\'œuvre.", cost: "~1€" },
-        { icon: "🌿", name: "Parc de Dajti", detail: "Téléphérique depuis Tirana jusqu\'au mont Dajti (1613m) — vue sur toute la plaine.", cost: "~6€ téléphérique" },
-        { icon: "🫕", name: "Tavë Kosi", detail: "Le plat national : agneau et yaourt au four. Incontournable dans une qebaptore locale.", cost: "~4€" }
+      { title: 'Tirana Museums & Daytrip', location: '📍 Tirana & Krujë', color: '#f97316', activities: [
+        { icon: '🏰', name: 'Krujë & Château de Skanderbeg', detail: 'Ville sacrée de l\'héros national, château médiéval et bazaar ottoman en contrebas.', cost: '~3€ château' },
+        { icon: '🏺', name: 'Musée National d\'Histoire', detail: 'Histoire albanaise de l\'Illyrie à nos jours — la mosaïque en façade est un chef-d\'œuvre.', cost: '~1€' },
+        { icon: '🌿', name: 'Parc de Dajti', detail: 'Téléphérique depuis Tirana jusqu\'au mont Dajti (1613m) — vue sur toute la plaine.', cost: '~6€ téléphérique' },
+        { icon: '🫕', name: 'Tavë Kosi', detail: 'Le plat national : agneau et yaourt au four. Incontournable dans une qebaptore locale.', cost: '~4€' }
       ]},
-      { title: "Berat — Cité aux Mille Fenêtres", location: "📍 Berat (UNESCO)", color: "#8b5cf6", activities: [
-        { icon: "🚐", name: "Furgon Tirana → Berat", detail: "Mini-bus depuis la gare routière de Tirana, départ quand c\'est plein (2h30).", cost: "~2€" },
-        { icon: "🏯", name: "Château de Berat", detail: "Forteresse byzantine du XIIIe avec village vivant à l\'intérieur — unique en Europe.", cost: "~1€" },
-        { icon: "🪟", name: "Quartier Mangalem", detail: "Les maisons ottomanes blanches aux multiples fenêtres superposées — image iconique d\'Albanie.", cost: "Gratuit" },
-        { icon: "🎻", name: "Musée du Berat", detail: "Icônes byzantines d\'Onufri — les rouges les plus intenses de l\'art chrétien médiéval.", cost: "~1€" }
+      { title: 'Berat — Cité aux Mille Fenêtres', location: '📍 Berat (UNESCO)', color: '#8b5cf6', activities: [
+        { icon: '🚐', name: 'Furgon Tirana → Berat', detail: 'Mini-bus depuis la gare routière de Tirana, départ quand c\'est plein (2h30).', cost: '~2€' },
+        { icon: '🏯', name: 'Château de Berat', detail: 'Forteresse byzantine du XIIIe avec village vivant à l\'intérieur — unique en Europe.', cost: '~1€' },
+        { icon: '🪟', name: 'Quartier Mangalem', detail: 'Les maisons ottomanes blanches aux multiples fenêtres superposées — image iconique d\'Albanie.', cost: 'Gratuit' },
+        { icon: '🎻', name: 'Musée du Berat', detail: 'Icônes byzantines d\'Onufri — les rouges les plus intenses de l\'art chrétien médiéval.', cost: '~1€' }
       ]},
-      { title: "Riviera Albanaise", location: "📍 Himara & Dhermi", color: "#06b6d4", activities: [
-        { icon: "🚐", name: "Bus Berat → Himara", detail: "La route des montagnes et de la côte ionienne — paysages à couper le souffle.", cost: "~3€" },
-        { icon: "🏖️", name: "Plage de Livadh", detail: "Eaux turquoise, galets blancs, quelques tavernes de pêcheurs — zéro touriste de masse.", cost: "Gratuit" },
-        { icon: "🤿", name: "Snorkeling Jale", detail: "Eaux cristallines d\'une clarté irréelle sur cette côte encore préservée.", cost: "~3€ équipement" },
-        { icon: "🐟", name: "Poisson grillé sur la plage", detail: "Bar, dorade et poulpe grillés à même la plage — fraîcheur garantie du matin même.", cost: "~6€" }
+      { title: 'Riviera Albanaise', location: '📍 Himara & Dhermi', color: '#06b6d4', activities: [
+        { icon: '🚐', name: 'Bus Berat → Himara', detail: 'La route des montagnes et de la côte ionienne — paysages à couper le souffle.', cost: '~3€' },
+        { icon: '🏖️', name: 'Plage de Livadh', detail: 'Eaux turquoise, galets blancs, quelques tavernes de pêcheurs — zéro touriste de masse.', cost: 'Gratuit' },
+        { icon: '🤿', name: 'Snorkeling Jale', detail: 'Eaux cristallines d\'une clarté irréelle sur cette côte encore préservée.', cost: '~3€ équipement' },
+        { icon: '🐟', name: 'Poisson grillé sur la plage', detail: 'Bar, dorade et poulpe grillés à même la plage — fraîcheur garantie du matin même.', cost: '~6€' }
       ]},
-      { title: "Gjirokastër — Cité de Pierre", location: "📍 Gjirokastër (UNESCO)", color: "#a78bfa", activities: [
-        { icon: "🏯", name: "Château de Gjirokastër", detail: "Forteresse ottomane en ruines avec vue vertigineuse sur la vallée — avion US de la Guerre Froide en plein milieu !", cost: "~2€" },
-        { icon: "🏘️", name: "Vieille ville ottomane", detail: "Maisons-tours en pierre grise du XVIIIe — classées UNESCO, presque sans touristes.", cost: "Gratuit" },
-        { icon: "🎭", name: "Festival folklorique (si été)", detail: "Le plus grand rassemblement de musique et danse traditionnel des Balkans.", cost: "Gratuit" },
-        { icon: "🥃", name: "Raki et byrek", detail: "L\'apéritif albanais incontournable : raki de raisin maison + byrek (chausson salé).", cost: "~2€" }
+      { title: 'Gjirokastër — Cité de Pierre', location: '📍 Gjirokastër (UNESCO)', color: '#a78bfa', activities: [
+        { icon: '🏯', name: 'Château de Gjirokastër', detail: 'Forteresse ottomane en ruines avec vue vertigineuse sur la vallée — avion US de la Guerre Froide en plein milieu !', cost: '~2€' },
+        { icon: '🏘️', name: 'Vieille ville ottomane', detail: 'Maisons-tours en pierre grise du XVIIIe — classées UNESCO, presque sans touristes.', cost: 'Gratuit' },
+        { icon: '🎭', name: 'Festival folklorique (si été)', detail: 'Le plus grand rassemblement de musique et danse traditionnel des Balkans.', cost: 'Gratuit' },
+        { icon: '🥃', name: 'Raki et byrek', detail: 'L\'apéritif albanais incontournable : raki de raisin maison + byrek (chausson salé).', cost: '~2€' }
       ]},
-      { title: "Vallée Drino & Grottes", location: "📍 Blloshmi / Ksamil", color: "#14b8a6", activities: [
-        { icon: "🌊", name: "Ksamil — Les mini Caraïbes", detail: "3 petites îles à 200m du rivage dans une eau turquoise irréelle. Boat taxi 2€.", cost: "~2€ bateau" },
-        { icon: "🏛️", name: "Butrint — Cité antique", detail: "Site archéologique grec, romain et byzantin dans une réserve naturelle lacustre.", cost: "~5€" },
-        { icon: "💧", name: "Source Bleue de Bistrica", detail: "Résurgence karstique aux eaux d\'un bleu surnaturel au milieu de la forêt.", cost: "Gratuit" },
-        { icon: "🍹", name: "Soirée plage de Ksamil", detail: "Bars de plage à prix albanais — cocktails à 2€, coucher de soleil sur l\'île de Corfou.", cost: "~5€" }
+      { title: 'Vallée Drino & Grottes', location: '📍 Blloshmi / Ksamil', color: '#14b8a6', activities: [
+        { icon: '🌊', name: 'Ksamil — Les mini Caraïbes', detail: '3 petites îles à 200m du rivage dans une eau turquoise irréelle. Boat taxi 2€.', cost: '~2€ bateau' },
+        { icon: '🏛️', name: 'Butrint — Cité antique', detail: 'Site archéologique grec, romain et byzantin dans une réserve naturelle lacustre.', cost: '~5€' },
+        { icon: '💧', name: 'Source Bleue de Bistrica', detail: 'Résurgence karstique aux eaux d\'un bleu surnaturel au milieu de la forêt.', cost: 'Gratuit' },
+        { icon: '🍹', name: 'Soirée plage de Ksamil', detail: 'Bars de plage à prix albanais — cocktails à 2€, coucher de soleil sur l\'île de Corfou.', cost: '~5€' }
       ]},
-      { title: "Alpes Albanaises — Valbona", location: "📍 Vallée de Valbona", color: "#10b981", activities: [
-        { icon: "⛴️", name: "Ferry Lac Koman", detail: "Le trajet en bateau le plus spectaculaire des Balkans — fjord encaissé entre les falaises.", cost: "~6€" },
-        { icon: "🏔️", name: "Vallée de Valbona", detail: "Les Alpes albanaises sauvages — air pur, aigles royaux et silence des cimes.", cost: "Gratuit" },
-        { icon: "🥾", name: "Trek Valbona → Theth", detail: "Le trek le plus emblématique des Balkans (6h) — col à 1760m, vue panoramique.", cost: "~5€ guide local" },
-        { icon: "🏠", name: "Guesthouse familiale", detail: "Pension chez l\'habitant — qifqi (beignets de riz) et suite albanaise pour 10€/nuit.", cost: "~10€ demi-pension" }
+      { title: 'Alpes Albanaises — Valbona', location: '📍 Vallée de Valbona', color: '#10b981', activities: [
+        { icon: '⛴️', name: 'Ferry Lac Koman', detail: 'Le trajet en bateau le plus spectaculaire des Balkans — fjord encaissé entre les falaises.', cost: '~6€' },
+        { icon: '🏔️', name: 'Vallée de Valbona', detail: 'Les Alpes albanaises sauvages — air pur, aigles royaux et silence des cimes.', cost: 'Gratuit' },
+        { icon: '🥾', name: 'Trek Valbona → Theth', detail: 'Le trek le plus emblématique des Balkans (6h) — col à 1760m, vue panoramique.', cost: '~5€ guide local' },
+        { icon: '🏠', name: 'Guesthouse familiale', detail: 'Pension chez l\'habitant — qifqi (beignets de riz) et suite albanaise pour 10€/nuit.', cost: '~10€ demi-pension' }
       ]},
-      { title: "Theth & Cascade", location: "📍 Theth", color: "#f59e0b", activities: [
-        { icon: "💧", name: "Cascade de Grunas", detail: "Randonnée facile (2h aller-retour) jusqu\'à la plus belle cascade d\'Albanie (25m).", cost: "Gratuit" },
-        { icon: "🏊", name: "Natural pool de Theth", detail: "Piscine naturelle dans la rivière glaciaire — eau à 14°C mais une fraîcheur incroyable !", cost: "Gratuit" },
-        { icon: "🏯", name: "Kulla (Tour de réconciliation)", detail: "Tour médiévale de la vengeance des Kanun — le code d\'honneur albanais expliqué.", cost: "Gratuit" },
-        { icon: "🚐", name: "Retour Shkodër → Tirana", detail: "Jeep ou furgon depuis Theth (4h de piste) puis bus Shkodër-Tirana.", cost: "~10€ total" }
+      { title: 'Theth & Cascade', location: '📍 Theth', color: '#f59e0b', activities: [
+        { icon: '💧', name: 'Cascade de Grunas', detail: 'Randonnée facile (2h aller-retour) jusqu\'à la plus belle cascade d\'Albanie (25m).', cost: 'Gratuit' },
+        { icon: '🏊', name: 'Natural pool de Theth', detail: 'Piscine naturelle dans la rivière glaciaire — eau à 14°C mais une fraîcheur incroyable !', cost: 'Gratuit' },
+        { icon: '🏯', name: 'Kulla (Tour de réconciliation)', detail: 'Tour médiévale de la vengeance des Kanun — le code d\'honneur albanais expliqué.', cost: 'Gratuit' },
+        { icon: '🚐', name: 'Retour Shkodër → Tirana', detail: 'Jeep ou furgon depuis Theth (4h de piste) puis bus Shkodër-Tirana.', cost: '~10€ total' }
       ]},
-      { title: "Shkodër & Lac", location: "📍 Shkodër", color: "#ec4899", activities: [
-        { icon: "🏰", name: "Château de Rozafa", detail: "Forteresse illyrique sur un rocher dominant le confluent de 3 rivières — coucher de soleil idéal.", cost: "~2€" },
-        { icon: "🚲", name: "Vélo au bord du lac Shkodër", detail: "Le plus grand lac des Balkans — piste cyclable, pêcheurs, hérons cendrés.", cost: "~3€ vélo" },
-        { icon: "🕌", name: "Vieille ville", detail: "Mosquée, église orthodoxe, cathédrale catholique — l\'Albanie et sa tolérance religieuse unique.", cost: "Gratuit" },
-        { icon: "✈️", name: "Retour Tirana → France", detail: "Bus Shkodër → Tirana (2h) + vol retour. L\'Albanie aura gardé un morceau de vous.", cost: "❤️" }
+      { title: 'Shkodër & Lac', location: '📍 Shkodër', color: '#ec4899', activities: [
+        { icon: '🏰', name: 'Château de Rozafa', detail: 'Forteresse illyrique sur un rocher dominant le confluent de 3 rivières — coucher de soleil idéal.', cost: '~2€' },
+        { icon: '🚲', name: 'Vélo au bord du lac Shkodër', detail: 'Le plus grand lac des Balkans — piste cyclable, pêcheurs, hérons cendrés.', cost: '~3€ vélo' },
+        { icon: '🕌', name: 'Vieille ville', detail: 'Mosquée, église orthodoxe, cathédrale catholique — l\'Albanie et sa tolérance religieuse unique.', cost: 'Gratuit' },
+        { icon: '✈️', name: 'Retour Tirana → France', detail: 'Bus Shkodër → Tirana (2h) + vol retour. L\'Albanie aura gardé un morceau de vous.', cost: '❤️' }
       ]}
     ]
   },
 
   {
-    id: "thaïlande",
-    name: "Thaïlande",
-    country: "Thaïlande",
-    flag: "🇹🇭",
-    emoji: "🏯",
-    region: "asie",
-    color: "#3b82f6",
-    colorDark: "#1e3a8a",
-    budget: "~1 100€",
-    budgetDetail: { vol: "480€", hotel: "250€", repas: "180€", activites: "190€" },
-    duration: "10 jours",
-    bestSeason: "Nov.–Mars",
-    tags: ["Îles", "Temples", "Street food", "Éléphants", "Boxe thaï"],
-    description: "Bangkok la flamboyante, Chiang Mai et la jungle du Nord, puis les îles du Sud — la Thaïlande en 10 jours parfaits.",
+    id: 'thaïlande',
+    name: 'Thaïlande',
+    country: 'Thaïlande',
+    flag: '🇹🇭',
+    emoji: '🏯',
+    region: 'asie',
+    color: '#3b82f6',
+    colorDark: '#1e3a8a',
+    budget: '~1 100€',
+    budgetDetail: { vol: '480€', hotel: '250€', repas: '180€', activites: '190€' },
+    duration: '10 jours',
+    bestSeason: 'Nov.–Mars',
+    tags: ['Îles', 'Temples', 'Street food', 'Éléphants', 'Boxe thaï'],
+    description: 'Bangkok la flamboyante, Chiang Mai et la jungle du Nord, puis les îles du Sud — la Thaïlande en 10 jours parfaits.',
     tips: [
-      "Tuk-tuk dans Bangkok = toujours demander le prix avant (15-60 bath = 0.40-1.70€). Grab est plus fiable.",
-      "Les temples exigent épaules et genoux couverts — foulard dans le sac à dos",
-      "Les marchés flottants de week-end (Amphawa, Damnoen Saduak) valent l\'excursion",
-      "Vols domestiques Don Mueang (DMK) → Chiang Mai ou Ko Samui avec AirAsia depuis 20€",
-      "Le meilleur pad thai de votre vie sera dans un chariot de street food à 50 bath (1.40€), pas dans un restaurant'
+      'Tuk-tuk dans Bangkok = toujours demander le prix avant (15-60 bath = 0.40-1.70€). Grab est plus fiable.',
+      'Les temples exigent épaules et genoux couverts — foulard dans le sac à dos',
+      'Les marchés flottants de week-end (Amphawa, Damnoen Saduak) valent l\'excursion',
+      'Vols domestiques Don Mueang (DMK) → Chiang Mai ou Ko Samui avec AirAsia depuis 20€',
+      'Le meilleur pad thai de votre vie sera dans un chariot de street food à 50 bath (1.40€), pas dans un restaurant'
     ],
     days: [
-      { title: 'Bangkok — Arrivée & Temples", location: "📍 Rattanakosin", color: "#3b82f6", activities: [
-        { icon: "✈️", name: "Arrivée Suvarnabhumi (BKK)", detail: "Airport Rail Link vers Phaya Thai (30 bath = 0.80€) ou taxi à mètre (~200 bath).", cost: "~0.80€" },
-        { icon: "🏯", name: "Wat Pho & Bouddha couché", detail: "Le temple du Bouddha couché de 46m — dorures, azulejos et sérénité.", cost: "~5€" },
-        { icon: "⛵", name: "Bateau Chao Phraya", detail: "Le bateau-bus sur le fleuve depuis le quai Tha Chang — vue sur les temples au crépuscule.", cost: "~0.40€" },
-        { icon: "🌃", name: "Khaosan Road", detail: "La rue des backpackers légendaire — pad thaï à 1€, cocktails, massages de rue.", cost: "~5€" }
+      { title: 'Bangkok — Arrivée & Temples', location: '📍 Rattanakosin', color: '#3b82f6', activities: [
+        { icon: '✈️', name: 'Arrivée Suvarnabhumi (BKK)', detail: 'Airport Rail Link vers Phaya Thai (30 bath = 0.80€) ou taxi à mètre (~200 bath).', cost: '~0.80€' },
+        { icon: '🏯', name: 'Wat Pho & Bouddha couché', detail: 'Le temple du Bouddha couché de 46m — dorures, azulejos et sérénité.', cost: '~5€' },
+        { icon: '⛵', name: 'Bateau Chao Phraya', detail: 'Le bateau-bus sur le fleuve depuis le quai Tha Chang — vue sur les temples au crépuscule.', cost: '~0.40€' },
+        { icon: '🌃', name: 'Khaosan Road', detail: 'La rue des backpackers légendaire — pad thaï à 1€, cocktails, massages de rue.', cost: '~5€' }
       ]},
-      { title: "Bangkok Royale", location: "📍 Grand Palais & Chatuchak", color: "#f59e0b", activities: [
-        { icon: "👑", name: "Grand Palais", detail: "Le palais des rois de Thaïlande — Wat Phra Kaew (Bouddha d\'Émeraude) et mosaïques d\'or.", cost: "~10€" },
-        { icon: "🛒", name: "Marché de Chatuchak", detail: "15 000 stands sur 35 hectares — le plus grand marché d\'Asie (week-end uniquement).", cost: "~10-20€ achats" },
-        { icon: "🌆", name: "Rooftop Bar Silom", detail: "Cocktail au-dessus des gratte-ciels de Bangkok au coucher du soleil — vue à 360°.", cost: "~8€ cocktail" },
-        { icon: "💆", name: "Massage thaï traditionnel", detail: "Une heure de massage traditionnel dans une école de massage reconnue (Wat Pho).", cost: "~8€" }
+      { title: 'Bangkok Royale', location: '📍 Grand Palais & Chatuchak', color: '#f59e0b', activities: [
+        { icon: '👑', name: 'Grand Palais', detail: 'Le palais des rois de Thaïlande — Wat Phra Kaew (Bouddha d\'Émeraude) et mosaïques d\'or.', cost: '~10€' },
+        { icon: '🛒', name: 'Marché de Chatuchak', detail: '15 000 stands sur 35 hectares — le plus grand marché d\'Asie (week-end uniquement).', cost: '~10-20€ achats' },
+        { icon: '🌆', name: 'Rooftop Bar Silom', detail: 'Cocktail au-dessus des gratte-ciels de Bangkok au coucher du soleil — vue à 360°.', cost: '~8€ cocktail' },
+        { icon: '💆', name: 'Massage thaï traditionnel', detail: 'Une heure de massage traditionnel dans une école de massage reconnue (Wat Pho).', cost: '~8€' }
       ]},
-      { title: "Ayutthaya — Ancienne Capitale", location: "📍 Ayutthaya", color: "#a78bfa", activities: [
-        { icon: "🚆", name: "Train Bangkok → Ayutthaya", detail: "Train depuis Hua Lamphong (20 bath = 0.60€, 1h30) — l\'aventure ferroviaire thaïe.", cost: "~0.60€" },
-        { icon: "🏯", name: "Temples en ruines à vélo", detail: "Location vélo 50 bath et exploration des 400 temples en ruines classés UNESCO.", cost: "~1.40€ vélo" },
-        { icon: "🐘", name: "Sanctuaire d\'éléphants", detail: "Observation (sans monte !) des éléphants dans leur réserve éthique — baignade avec eux.", cost: "~15€" },
-        { icon: "🛶", name: "Tour en bateau", detail: "Île fluviale d\'Ayutthaya vue depuis l\'eau — coucher de soleil sur les prang.", cost: "~4€" }
+      { title: 'Ayutthaya — Ancienne Capitale', location: '📍 Ayutthaya', color: '#a78bfa', activities: [
+        { icon: '🚆', name: 'Train Bangkok → Ayutthaya', detail: 'Train depuis Hua Lamphong (20 bath = 0.60€, 1h30) — l\'aventure ferroviaire thaïe.', cost: '~0.60€' },
+        { icon: '🏯', name: 'Temples en ruines à vélo', detail: 'Location vélo 50 bath et exploration des 400 temples en ruines classés UNESCO.', cost: '~1.40€ vélo' },
+        { icon: '🐘', name: 'Sanctuaire d\'éléphants', detail: 'Observation (sans monte !) des éléphants dans leur réserve éthique — baignade avec eux.', cost: '~15€' },
+        { icon: '🛶', name: 'Tour en bateau', detail: 'Île fluviale d\'Ayutthaya vue depuis l\'eau — coucher de soleil sur les prang.', cost: '~4€' }
       ]},
-      { title: "Chiang Mai — Rose du Nord", location: "📍 Chiang Mai", color: "#10b981", activities: [
-        { icon: "✈️", name: "Vol Bangkok → Chiang Mai", detail: "AirAsia depuis Don Mueang — ~30€ si réservé à l\'avance (1h de vol).", cost: "~30€" },
-        { icon: "🕌", name: "Vieille Ville (300 temples)", detail: "Douves et remparts médiévaux — Wat Chedi Luang et ses bouddhas naga géants.", cost: "Gratuit/~1€" },
-        { icon: "🛺", name: "Marché nocturne du samedi", detail: "Wualai Walking Street : artisanat chiang-maï, batik, sculptures sur teck, street food.", cost: "~5-10€" },
-        { icon: "🥊", name: "Soirée Muay Thai", detail: "Match de boxe thaïe au Thaphae Boxing Stadium — ambiance électrique.", cost: "~10€" }
+      { title: 'Chiang Mai — Rose du Nord', location: '📍 Chiang Mai', color: '#10b981', activities: [
+        { icon: '✈️', name: 'Vol Bangkok → Chiang Mai', detail: 'AirAsia depuis Don Mueang — ~30€ si réservé à l\'avance (1h de vol).', cost: '~30€' },
+        { icon: '🕌', name: 'Vieille Ville (300 temples)', detail: 'Douves et remparts médiévaux — Wat Chedi Luang et ses bouddhas naga géants.', cost: 'Gratuit/~1€' },
+        { icon: '🛺', name: 'Marché nocturne du samedi', detail: 'Wualai Walking Street : artisanat chiang-maï, batik, sculptures sur teck, street food.', cost: '~5-10€' },
+        { icon: '🥊', name: 'Soirée Muay Thai', detail: 'Match de boxe thaïe au Thaphae Boxing Stadium — ambiance électrique.', cost: '~10€' }
       ]},
-      { title: "Chiang Mai — Jungle & Éléphants", location: "📍 Montagnes du Nord", color: "#f97316", activities: [
-        { icon: "🐘", name: "Sanctuaire éthique Elephant Nature Park", detail: "La journée la plus marquante du voyage — se baigner, nourrir et prendre soin des éléphants sauvés.", cost: "~55€ journée" },
-        { icon: "🚵", name: "VTT dans la jungle", detail: "Descente depuis Doi Suthep à travers les villages Karen — rafraîchissant et mémorable.", cost: "~20€" },
-        { icon: "🍜", name: "Cours de cuisine thaïe", detail: "Ferme locale + marché + cours = 5 plats préparés. Ramener les recettes à la maison.", cost: "~20€" },
-        { icon: "🌺", name: "Doi Inthanon (toit de Thaïlande)", detail: "Le plus haut sommet (2565m) avec ses cascades et jardins royaux — brume et fraîcheur.", cost: "~8€ parc" }
+      { title: 'Chiang Mai — Jungle & Éléphants', location: '📍 Montagnes du Nord', color: '#f97316', activities: [
+        { icon: '🐘', name: 'Sanctuaire éthique Elephant Nature Park', detail: 'La journée la plus marquante du voyage — se baigner, nourrir et prendre soin des éléphants sauvés.', cost: '~55€ journée' },
+        { icon: '🚵', name: 'VTT dans la jungle', detail: 'Descente depuis Doi Suthep à travers les villages Karen — rafraîchissant et mémorable.', cost: '~20€' },
+        { icon: '🍜', name: 'Cours de cuisine thaïe', detail: 'Ferme locale + marché + cours = 5 plats préparés. Ramener les recettes à la maison.', cost: '~20€' },
+        { icon: '🌺', name: 'Doi Inthanon (toit de Thaïlande)', detail: 'Le plus haut sommet (2565m) avec ses cascades et jardins royaux — brume et fraîcheur.', cost: '~8€ parc' }
       ]},
-      { title: "Ko Lanta — L\'île Zen", location: "📍 Ko Lanta, Krabi", color: "#06b6d4", activities: [
-        { icon: "✈️", name: "Vol Chiang Mai → Krabi", detail: "Vol + ferry jusqu\'à Ko Lanta — une journée de transit mais ça vaut le voyage.", cost: "~35€ vol + 3€ ferry" },
-        { icon: "🏖️", name: "Plage Klong Dao", detail: "La plus belle plage de Ko Lanta — 3km de sable fin, palmiers, coucher de soleil orange.", cost: "Gratuit" },
-        { icon: "🌊", name: "Kayak de mer au coucher de soleil", detail: "Tour en kayak autour de l\'île — mangroves, grottes marines et lagons cachés.", cost: "~10€" },
-        { icon: "🍹", name: "Soirée beach bar", detail: "Pieds dans le sable, full moon cocktails, musique live et étoiles tropicales.", cost: "~8€" }
+      { title: 'Ko Lanta — L\'île Zen', location: '📍 Ko Lanta, Krabi', color: '#06b6d4', activities: [
+        { icon: '✈️', name: 'Vol Chiang Mai → Krabi', detail: 'Vol + ferry jusqu\'à Ko Lanta — une journée de transit mais ça vaut le voyage.', cost: '~35€ vol + 3€ ferry' },
+        { icon: '🏖️', name: 'Plage Klong Dao', detail: 'La plus belle plage de Ko Lanta — 3km de sable fin, palmiers, coucher de soleil orange.', cost: 'Gratuit' },
+        { icon: '🌊', name: 'Kayak de mer au coucher de soleil', detail: 'Tour en kayak autour de l\'île — mangroves, grottes marines et lagons cachés.', cost: '~10€' },
+        { icon: '🍹', name: 'Soirée beach bar', detail: 'Pieds dans le sable, full moon cocktails, musique live et étoiles tropicales.', cost: '~8€' }
       ]},
-      { title: "Ko Lanta — Snorkeling & Plongée", location: "📍 Parc marin de Ko Lanta", color: "#0ea5e9", activities: [
-        { icon: "🐠", name: "Excursion 4 îles", detail: "Ko Rok, Ko Haa — snorkeling dans des eaux parmi les plus claires de Thaïlande.", cost: "~22€ excursion" },
-        { icon: "🤿", name: "Plongée avec requins léopards", detail: "Ko Haa Yai — requins léopards, nudibranches et gorgones dans 15m d\'eau.", cost: "~35€ 2 plongées" },
-        { icon: "🌴", name: "Village pêcheurs Ban Saladan", detail: "Maisons sur pilotis, bateaux colorés, épices à profusion et seafood du matin.", cost: "~4€ repas" },
-        { icon: "🌅", name: "Sunset Viewpoint", detail: "Point de vue sur l\'archipel au coucher du soleil — les îles s\'embrasent en orange.", cost: "Gratuit" }
+      { title: 'Ko Lanta — Snorkeling & Plongée', location: '📍 Parc marin de Ko Lanta', color: '#0ea5e9', activities: [
+        { icon: '🐠', name: 'Excursion 4 îles', detail: 'Ko Rok, Ko Haa — snorkeling dans des eaux parmi les plus claires de Thaïlande.', cost: '~22€ excursion' },
+        { icon: '🤿', name: 'Plongée avec requins léopards', detail: 'Ko Haa Yai — requins léopards, nudibranches et gorgones dans 15m d\'eau.', cost: '~35€ 2 plongées' },
+        { icon: '🌴', name: 'Village pêcheurs Ban Saladan', detail: 'Maisons sur pilotis, bateaux colorés, épices à profusion et seafood du matin.', cost: '~4€ repas' },
+        { icon: '🌅', name: 'Sunset Viewpoint', detail: 'Point de vue sur l\'archipel au coucher du soleil — les îles s\'embrasent en orange.', cost: 'Gratuit' }
       ]},
-      { title: "Ko Phi Phi", location: "📍 Ko Phi Phi Don", color: "#ec4899", activities: [
-        { icon: "⛴️", name: "Ferry Ko Lanta → Ko Phi Phi", detail: "Ferry rapide (1h30) vers l\'île la plus mythique de Thaïlande.", cost: "~10€" },
-        { icon: "🦜", name: "Maya Bay (The Beach)", detail: "La baie du film The Beach (Phi Phi Leh) — rochers calcaires vertigineux, eau turquoise.", cost: "~5€ entrée" },
-        { icon: "🌊", name: "Viking Cave & snorkeling", detail: "Nids d\'hirondelles récoltés depuis la préhistoire et coraux intacts autour.", cost: "~15€ tour" },
-        { icon: "🌃", name: "Soirée Phi Phi Village", detail: "Fire show sur la plage, cocktails dans les bamboo bars — l\'ambiance unique de Phi Phi.", cost: "~8€" }
+      { title: 'Ko Phi Phi', location: '📍 Ko Phi Phi Don', color: '#ec4899', activities: [
+        { icon: '⛴️', name: 'Ferry Ko Lanta → Ko Phi Phi', detail: 'Ferry rapide (1h30) vers l\'île la plus mythique de Thaïlande.', cost: '~10€' },
+        { icon: '🦜', name: 'Maya Bay (The Beach)', detail: 'La baie du film The Beach (Phi Phi Leh) — rochers calcaires vertigineux, eau turquoise.', cost: '~5€ entrée' },
+        { icon: '🌊', name: 'Viking Cave & snorkeling', detail: 'Nids d\'hirondelles récoltés depuis la préhistoire et coraux intacts autour.', cost: '~15€ tour' },
+        { icon: '🌃', name: 'Soirée Phi Phi Village', detail: 'Fire show sur la plage, cocktails dans les bamboo bars — l\'ambiance unique de Phi Phi.', cost: '~8€' }
       ]},
-      { title: "Retour Bangkok", location: "📍 Bangkok", color: "#84cc16", activities: [
-        { icon: "⛴️", name: "Ferry → Krabi → Bangkok", detail: "Ferry + bus ou AirAsia direct Krabi → Bangkok (DMK).", cost: "~25-40€" },
-        { icon: "🛍️", name: "MBK Center & Siam Paragon", detail: "Shopping de fin de voyage — contrefaçons, électronique, mode thaïe et souvenirs.", cost: "~15-30€" },
-        { icon: "💆", name: "Dernier massage & spa", detail: "Un dernier soin thaï complet — huile de jasmin, massage des pieds, 2 heures de paradis.", cost: "~15€" },
-        { icon: "🌮", name: "Dîner Yaowarat (Chinatown)", detail: "La rue de la street food de Bangkok — crevettes grillées géantes, dim sum, canard laqué.", cost: "~5€" }
+      { title: 'Retour Bangkok', location: '📍 Bangkok', color: '#84cc16', activities: [
+        { icon: '⛴️', name: 'Ferry → Krabi → Bangkok', detail: 'Ferry + bus ou AirAsia direct Krabi → Bangkok (DMK).', cost: '~25-40€' },
+        { icon: '🛍️', name: 'MBK Center & Siam Paragon', detail: 'Shopping de fin de voyage — contrefaçons, électronique, mode thaïe et souvenirs.', cost: '~15-30€' },
+        { icon: '💆', name: 'Dernier massage & spa', detail: 'Un dernier soin thaï complet — huile de jasmin, massage des pieds, 2 heures de paradis.', cost: '~15€' },
+        { icon: '🌮', name: 'Dîner Yaowarat (Chinatown)', detail: 'La rue de la street food de Bangkok — crevettes grillées géantes, dim sum, canard laqué.', cost: '~5€' }
       ]},
-      { title: "Départ Bangkok", location: "📍 Suvarnabhumi (BKK)", color: "#6366f1", activities: [
-        { icon: "🛕", name: "Wat Arun au lever du soleil", detail: "Le temple de l\'Aube en face du Grand Palais — mosaïques de porcelaine et lumière dorée.", cost: "~2€" },
-        { icon: "☕", name: "Café thaï glacé", detail: "Oliang (café thaï noir) ou cha yen (thé au lait concentré orange) — énergie pour le retour.", cost: "~0.50€" },
-        { icon: "🛍️", name: "King Power Duty Free", detail: "Alcool, cosmétiques, noix de cajou et curry en poudre — les indispensables de l\'aéroport.", cost: "~15-30€" },
-        { icon: "✈️", name: "Sawadee kha, Thaïlande 🙏", detail: "Retour au froid français — mais les plages, les temples et le pad thai restent dans la tête.", cost: "❤️" }
+      { title: 'Départ Bangkok', location: '📍 Suvarnabhumi (BKK)', color: '#6366f1', activities: [
+        { icon: '🛕', name: 'Wat Arun au lever du soleil', detail: 'Le temple de l\'Aube en face du Grand Palais — mosaïques de porcelaine et lumière dorée.', cost: '~2€' },
+        { icon: '☕', name: 'Café thaï glacé', detail: 'Oliang (café thaï noir) ou cha yen (thé au lait concentré orange) — énergie pour le retour.', cost: '~0.50€' },
+        { icon: '🛍️', name: 'King Power Duty Free', detail: 'Alcool, cosmétiques, noix de cajou et curry en poudre — les indispensables de l\'aéroport.', cost: '~15-30€' },
+        { icon: '✈️', name: 'Sawadee kha, Thaïlande 🙏', detail: 'Retour au froid français — mais les plages, les temples et le pad thai restent dans la tête.', cost: '❤️' }
       ]}
     ]
   }
-,
-  // ══════════════ DESTINATIONS PREMIUM ══════════════
-  {
-    id: "japon",
-    name: "Japon",
-    country: "Japon",
-    flag: "🇯🇵",
-    emoji: "⛩️",
-    region: "premium",
-    color: "#ef4444",
-    colorDark: "#7f1d1d",
-    budget: "~2 200€",
-    budgetDetail: { vol: "850€", hotel: "550€", repas: "400€", activites: "400€" },
-    duration: "10 jours",
-    bestSeason: "Mars–Mai / Oct.–Nov.",
-    tags: ["Sakura", "Temples", "Tokyo", "Ramen", "Mont Fuji"],
-    premium: true,
-    description: "Tokyo la futuriste, Kyoto la millénaire, Osaka la gourmande et le Mont Fuji — le voyage d'une vie.",
-    tips: [
-      "Le Japan Rail Pass 14 jours (~500€) est indispensable pour couvrir Tokyo-Kyoto-Osaka en Shinkansen",
-      "Réservez les restaurants étoilés 2-3 mois à l'avance (Tabelog ou Gurunavi) — les meilleures tables se remplissent vite",
-      "Suica ou IC Card (carte rechargeable) pour tous les transports urbains — plus pratique que les tickets",
-      "La saison des cerisiers (hanami) fin mars-début avril = magique mais hôtels à réserver 6 mois à l'avance",
-      "Les konbini (Lawson, 7-Eleven) servent les meilleurs onigiri, sandwichs et ramen du monde — à 1-2€'
-    ],
-    days: [
-      { title: 'Tokyo — Shinjuku & Arrivée", location: "📍 Shinjuku, Tokyo", color: "#ef4444", activities: [
-        { icon: "✈️", name: "Arrivée Narita ou Haneda", detail: "Narita Express (NEX) depuis Narita : 35€. Monorail depuis Haneda : 5€. Activation du JR Pass.", cost: "~5-35€" },
-        { icon: "🏙️", name: "Shinjuku Gyoen", detail: "Le jardin impérial de Tokyo — cerisiers, jardins français et japonais côte à côte.", cost: "~4€" },
-        { icon: "🌆", name: "Observatoire Gouvernement Métropolitain", detail: "Vue à 360° sur Tokyo depuis 202m — gratuit et aussi beau que la Skytree.", cost: "Gratuit" },
-        { icon: "🍜", name: "Ichiran Ramen", detail: "Ramen dans un box individuel, face au mur — l'expérience ramen la plus authentique du Japon.", cost: "~8€" }
-      ]},
-      { title: "Tokyo — Asakusa & Akihabara", location: "📍 Taitō, Tokyo", color: "#f97316", activities: [
-        { icon: "⛩️", name: "Senso-ji & Nakamise-dori", detail: "Le plus vieux temple de Tokyo (628 ap JC) et sa rue de marchands aux 1000 boutiques.", cost: "Gratuit" },
-        { icon: "🎮", name: "Akihabara Electric Town", detail: "Le quartier otaku — arcades, mangas, figurines, Gundam géants et tech japonaise.", cost: "~15€ jeux" },
-        { icon: "🍣", name: "Tsukiji Outer Market", detail: "Le marché des sushis et poissons — thon à 6h du matin, tamagoyaki et oursin frais.", cost: "~12€" },
-        { icon: "🌃", name: "Shibuya Crossing by night", detail: "Le croisement le plus fréquenté du monde — 1000 personnes qui se croisent à chaque feu vert.", cost: "Gratuit" }
-      ]},
-      { title: "Mont Fuji & Hakone", location: "📍 Hakone / Fuji-Q", color: "#3b82f6", activities: [
-        { icon: "🏔️", name: "Vue sur le Fuji depuis Hakone", detail: "Ryokan avec onsen face au mont Fuji — l'image du Japon dans toute sa perfection.", cost: "~80€ ryokan" },
-        { icon: "♨️", name: "Onsen privé", detail: "Bain thermal naturel en plein air (rotenburo) sous les étoiles — l'expérience japonaise ultime.", cost: "Inclus ryokan" },
-        { icon: "🚡", name: "Hakone Ropeway", detail: "Téléphérique au-dessus des fumerolles volcaniques du lac Ashi — paysage lunaire.", cost: "~12€" },
-        { icon: "🎋", name: "Musée en Plein Air Hakone", detail: "Sculptures de Rodin et Picasso dans un parc avec vue sur les montagnes.", cost: "~15€" }
-      ]},
-      { title: "Kyoto — Geishas & Temples", location: "📍 Gion, Kyoto", color: "#8b5cf6", activities: [
-        { icon: "🚅", name: "Shinkansen Tokyo → Kyoto", detail: "Bullet train Nozomi (2h15) à 280km/h — inclus dans le JR Pass.", cost: "JR Pass" },
-        { icon: "⛩️", name: "Fushimi Inari", detail: "10 000 torii orangés qui serpentent la montagne — le symbole du Japon moderne.", cost: "Gratuit" },
-        { icon: "🎎", name: "Gion au crépuscule", detail: "Le quartier des geishas au coucher du soleil — maisons de thé, lanternes et kimono.", cost: "Gratuit" },
-        { icon: "🍵", name: "Cérémonie du thé", detail: "Matcha et wagashi dans une maison de thé traditionnelle du XVIIe siècle.", cost: "~15€" }
-      ]},
-      { title: "Kyoto — Temples & Bambous", location: "📍 Arashiyama, Kyoto", color: "#10b981", activities: [
-        { icon: "🎋", name: "Forêt de bambous Arashiyama", detail: "Le matin à 6h avant les foules — allées de bambous géants bruissants dans le vent.", cost: "Gratuit" },
-        { icon: "🏯", name: "Kinkaku-ji (Pavillon d'Or)", detail: "Le temple entièrement recouvert de feuilles d'or reflété dans l'étang — irréel.", cost: "~4€" },
-        { icon: "🌸", name: "Philosophe's Path", detail: "Le chemin du philosophe longeant le canal — cerisiers en fleurs ou feuilles d'automne.", cost: "Gratuit" },
-        { icon: "🍱", name: "Kaiseki dinner", detail: "Le repas gastronomique japonais en 12 services — art culinaire pur dans un ryokan.", cost: "~60€" }
-      ]},
-      { title: "Nara & Cerfs Sacrés", location: "📍 Nara", color: "#f59e0b", activities: [
-        { icon: "🦌", name: "Parc de Nara", detail: "1200 cerfs sacrés qui se promènent librement dans le parc — mangent les gâteaux dans vos mains.", cost: "~1.50€ senbei" },
-        { icon: "🏯", name: "Todai-ji", detail: "Le plus grand bâtiment en bois du monde avec le Grand Bouddha de bronze (15m).", cost: "~6€" },
-        { icon: "⛩️", name: "Kasuga Taisha", detail: "Temple shintoïste aux 3000 lanternes de pierre — féerique à l'aube dans la forêt.", cost: "~5€" },
-        { icon: "🚅", name: "Retour Osaka", detail: "Train Nara → Osaka (40 min) pour la nuit et les plaisirs gastronomiques.", cost: "JR Pass" }
-      ]},
-      { title: "Osaka — La Cuisine du Japon", location: "📍 Dotonbori, Osaka", color: "#ec4899", activities: [
-        { icon: "🦑", name: "Dotonbori Street Food", detail: "Takoyaki (poulpe), okonomiyaki, kushikatsu — l'Osaka qu'on ne quitte plus jamais le soir.", cost: "~10€ festin" },
-        { icon: "🏯", name: "Château d'Osaka", detail: "Forteresse du XVIe de Toyotomi Hideyoshi — musée de la période Edo.", cost: "~6€" },
-        { icon: "🎡", name: "Universal Studios Japan", detail: "Harry Potter, Mario World, Jurassic Park — le parc d'attractions le plus complet d'Asie.", cost: "~70€" },
-        { icon: "🍺", name: "Izakaya à Namba", detail: "Pub japonais : yakitori, edamame, bière Sapporo — ambiance salaryman après le boulot.", cost: "~15€" }
-      ]},
-      { title: "Hiroshima & Miyajima", location: "📍 Hiroshima", color: "#14b8a6", activities: [
-        { icon: "🕊️", name: "Mémorial de la Paix", detail: "Le Dôme de Genbaku et le musée de la bombe atomique — moment de recueillement incontournable.", cost: "~2€ musée" },
-        { icon: "⛴️", name: "Ferry vers Miyajima", detail: "Île sacrée accessible en 10 min de ferry — inclus JR Pass.", cost: "JR Pass" },
-        { icon: "⛩️", name: "Torii flottant d'Itsukushima", detail: "Le torii orange géant qui semble flotter sur la mer à marée haute — image iconique du Japon.", cost: "Gratuit" },
-        { icon: "🦌", name: "Cerfs sacrés de Miyajima", detail: "Comme à Nara, les cerfs se promènent librement dans le village et autour du temple.", cost: "Gratuit" }
-      ]},
-      { title: "Tokyo — Harajuku & Shopping", location: "📍 Harajuku & Omotesando", color: "#a78bfa", activities: [
-        { icon: "🚅", name: "Shinkansen retour Tokyo", detail: "Osaka → Tokyo en 2h30 à bord du Nozomi — le train le plus ponctuel du monde.", cost: "JR Pass" },
-        { icon: "🎌", name: "Takeshita Street, Harajuku", detail: "La rue la plus folle de Tokyo — mode kawaii, crêpes à 10 ingrédients, cosplay.", cost: "~5€ crêpe" },
-        { icon: "🛍️", name: "Omotesando & Ginza", detail: "Les Champs-Élysées de Tokyo — flagships de luxe, architecture spectaculaire.", cost: "Lèche-vitrine" },
-        { icon: "🌸", name: "Shinjuku Garden illuminé", detail: "Parc illuminé la nuit pendant la saison des cerisiers ou l'automne rouge.", cost: "~2€" }
-      ]},
-      { title: "Dernier Jour Tokyo", location: "📍 Odaiba & Aéroport", color: "#6366f1", activities: [
-        { icon: "🤖", name: "TeamLab Planets", detail: "Le musée d'art numérique immersif — forêts de fleurs digitales, miroirs infinis.", cost: "~25€" },
-        { icon: "🗼", name: "Tokyo Tower au coucher de soleil", detail: "La tour symbole de l'ère Shōwa — vue sur la ville et le Fuji au loin.", cost: "~8€" },
-        { icon: "🍣", name: "Sushi bar Omakase", detail: "Dernier repas au comptoir du chef — omakase (laissez le chef décider) = 15 pièces.", cost: "~40€" },
-        { icon: "✈️", name: "Sayōnara Japon 🙏", detail: "Le Japon — ce pays qui change vos standards de tout pour toujours.", cost: "❤️" }
-      ]}
-    ]
-  },
-
-  {
-    id: "usa",
-    name: "USA Côte Ouest",
-    country: "États-Unis",
-    flag: "🇺🇸",
-    emoji: "🗽",
-    region: "premium",
-    color: "#3b82f6",
-    colorDark: "#1e3a8a",
-    budget: "~2 500€",
-    budgetDetail: { vol: "750€", hotel: "700€", repas: "550€", activites: "500€" },
-    duration: "10 jours",
-    bestSeason: "Avr.–Juin / Sep.–Oct.",
-    tags: ["Route 66", "Grand Canyon", "Las Vegas", "LA", "Parcs Nationaux"],
-    premium: true,
-    description: "Los Angeles, le désert de Joshua Tree, Las Vegas et le Grand Canyon — road trip légendaire sur la côte ouest.",
-    tips: [
-      "Location de van/SUV pour 7 = plus économique qu'une voiture et une navette. Budget ~80€/j réparti = 11€/pers/j",
-      "America the Beautiful Pass (80$) = accès illimité à tous les parcs nationaux pour un an — indispensable",
-      "Les motels routiers (Motel 6, Super 8) coûtent 40-60€/nuit pour une chambre double — parfaits en road trip",
-      "La nourriture américaine peut être chère dans les restaurants — privilégiez les diners, food trucks et In-N-Out",
-      "Réservez le Grand Canyon South Rim 6 mois à l'avance en été — les campsites et lodges partent très vite'
-    ],
-    days: [
-      { title: 'Los Angeles — Hollywood", location: "📍 Hollywood & Beverly Hills", color: "#3b82f6", activities: [
-        { icon: "✈️", name: "Arrivée LAX", detail: "Flyaway Bus depuis LAX vers Downtown (10$) ou Uber partagé vers l'hôtel.", cost: "~9€" },
-        { icon: "🎬", name: "Hollywood Walk of Fame", detail: "Les étoiles de Marilyn, Elvis, Chaplin — foule, vendeurs et touristes du monde entier.", cost: "Gratuit" },
-        { icon: "🏛️", name: "Griffith Observatory", detail: "Vue panoramique sur LA et le panneau Hollywood — coucher de soleil légendaire.", cost: "Gratuit" },
-        { icon: "🍔", name: "In-N-Out Burger", detail: "Le burger californien mythique — Double Double, Animal Style, neapolitan shake.", cost: "~8€" }
-      ]},
-      { title: "LA — Santa Monica & Venice", location: "📍 Santa Monica", color: "#06b6d4", activities: [
-        { icon: "🎡", name: "Santa Monica Pier", detail: "La Route 66 se termine ici — grande roue, arcades, Pacifique et coucher de soleil orange.", cost: "Gratuit" },
-        { icon: "🛹", name: "Venice Beach Boardwalk", detail: "Skateparks, body-builders, artistes de rue et palmiers — la Californie à son paroxysme.", cost: "Gratuit" },
-        { icon: "🦭", name: "Malibu & Pacific Coast Highway", detail: "Drive sur la PCH au bord de l'océan — plages secrètes des stars, dauphins depuis la route.", cost: "~10€ essence" },
-        { icon: "🌮", name: "Tacos de Grand Central Market", detail: "Le marché couvert de Downtown LA — tacos, birria, elotes et agua fresca.", cost: "~8€" }
-      ]},
-      { title: "Joshua Tree & Désert", location: "📍 Joshua Tree National Park", color: "#f59e0b", activities: [
-        { icon: "🚗", name: "Road trip vers Palm Springs", detail: "Route I-10 East depuis LA — paysage qui change en 2 heures du Pacifique au désert de Mojave.", cost: "~15€ essence" },
-        { icon: "🌵", name: "Joshua Tree NP", detail: "Forêts de yuccas géants dans un paysage martien — randonnées entre les rochers rouges.", cost: "~15€ America Pass" },
-        { icon: "⭐", name: "Nuit au désert", detail: "Camping sous le ciel étoilé du désert de Mojave — aucune pollution lumineuse, Voie Lactée totale.", cost: "~20€ camping" },
-        { icon: "🌅", name: "Lever de soleil sur Keys View", detail: "Vue sur la faille de San Andreas et le désert de Coachella depuis 1581m — inoubliable.", cost: "Gratuit" }
-      ]},
-      { title: "Las Vegas — Neon Jungle", location: "📍 The Strip, Las Vegas", color: "#ec4899", activities: [
-        { icon: "🎰", name: "The Strip by night", detail: "MGM, Bellagio, Caesars Palace, New York-New York — 7km de démesure américaine illuminée.", cost: "Gratuit à voir" },
-        { icon: "⛲", name: "Fontaines du Bellagio", detail: "Le spectacle de fontaines le plus célèbre du monde — toutes les 30 min, gratuit depuis le Strip.", cost: "Gratuit" },
-        { icon: "🎭", name: "Spectacle Cirque du Soleil", detail: "O ou Ka au MGM Grand — l'art du cirque poussé à l'extrême dans une salle à 150M$.", cost: "~80€" },
-        { icon: "🍕", name: "Buffet Vegas style", detail: "Le légendaire buffet à volonté de Las Vegas — homard, sushi, steaks et desserts infinis.", cost: "~25€" }
-      ]},
-      { title: "Grand Canyon South Rim", location: "📍 Grand Canyon NP, Arizona", color: "#f97316", activities: [
-        { icon: "🚗", name: "Drive Las Vegas → Grand Canyon", detail: "Route 93 South puis Highway 89 — 4h30 à travers le Nevada et l'Arizona désertiques.", cost: "~20€ essence" },
-        { icon: "🏔️", name: "South Rim Sunrise", detail: "Mather Point ou Yavapai Point — le premier regard dans le Grand Canyon au lever du soleil.", cost: "Gratuit (parc)" },
-        { icon: "🥾", name: "Bright Angel Trail", detail: "Descente dans le canyon (jusqu'à 3 Mile Resthouse max en été) — décor extraterrestre.", cost: "Gratuit" },
-        { icon: "🚁", name: "Survol en hélicoptère", detail: "Option : 30 min de survol au-dessus du canyon — perspective unique et saisissante.", cost: "~150€ optionnel" }
-      ]},
-      { title: "Sedona & Monument Valley", location: "📍 Sedona, Arizona", color: "#ef4444", activities: [
-        { icon: "🏜️", name: "Sedona Red Rocks", detail: "Formations rocheuses rouge sang — randonnée Cathedral Rock ou Devil's Bridge (arche naturelle).", cost: "~10€ pass" },
-        { icon: "🌵", name: "Monument Valley", detail: "Les buttes de grès rouge des Navajos — décor de westerns de John Ford, route 163 mythique.", cost: "~20€" },
-        { icon: "⭐", name: "Camping Navajo Nation", detail: "Dormir au cœur de la Navajo Nation avec un guide — histoires et constellations.", cost: "~30€" },
-        { icon: "🌅", name: "The Wave (si possible)", detail: "Formation géologique rare dans le Coyote Buttes — tirage au sort pour 64 personnes/jour.", cost: "~9€ si tiré" }
-      ]},
-      { title: "Route 66 & Route Panoramique", location: "📍 Arizona → California", color: "#84cc16", activities: [
-        { icon: "🚗", name: "Route 66 — Kingman → Barstow", detail: "La Mère des Routes sur 350 miles — diners années 50, motels en néon, stations abandonnées.", cost: "~20€ essence" },
-        { icon: "☕", name: "Diner historique Route 66", detail: "Milkshake, apple pie et burger dans un authentique diner des années 1950 — jukebox inclus.", cost: "~12€" },
-        { icon: "🌊", name: "Huntington Beach", detail: "La surf city USA — arrivée triomphale sur le Pacifique après le désert.", cost: "Gratuit" },
-        { icon: "🌅", name: "Coucher de soleil sur le Pacifique", detail: "Le soleil plonge dans l'océan — après 3000 km de route, ça vaut chaque kilomètre.", cost: "Gratuit" }
-      ]},
-      { title: "San Francisco — Golden Gate", location: "📍 San Francisco", color: "#a78bfa", activities: [
-        { icon: "🌉", name: "Golden Gate Bridge", detail: "À pied ou à vélo sur le pont le plus photographié du monde — brume matinale recommandée.", cost: "Gratuit" },
-        { icon: "🚃", name: "Cable Car", detail: "Le funiculaire historique de SF depuis 1873 — Powell & Mason, vues sur les collines.", cost: "~6€" },
-        { icon: "🦀", name: "Fisherman's Wharf", detail: "Crabe Dungeness, Clam Chowder dans un pain brioché, lions de mer et vue sur Alcatraz.", cost: "~15€" },
-        { icon: "🏛️", name: "Alcatraz", detail: "La prison la plus célèbre du monde en bateau — visite audio avec les voix des ex-détenus.", cost: "~38€" }
-      ]},
-      { title: "Big Sur & Côte Pacifique", location: "📍 Highway 1, Big Sur", color: "#14b8a6", activities: [
-        { icon: "🚗", name: "Highway 1 — Big Sur", detail: "La route côtière la plus spectaculaire d'Amérique — falaises de 300m sur le Pacifique.", cost: "~15€ essence" },
-        { icon: "🌊", name: "Bixby Creek Bridge", detail: "L'arche de béton dans les falaises — point de vue iconique et photos inoubliables.", cost: "Gratuit" },
-        { icon: "🦭", name: "Éléphants de mer de San Simeon", detail: "Colonie de 20 000 éléphants de mer sur la plage — bruit, odeur et spectacle unique.", cost: "Gratuit" },
-        { icon: "🏖️", name: "Santa Barbara", detail: "La Riviera californienne — architecture espagnole, vignobles, plages et polo.", cost: "Gratuit" }
-      ]},
-      { title: "Retour Los Angeles", location: "📍 LAX", color: "#6366f1", activities: [
-        { icon: "🎬", name: "Warner Bros Studio Tour", detail: "Les vrais décors de Friends, Harry Potter et Batman — 3h dans les coulisses de Hollywood.", cost: "~55€" },
-        { icon: "🏛️", name: "Getty Center", detail: "Musée d'art à flanc de colline avec vue sur tout LA et le Pacifique — entrée gratuite.", cost: "Gratuit" },
-        { icon: "🥩", name: "Dernier repas — Steakhouse californien", detail: "Ribeye et Californian wine — au revoir America en beauté, avec les hôtes habituels.", cost: "~35€" },
-        { icon: "✈️", name: "See you USA 🤠", detail: "Retour LAX — le road trip le plus épique de vos vies est dans le rétroviseur.", cost: "❤️" }
-      ]}
-    ]
-  },
-
-  {
-    id: "australie",
-    name: "Australie",
-    country: "Australie",
-    flag: "🇦🇺",
-    emoji: "🦘",
-    region: "premium",
-    color: "#f59e0b",
-    colorDark: "#78350f",
-    budget: "~2 800€",
-    budgetDetail: { vol: "1100€", hotel: "700€", repas: "500€", activites: "500€" },
-    duration: "10 jours",
-    bestSeason: "Sep.–Nov. / Mars–Mai",
-    tags: ["Grande Barrière", "Uluru", "Sydney", "Kangourous", "Surf"],
-    premium: true,
-    description: "Sydney et son Opéra, la Grande Barrière de Corail, Uluru et les kangourous — le continent des extrêmes.",
-    tips: [
-      "Réservez la Grande Barrière de Corail 3 mois à l'avance — les tours sérieux (Quicksilver, Reef Magic) partent vite",
-      "Le PVT australien (Permis Vacances Travail) donne droit de travailler sur place — idéal pour prolonger le séjour",
-      "Conduire à gauche — prévenez tout le monde avant la location de van à 7",
-      "Uluru (Ayers Rock) : la montée est interdite depuis 2019. Les tours de base au lever du soleil sont l'expérience recommandée",
-      "Le HOP-ON HOP-OFF Greyhound Australia existe entre les villes — économique sur de longues distances'
-    ],
-    days: [
-      { title: 'Sydney — Opéra & Harbour", location: "📍 Sydney CBD", color: "#f59e0b", activities: [
-        { icon: "✈️", name: "Arrivée Sydney (SYD)", detail: "Train Airport Link vers Central Station (15 AUD = 9€) — rapide et pratique.", cost: "~9€" },
-        { icon: "🏛️", name: "Opéra de Sydney & Harbour Bridge", detail: "Les deux icônes australiennes depuis Circular Quay — au coucher du soleil, magique.", cost: "Gratuit (extérieur)" },
-        { icon: "🚶", name: "Rocks Historic District", detail: "Le quartier colonial de Sydney — pubs irlandais de 1850, marchés artisanaux le week-end.", cost: "~10€ repas" },
-        { icon: "🌉", name: "BridgeClimb (option)", detail: "Escalader le Harbour Bridge — 3h30 au sommet, vue à 360° sur Sydney et l'Océanie.", cost: "~200€ optionnel" }
-      ]},
-      { title: "Bondi & Plages de Sydney", location: "📍 Bondi Beach", color: "#06b6d4", activities: [
-        { icon: "🏄", name: "Bondi Beach", detail: "La plage urbaine la plus célèbre du monde — surfeurs, yoga au lever du soleil, hipsters.", cost: "Gratuit" },
-        { icon: "🥾", name: "Bondi to Coogee Walk", detail: "Sentier côtier de 6km entre les plages — vues spectaculaires sur l'océan Pacifique.", cost: "Gratuit" },
-        { icon: "🏊", name: "Piscines naturelles de Coogee", detail: "Les tidal pools naturels dans les rochers — baignade à l'abri des vagues et des requins.", cost: "Gratuit" },
-        { icon: "🍦", name: "Gelato à Bondi", detail: "Glace artisanale en regardant les surfeurs depuis la promenade — l'été australien.", cost: "~4€" }
-      ]},
-      { title: "Blue Mountains", location: "📍 Katoomba, NSW", color: "#10b981", activities: [
-        { icon: "🚂", name: "Train Sydney → Katoomba", detail: "Scenic Sydney Trains (2h) — service CityRail jusqu'aux montagnes bleues.", cost: "~5€" },
-        { icon: "🏔️", name: "Three Sisters & Echo Point", detail: "Les 3 sœurs de grès rouge dominant les gorges profondes de la Jamison Valley.", cost: "Gratuit" },
-        { icon: "🚡", name: "Scenic World", detail: "Téléphérique dans les gorges, télécabine et le chemin de fer le plus raide du monde.", cost: "~30€" },
-        { icon: "🦘", name: "Featherdale Wildlife Park", detail: "Kangourous en liberté, koalas à câliner, wombats et diables de Tasmanie.", cost: "~18€" }
-      ]},
-      { title: "Vol Cairns — Grande Barrière", location: "📍 Cairns, Queensland", color: "#0ea5e9", activities: [
-        { icon: "✈️", name: "Vol Sydney → Cairns", detail: "Jetstar ou Qantas depuis Sydney (2h30) — réservé à l'avance depuis 60€.", cost: "~60-100€" },
-        { icon: "🎿", name: "Skyrail Rainforest Cableway", detail: "Téléphérique au-dessus de la forêt tropicale humide du Daintree — 7.5km.", cost: "~40€" },
-        { icon: "🌿", name: "Forêt tropicale de Daintree", detail: "La forêt tropicale la plus ancienne du monde (135M d'années) — baignade dans la Mossman Gorge.", cost: "~15€ tour" },
-        { icon: "🍹", name: "Front Street Cairns", detail: "La rue animée de Cairns — bars, cocktails tropicaux, barbecue et backpackers du monde entier.", cost: "~8€" }
-      ]},
-      { title: "Grande Barrière de Corail", location: "📍 Outer Reef, QLD", color: "#3b82f6", activities: [
-        { icon: "⛵", name: "Croisière Outer Reef", detail: "Catamaran vers la Grande Barrière — 2h de navigation, transfert dans l'eau turquoise.", cost: "~100€" },
-        { icon: "🤿", name: "Plongée avec bouteilles", detail: "Première plongée sur le récif — poissons-clowns, raies manta, tortues vertes, coraux.", cost: "~50€ 2 plongées" },
-        { icon: "🐠", name: "Snorkeling Glass Bottom Boat", detail: "Pour les non-plongeurs : vue sur le récif depuis un bateau à fond de verre.", cost: "Inclus" },
-        { icon: "🦀", name: "Festin de fruits de mer à Cairns", detail: "Crustacés du Queensland, barramundi grillé et tarte aux mangues — saveurs australiennes.", cost: "~20€" }
-      ]},
-      { title: "Uluru — Le Cœur Rouge", location: "📍 Uluru-Kata Tjuta NP", color: "#ef4444", activities: [
-        { icon: "✈️", name: "Vol Cairns → Ayers Rock", detail: "Petit vol regional Jetstar/Rex vers Connellan Airport (YAY) — au milieu du bush.", cost: "~80€" },
-        { icon: "🌅", name: "Uluru au lever du soleil", detail: "Le monolithe sacré des Anangu s'embrase en rouge, orange et violet — feux à l'aube.", cost: "~25€ parc" },
-        { icon: "🥾", name: "Base Walk (10.6km)", detail: "Tour complet du rocher à pied — peintures rupestres, sources sacrées et sites cérémoniels.", cost: "Inclus" },
-        { icon: "⭐", name: "Dîner Field of Light", detail: "Installation artistique de 50 000 sphères lumineuses autour d'Uluru — dîner sous les étoiles.", cost: "~100€" }
-      ]},
-      { title: "Kata Tjuta & Red Centre", location: "📍 Kata Tjuta, NT", color: "#f97316", activities: [
-        { icon: "🏜️", name: "Kata Tjuta (The Olgas)", detail: "36 dômes de grès rouge encore plus grands qu'Uluru — randonnée Valley of the Winds.", cost: "Inclus parc" },
-        { icon: "🦎", name: "King's Canyon", detail: "Gorge de 270m de profondeur dans le désert rouge — Lost City de piliers de grès.", cost: "~10€" },
-        { icon: "🌌", name: "Nuit dans l'Outback", detail: "Ciel étoilé de l'hémisphère Sud — Croix du Sud, Voie Lactée, shooting stars en continu.", cost: "~30€ camping" },
-        { icon: "🦘", name: "Faune de l'Outback", detail: "Emeus, kangourous roux, perroquets multicolores et dingos sauvages au crépuscule.", cost: "Gratuit" }
-      ]},
-      { title: "Melbourne — La Coolest City", location: "📍 Melbourne, VIC", color: "#8b5cf6", activities: [
-        { icon: "✈️", name: "Vol Ayers Rock → Melbourne", detail: "Via Alice Springs ou direct avec Qantas — 2h de vol.", cost: "~90€" },
-        { icon: "🎨", name: "Hosier Lane Street Art", detail: "La ruelle aux graffitis qui changent chaque semaine — la culture alternative de Melbourne.", cost: "Gratuit" },
-        { icon: "☕", name: "Coffee culture de Melbourne", detail: "La meilleure scène café du monde — flat white, magic, cortado dans 1000 cafés indépendants.", cost: "~3€" },
-        { icon: "🐧", name: "Défilé des pingouins de Phillip Island", detail: "À 90 min — les petits pingouins bleusremontent la plage au coucher du soleil. Magique.", cost: "~20€" }
-      ]},
-      { title: "Great Ocean Road", location: "📍 Great Ocean Road, VIC", color: "#14b8a6", activities: [
-        { icon: "🚗", name: "Great Ocean Road Drive", detail: "La plus belle route côtière d'Australie — 243km entre rainforest, falaises et Pacifique.", cost: "~20€ essence" },
-        { icon: "🏔️", name: "12 Apôtres", detail: "Les colonnes de calcaire qui émergent de l'océan — érosion en direct depuis les falaises.", cost: "Gratuit" },
-        { icon: "🦜", name: "Forêt de Rainforest d'Otway", detail: "Koalas sauvages dans les eucalyptus — les voir dans leur habitat naturel, ça n'a pas de prix.", cost: "Gratuit" },
-        { icon: "🌊", name: "Loch Ard Gorge", detail: "Gorge secrète accessible depuis la plage — histoire de naufrage et rochers sculptés.", cost: "Gratuit" }
-      ]},
-      { title: "Retour Sydney & Départ", location: "📍 SYD", color: "#6366f1", activities: [
-        { icon: "✈️", name: "Vol Melbourne → Sydney", detail: "Dernière liaison intérieure avant le grand vol retour — 1h15.", cost: "~40€" },
-        { icon: "🦘", name: "Taronga Zoo", detail: "Le zoo de Sydney avec vue sur le Harbour Bridge — koalas, kangourous, wombats.", cost: "~35€" },
-        { icon: "🍷", name: "Hunter Valley Wine (si temps)", detail: "Vignobles à 2h de Sydney — shiraz et semillon dans le plus vieux vignoble d'Australie.", cost: "~15€ dégus." },
-        { icon: "✈️", name: "G'day Australia 🦘", detail: "Le continent le plus lointain — et celui qui vous manquera le plus une fois rentré.", cost: "❤️" }
-      ]}
-    ]
-  },
-
-  {
-    id: "islande",
-    name: "Islande",
-    country: "Islande",
-    flag: "🇮🇸",
-    emoji: "🌋",
-    region: "premium",
-    color: "#06b6d4",
-    colorDark: "#164e63",
-    budget: "~1 900€",
-    budgetDetail: { vol: "350€", hotel: "700€", repas: "500€", activites: "350€" },
-    duration: "10 jours",
-    bestSeason: "Juin–Août / Nov.–Fév.",
-    tags: ["Aurores Boréales", "Geysers", "Cascades", "Lagon Bleu", "Volcans"],
-    premium: true,
-    description: "Terre de feu et de glace — aurores boréales, geysers, cascades et paysages de fin du monde à portée d'easyJet.",
-    tips: [
-      "Vol Paris-Reykjavik depuis 70€ sur easyJet ou IcelandAir — l'un des meilleurs rapports voyage/coût d'Europe du Nord",
-      "Location de van aménagé pour 7 = ~130€/j = 18€/pers — hébergement + transport réunis, recommandé",
-      "La Ring Road (Route 1, 1332km) fait le tour complet de l'île en 7-10 jours — c'est le voyage classique",
-      "Aurores boréales : prévisibles mais jamais garanties. Application \"Aurora Forecast\" et KP index ≥ 4",
-      "Supermarchés Bónus (prix raisonnables) vs Kronan — cuisiner dans le van = économie énorme sur les repas'
-    ],
-    days: [
-      { title: 'Reykjavik — Petite Grande Capitale", location: "📍 Reykjavik", color: "#06b6d4", activities: [
-        { icon: "✈️", name: "Arrivée Keflavik (KEF)", detail: "Flybus vers Reykjavik (30€) ou taxi (70€). Activation du van de location.", cost: "~30€" },
-        { icon: "⛪", name: "Hallgrímskirkja", detail: "L'église en forme de colonnes basaltiques qui domine Reykjavik — ascenseur jusqu'au sommet.", cost: "~7€" },
-        { icon: "🎨", name: "Harpa Concert Hall", detail: "Chef-d'œuvre d'architecture de verre inspiré des cristaux de basalte — gratuit à admirer.", cost: "Gratuit" },
-        { icon: "🐳", name: "Whale Watching", detail: "Baleines à bosse et dauphins dans le Faxaflói depuis le vieux port de Reykjavik.", cost: "~60€" }
-      ]},
-      { title: "Cercle d'Or", location: "📍 Golden Circle", color: "#f59e0b", activities: [
-        { icon: "💧", name: "Geysir & Strokkur", detail: "Le geyser Strokkur jaillit à 30m toutes les 5 minutes — attente magique, giclée garantie.", cost: "Gratuit" },
-        { icon: "🌊", name: "Gullfoss", detail: "La cascade à deux paliers dans un canyon glaciaire — brume arc-en-ciel permanente.", cost: "Gratuit" },
-        { icon: "🌋", name: "Thingvellir NP", detail: "Là où les plaques tectoniques eurasienne et nord-américaine se séparent — marcher entre deux continents.", cost: "Gratuit" },
-        { icon: "🛁", name: "Lagon Bleu", detail: "Le spa géothermique le plus célèbre du monde — eaux bleues à 39°C au milieu des champs de lave.", cost: "~60€" }
-      ]},
-      { title: "Côte Sud & Cascades", location: "📍 Côte Sud", color: "#10b981", activities: [
-        { icon: "💧", name: "Seljalandsfoss", detail: "La cascade qu'on peut contourner — derrière les chutes, le monde disparaît dans la brume.", cost: "~2€ parking" },
-        { icon: "🌊", name: "Skógafoss", detail: "Cascade de 60m de large — 527 marches jusqu'au sommet, arc-en-ciel quotidien à midi.", cost: "Gratuit" },
-        { icon: "🏖️", name: "Plage noire de Reynisfjara", detail: "Sable noir volcanique, basalte en orgues, vagues de l'Atlantique déchaîné et macareux.", cost: "Gratuit" },
-        { icon: "🌋", name: "Eyjafjallajökull", detail: "Le volcan de 2010 qu'on ne sait pas prononcer — visitor center avec la vraie histoire.", cost: "~5€" }
-      ]},
-      { title: "Glacier Vatnajökull", location: "📍 Jökulsárlón", color: "#3b82f6", activities: [
-        { icon: "🧊", name: "Lagune glaciaire Jökulsárlón", detail: "Icebergs qui dérivent lentement vers l'Atlantique — bleus, blancs et transparents. Surréel.", cost: "Gratuit" },
-        { icon: "🦭", name: "Diamond Beach", detail: "Les icebergs s'échouent sur le sable noir — comme des diamants sur du velours.", cost: "Gratuit" },
-        { icon: "🥾", name: "Randonnée sur glacier (guide)", detail: "Marcher sur le Vatnajökull (le plus grand glacier d'Europe) avec crampons et piolet.", cost: "~50€" },
-        { icon: "🌌", name: "Aurores boréales (si saison)", detail: "Réveil à 2h — rideau vert et violet au-dessus des icebergs. L'une des images les plus fortes du voyage.", cost: "Gratuit" }
-      ]},
-      { title: "Est Islandais Sauvage", location: "📍 Fjords de l'Est", color: "#8b5cf6", activities: [
-        { icon: "🏔️", name: "Fjords de l'Est", detail: "La partie la plus sauvage de l'Islande — fjords étroits, fermes isolées et oies sauvages.", cost: "Gratuit" },
-        { icon: "🦊", name: "Renards arctiques", detail: "La faune islandaise : renards arctiques, phoques, macareux — sortez les jumelles.", cost: "Gratuit" },
-        { icon: "♨️", name: "Pot géothermal naturel", detail: "Source chaude naturelle dans la nature — bain à 40°C en plein milieu de nulle part, gratuit.", cost: "Gratuit" },
-        { icon: "🏕️", name: "Van camping sous ciel étoilé", detail: "Nuit dans le van au bord d'un fjord — le seul bruit : le vent et les vagues.", cost: "~10€ camping" }
-      ]},
-      { title: "Nord — Akureyri & Baleines", location: "📍 Akureyri", color: "#f97316", activities: [
-        { icon: "🐋", name: "Whale Watching Húsavík", detail: "Le meilleur spot de whale watching d'Europe — baleines à bosse garanties presque.", cost: "~70€" },
-        { icon: "🌊", name: "Godafoss — Chute des Dieux", detail: "Là où l'Islande devint chrétienne en l'an 1000 — chutes en fer à cheval dans la lave.", cost: "Gratuit" },
-        { icon: "🏙️", name: "Akureyri — Capitale du Nord", detail: "La deuxième ville d'Islande avec 18 000 habitants — feux de signalisation en forme de cœur.", cost: "Gratuit" },
-        { icon: "🌋", name: "Krafla Caldera", detail: "Lac volcanique bouillonnant dans une caldeira active — paysage martien de soufre et lave.", cost: "~2€" }
-      ]},
-      { title: "Péninsule de Snæfellsnes", location: "📍 Snæfellsnes", color: "#a78bfa", activities: [
-        { icon: "🌋", name: "Glacier Snæfellsjökull", detail: "Le glacier du \"Voyage au Centre de la Terre\" de Jules Verne — accès en Superjeep.", cost: "~40€ tour" },
-        { icon: "⛪", name: "Arnarstapi & Hellnar", detail: "Villages de pêcheurs au pied du glacier — falaises basaltiques et arches naturelles.", cost: "Gratuit" },
-        { icon: "🦦", name: "Phoques de Ytri Tunga", detail: "Colonie de phoques sur une plage de rochers — à 50m, ils vous regardent avec curiosité.", cost: "Gratuit" },
-        { icon: "🌅", name: "Coucher de soleil de minuit", detail: "En été : le soleil qui ne se couche pas sur l'Atlantique depuis le cap Snæfells.", cost: "Gratuit" }
-      ]},
-      { title: "Péninsule de Reykjanes", location: "📍 Reykjanes", color: "#ef4444", activities: [
-        { icon: "🌋", name: "Geldingadalir Volcanic Field", detail: "L'éruption volcanique de 2021 — champs de lave refroidis, encore chauds par endroits.", cost: "Gratuit" },
-        { icon: "🌉", name: "Pont entre deux continents", detail: "Passerelle qui enjambe la fissure entre l'Eurasie et l'Amérique du Nord — 1 pied sur chaque continent.", cost: "~1€" },
-        { icon: "♨️", name: "Sky Lagoon", detail: "Nouveau spa géothermique avec vue sur l'Atlantique et Reykjavik — alternatif au Lagon Bleu.", cost: "~45€" },
-        { icon: "🎶", name: "Soirée Reykjavik", detail: "La nightlife islandaise — concerts de post-rock, bars de Laugavegur, Björk dans les speakers.", cost: "~10€" }
-      ]},
-      { title: "Dernier Jour & Départ", location: "📍 Keflavik (KEF)", color: "#6366f1", activities: [
-        { icon: "🛍️", name: "Souvenirs islandais", detail: "Laine Lopi, chocolat au caramel Skyr, rhum de bouleau, céramiques — tout à Kolaportið.", cost: "~20-40€" },
-        { icon: "🍦", name: "Skyr & Kleina", detail: "Le yaourt islandais protéiné et le beignet torsadé — le petit-déjeuner national.", cost: "~3€" },
-        { icon: "♨️", name: "Dernier bain géothermal", detail: "Pot naturel ou piscine publique locale (Sundhöll Reykjavíkur) — les Islandais y vont chaque jour.", cost: "~6€" },
-        { icon: "✈️", name: "Bless Ísland 🌋", detail: "L'Islande — l'endroit le plus étrange, le plus beau et le moins humain que vous ayez jamais vu.", cost: "❤️" }
-      ]}
-    ]
-  },
-
-  {
-    id: "canada",
-    name: "Canada — Québec & Nature",
-    country: "Canada",
-    flag: "🇨🇦",
-    emoji: "🍁",
-    region: "premium",
-    color: "#ef4444",
-    colorDark: "#7f1d1d",
-    budget: "~2 100€",
-    budgetDetail: { vol: "700€", hotel: "650€", repas: "400€", activites: "350€" },
-    duration: "10 jours",
-    bestSeason: "Juin–Août / Sep.–Oct.",
-    tags: ["Chutes Niagara", "Montréal", "Québec", "Érables", "Orignaux"],
-    premium: true,
-    description: "Montréal bilingue et festive, Québec City médiévale, les Laurentides sauvages et les Chutes Niagara — le Canada à la française.",
-    tips: [
-      "STM (métro de Montréal) : 3.50$ le trajet ou carnet de 10 à 30$ — très efficace et propre",
-      "L'automne (fin septembre-octobre) = érables rouges et oranges — l'un des plus beaux spectacles naturels au monde",
-      "Montréal = ville parfaitement bilingue, tous les menus en français. Quebec City = 95% francophone",
-      "Les parcs nationaux du Québec (SEPAQ) = 9.50$/adulte/j — camping exceptionnel dans la forêt boréale",
-      "Réservez les Chutes Niagara côté canadien (Ontario) — la vue est infiniment supérieure au côté américain'
-    ],
-    days: [
-      { title: 'Montréal — Arrivée & Plateau", location: "📍 Montréal, QC", color: "#ef4444", activities: [
-        { icon: "✈️", name: "Arrivée Trudeau Airport (YUL)", detail: "747 Express Bus vers downtown (11$) ou taxi fixe 50$. Montréal commence dès l'aéroport.", cost: "~8€" },
-        { icon: "🏠", name: "Le Plateau-Mont-Royal", detail: "Le quartier bohème de Montréal — escaliers colorés, murales géantes, cafés francophones.", cost: "Gratuit" },
-        { icon: "🥯", name: "Bagel de Saint-Viateur", detail: "Le bagel le plus célèbre du monde cuit au four à bois depuis 1919 — à déguster chaud à la sortie.", cost: "~1€" },
-        { icon: "🎶", name: "Soirée jazz Quartier Latin", detail: "Montréal est la capitale du jazz en Amérique du Nord — concerts gratuits en été dans les rues.", cost: "~8€ bières" }
-      ]},
-      { title: "Montréal Culture & Gastronomie", location: "📍 Vieux-Montréal", color: "#f97316", activities: [
-        { icon: "⛪", name: "Basilique Notre-Dame de Montréal", detail: "Chef-d'œuvre gothique aux vitraux bleus — son et lumière \"Aura\" le soir, époustouflant.", cost: "~7€" },
-        { icon: "🏙️", name: "Vieux-Port & Bonsecours", detail: "Port historique de Montréal — marché Bonsecours, silos à grains et vue sur le Saint-Laurent.", cost: "Gratuit" },
-        { icon: "🍁", name: "Mont Royal au coucher du soleil", detail: "La colline du parc Mont Royal au crépuscule — vue sur tout Montréal, orignaux dans le parc.", cost: "Gratuit" },
-        { icon: "🍽️", name: "Smoked Meat chez Schwartz's", detail: "Le sandwich au pastrami fumé mythique de Montréal depuis 1928 — file d'attente garantie.", cost: "~12€" }
-      ]},
-      { title: "Laurentides — Nature Québécoise", location: "📍 Parc du Mont-Tremblant", color: "#10b981", activities: [
-        { icon: "🚗", name: "Drive vers Mont-Tremblant (2h)", detail: "Autoroute 15 Nord à travers les Laurentides — forêt boréale, lacs miroirs, orignaux.", cost: "~15€ essence" },
-        { icon: "🛶", name: "Canot sur le Lac Monroe", detail: "Paddling dans les eaux noires du parc — hérons cendrés, castors et silence absolu.", cost: "~18€ location" },
-        { icon: "🥾", name: "Randonnée La Corniche", detail: "Sentier panoramique sur le lac Tremblant — vue à couper le souffle sur les érables rouges.", cost: "~10€ parc" },
-        { icon: "🦌", name: "Orignaux au crépuscule", detail: "À l'aube ou au crépuscule en forêt — le plus grand cervidé du monde, 700kg.", cost: "Gratuit" }
-      ]},
-      { title: "Québec City — La Vieille Ville", location: "📍 Vieux-Québec (UNESCO)", color: "#8b5cf6", activities: [
-        { icon: "🚗", name: "Route Québec City (3h)", detail: "A-20 le long du Saint-Laurent — villages de bois, clochers blancs, traversiers.", cost: "~15€ essence" },
-        { icon: "🏯", name: "Château Frontenac", detail: "L'hôtel le plus photographié au monde domine la vieille ville — café sur la terrasse.", cost: "~5€ café" },
-        { icon: "⚔️", name: "Fortifications de Québec", detail: "Les seules fortifications d'Amérique du Nord toujours debout — promenade sur les remparts.", cost: "~4€" },
-        { icon: "🥞", name: "Cabane à sucre", detail: "Sirop d'érable sur neige (tire d'érable), oreilles de crisse et poutine — culture québécoise pure.", cost: "~20€" }
-      ]},
-      { title: "Montmorency & Île d'Orléans", location: "📍 Côte de Beaupré", color: "#06b6d4", activities: [
-        { icon: "💧", name: "Chutes Montmorency", detail: "Plus hautes que Niagara (83m) — passerelle suspendue au-dessus des chutes, tyrolienne.", cost: "~5€ parc" },
-        { icon: "🍓", name: "Île d'Orléans", detail: "L'île des fromages et des fraises — producteurs locaux, cidres de glace, église du XVIIe.", cost: "~10€ dégus." },
-        { icon: "🦭", name: "Baleines du Saint-Laurent (option)", detail: "Croisière depuis Tadoussac — bélugas, rorquals et baleines bleues dans le fjord du Saguenay.", cost: "~50€" },
-        { icon: "🌅", name: "Coucher de soleil sur le fleuve", detail: "Le Saint-Laurent au crépuscule depuis les rives de l'île — flamant orange et bateaux de croisière.", cost: "Gratuit" }
-      ]},
-      { title: "Ottawa — Capitale Fédérale", location: "📍 Ottawa, Ontario", color: "#f59e0b", activities: [
-        { icon: "🚗", name: "Drive Québec → Ottawa (4h)", detail: "Route via Montréal ou par les Laurentides — frontière Québec-Ontario au milieu de la forêt.", cost: "~20€ essence" },
-        { icon: "🏛️", name: "Parlement du Canada", detail: "Le Parlement néogothique sur la colline — visite gratuite avec guide bilingue francophone.", cost: "Gratuit" },
-        { icon: "🎨", name: "Musée des beaux-arts du Canada", detail: "Inuit art, peintres du Groupe des Sept, Emily Carr — l'art canadien dans toute sa diversité.", cost: "~12€" },
-        { icon: "🛶", name: "Canal Rideau en kayak", detail: "Canal UNESCO en cœur de ville — en été en kayak, en hiver la plus longue patinoire du monde.", cost: "~15€ location" }
-      ]},
-      { title: "Toronto — La Cosmopolite", location: "📍 Toronto, Ontario", color: "#ec4899", activities: [
-        { icon: "🚂", name: "VIA Rail Ottawa → Toronto", detail: "Train fédéral canadien (2h) depuis Ottawa Union Station — buffet et vue sur l'Ontario.", cost: "~25€" },
-        { icon: "🗼", name: "CN Tower", detail: "L'ancienne plus haute tour du monde (553m) — tour de verre sous les pieds, vue sur le lac Ontario.", cost: "~28€" },
-        { icon: "🏘️", name: "Kensington Market & Chinatown", detail: "Le marché bohème de Toronto — Jamaïque, Éthiopie, Portugal en 200m de rues.", cost: "~10€ repas" },
-        { icon: "🏒", name: "Match NHL (si saison)", detail: "Un match des Maple Leafs au Scotiabank Arena — sport et ambiance nord-américaine.", cost: "~40-80€" }
-      ]},
-      { title: "Chutes Niagara", location: "📍 Niagara Falls, Ontario", color: "#14b8a6", activities: [
-        { icon: "🚗", name: "Drive Toronto → Niagara (1h30)", detail: "QEW vers Niagara Falls — au loin les panaches de vapeur se voient depuis l'autoroute.", cost: "~10€ essence" },
-        { icon: "🌊", name: "Horseshoe Falls — Vue canadienne", detail: "168m de large, 57m de haut, 2400m³ d'eau par seconde — la vue canadienne est la meilleure.", cost: "Gratuit" },
-        { icon: "⛴️", name: "Hornblower (Maid of the Mist)", detail: "Poncho obligatoire — le bateau s'approche au cœur des chutes, vous serez trempés.", cost: "~20€" },
-        { icon: "🎡", name: "Niagara-on-the-Lake", detail: "Village victorien à 20 min — dégustations de vins de glace du Niagara, boutiques anglaises.", cost: "~10€ vins" }
-      ]},
-      { title: "Retour Montréal", location: "📍 Montréal", color: "#84cc16", activities: [
-        { icon: "🚗", name: "Drive Niagara → Montréal (7h)", detail: "Via Toronto puis A-20 — ou vol rapide si vous avez économisé sur le carburant.", cost: "~25€ essence" },
-        { icon: "🛍️", name: "Derniers achats Montréal", detail: "Sirop d'érable, poutine au resto, whisky canadien Crown Royal, tuques en laine.", cost: "~30-50€" },
-        { icon: "🍺", name: "Microbrasseries du Plateau", detail: "Unibroue, Dieu du Ciel, Brasseurs du Monde — la scène bière artisanale de Montréal.", cost: "~8€ pintes" },
-        { icon: "✈️", name: "Au revoir Tabarnac ! 🍁", detail: "YUL → CDG — la nostalgie de la poutine et du sirop d'érable commence dans l'avion.", cost: "❤️" }
-      ]}
-    ]
-  }
-
 ];
 
 // ══════════════════════════════════════════════════════
@@ -1282,7 +856,6 @@ function renderCards(filter) {
     card.className = 'dest-card';
     card.style.animationDelay = (i * 0.07) + 's';
     card.style.setProperty('--dest-color', dest.color);
-    if (dest.premium) { card.style.border = '1px solid rgba(245,200,66,0.3)'; }
     card.innerHTML = `
       <div class="dest-banner" style="background: linear-gradient(135deg, ${dest.colorDark} 0%, #0a0d12 100%);">
         <div class="dest-emoji-bg">${dest.emoji}</div>
@@ -1294,7 +867,6 @@ function renderCards(filter) {
         <div class="budget-tag" style="color:${dest.color}">${dest.budget}<br><span style="font-size:9px;opacity:.7">par personne</span></div>
       </div>
       <div class="dest-body">
-        ${dest.premium ? '<div style="display:inline-flex;align-items:center;gap:5px;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.3);color:#f5c842;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:600;margin-bottom:12px;">💎 Destination Premium</div>' : ''}
         <div class="quick-infos">
           <div class="qi"><div class="qi-val" style="color:${dest.color}">${dest.budget}</div><div class="qi-lbl">Budget</div></div>
           <div class="qi"><div class="qi-val">10j</div><div class="qi-lbl">Durée</div></div>
@@ -1316,20 +888,6 @@ function filterDest(f, btn) {
   document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
   renderCards(f);
-  const badge = document.getElementById('globalBadge');
-  if (badge) {
-    if (f === 'premium') {
-      badge.textContent = '💎 Destinations Premium';
-      badge.style.background = 'rgba(245,200,66,0.12)';
-      badge.style.borderColor = 'rgba(245,200,66,0.35)';
-      badge.style.color = '#f5c842';
-    } else {
-      badge.textContent = '💸 Budget maîtrisé';
-      badge.style.background = '';
-      badge.style.borderColor = '';
-      badge.style.color = '';
-    }
-  }
 }
 
 // ══════════════════════════════════════════════════════
