@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destinations - Vacances Equipe</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0d12;
+  --surface: #121620;
+  --surface2: #181d2a;
+  --surface3: #1e2535;
+  --text: #e8eaf2;
+  --muted: #5c6480;
+  --border: #232840;
+  --radius: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; min-height: 100vh; overflow-x: hidden; }
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,.35) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 10%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 55%, rgba(255,255,255,.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 25%, rgba(255,255,255,.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 70%, rgba(255,255,255,.3) 0%, transparent 100%);
+  pointer-events: none;
+}
+header { padding: 22px 52px; display: flex; align-items: center; gap: 18px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: rgba(10,13,18,.92); backdrop-filter: blur(16px); z-index: 100; }
+.back-btn { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 14px; font-size: 13px; color: var(--text); text-decoration: none; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all .18s; }
+.back-btn:hover { border-color: #60a5fa; color: #60a5fa; }
+.header-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; }
+.header-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.budget-badge { margin-left: auto; background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.25); color: #4ade80; border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 600; }
+.hero { text-align: center; padding: 72px 40px 60px; position: relative; z-index: 1; }
+.hero-eyebrow { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 6vw, 76px); font-weight: 700; line-height: 1.05; margin-bottom: 18px; background: linear-gradient(135deg, #e8eaf2 0%, #9ba3c0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+.filters { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 0; }
+.filter-pill { padding: 8px 18px; border-radius: 24px; border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 12px; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all .18s; }
+.filter-pill:hover { color: var(--text); border-color: #60a5fa; }
+.filter-pill.active { background: #60a5fa; border-color: #60a5fa; color: #000; font-weight: 600; }
+.filter-pill.premium-pill.active { background: #f5c842; border-color: #f5c842; color: #000; }
+main { max-width: 1240px; margin: 0 auto; padding: 52px 44px 100px; position: relative; z-index: 1; }
+.destinations-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 24px; }
+.dest-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: transform .22s, border-color .22s, box-shadow .22s; cursor: pointer; animation: riseIn .5s ease both; }
+@keyframes riseIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.dest-card:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,.4); }
+.dest-banner { height: 180px; position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: 18px 20px; }
+.dest-banner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,13,18,.85) 0%, rgba(10,13,18,.1) 60%); }
+.dest-emoji-bg { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 80px; opacity: .18; filter: blur(2px); }
+.dest-flag { position: relative; z-index: 1; font-size: 28px; margin-right: 10px; }
+.dest-name-banner { position: relative; z-index: 1; flex: 1; }
+.dest-name-banner h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 700; line-height: 1; }
+.dest-name-banner .sub { font-size: 12px; color: rgba(255,255,255,.55); margin-top: 2px; }
+.budget-tag { position: relative; z-index: 1; background: rgba(0,0,0,.5); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 600; }
+.dest-body { padding: 20px 22px; }
+.quick-infos { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 18px; }
+.qi { background: var(--surface2); border-radius: 10px; padding: 10px; text-align: center; }
+.qi .qi-val { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.qi .qi-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.tag { background: var(--surface3); border-radius: 6px; padding: 4px 10px; font-size: 11px; color: var(--muted); }
+.premium-tag { background: rgba(245,200,66,.12); color: #f5c842; border: 1px solid rgba(245,200,66,.25); border-radius: 6px; padding: 3px 10px; font-size: 11px; font-weight: 600; margin-bottom: 12px; display: inline-block; }
+.btn-prog { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; transition: all .18s; display: flex; align-items: center; justify-content: center; gap: 7px; }
+.btn-prog:hover { background: var(--surface3); border-color: #60a5fa; color: #60a5fa; }
+#progModal { position: fixed; inset: 0; background: rgba(5,7,12,.88); backdrop-filter: blur(14px); z-index: 500; display: none; overflow-y: auto; padding: 32px 20px; }
+#progModal.open { display: block; }
+.prog-wrapper { max-width: 780px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; animation: popIn .35s cubic-bezier(.34,1.56,.64,1); position: relative; }
+@keyframes popIn { from { opacity:0; transform:scale(.92) translateY(24px); } to { opacity:1; transform:scale(1) translateY(0); } }
+.prog-header { padding: 32px 36px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 16px; }
+.prog-flag { font-size: 42px; flex-shrink: 0; }
+.prog-titles { flex: 1; }
+.prog-titles h2 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.prog-titles .prog-sub { font-size: 13px; color: var(--muted); }
+.prog-budget-big { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; text-align: right; }
+.prog-budget-big .pbb-lbl { font-size: 11px; color: var(--muted); font-family: 'Outfit', sans-serif; font-weight: 400; }
+.prog-close { position: absolute; top: 18px; right: 20px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; transition: all .15s; color: var(--muted); }
+.prog-close:hover { background: var(--surface3); color: var(--text); }
+.budget-breakdown { padding: 20px 36px; display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; border-bottom: 1px solid var(--border); }
+.bb-item { background: var(--surface2); border-radius: 10px; padding: 12px; text-align: center; }
+.bb-item .bb-icon { font-size: 18px; margin-bottom: 5px; }
+.bb-item .bb-val { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.bb-item .bb-lbl { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.prog-days { padding: 24px 36px 32px; }
+.prog-days h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; margin-bottom: 18px; color: var(--muted); font-style: italic; }
+.day-block { margin-bottom: 20px; display: flex; gap: 16px; animation: fadeIn .4s ease both; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px);} to{opacity:1;transform:translateY(0);} }
+.day-num-col { flex-shrink: 0; width: 44px; text-align: center; }
+.day-circle { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #000; margin-bottom: 4px; position: relative; }
+.day-circle::after { content: ''; position: absolute; top: 44px; left: 50%; transform: translateX(-50%); width: 1px; height: calc(100% + 12px); background: var(--border); }
+.day-block:last-child .day-circle::after { display: none; }
+.day-content { flex: 1; padding-top: 6px; padding-bottom: 20px; }
+.day-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.day-loc { font-size: 11px; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 4px; }
+.day-activities { display: flex; flex-direction: column; gap: 7px; }
+.activity { display: flex; gap: 10px; align-items: flex-start; background: var(--surface2); border-radius: 10px; padding: 10px 13px; }
+.activity-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.activity-text { flex: 1; }
+.activity-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+.activity-detail { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.activity-cost { font-size: 11px; font-weight: 600; flex-shrink: 0; background: var(--surface3); border-radius: 6px; padding: 2px 8px; align-self: flex-start; margin-top: 2px; white-space: nowrap; }
+.tips-section { margin: 0 36px 32px; background: rgba(96,165,250,.06); border: 1px solid rgba(96,165,250,.18); border-radius: 14px; padding: 18px 20px; }
+.tips-section h4 { font-size: 13px; color: #60a5fa; margin-bottom: 12px; font-weight: 600; }
+.tips-list { display: flex; flex-direction: column; gap: 7px; }
+.tip-item { font-size: 12px; color: var(--muted); display: flex; gap: 8px; line-height: 1.5; }
+.tip-item::before { content: 'rightarrow'; color: #60a5fa; flex-shrink: 0; }
+@media(max-width:768px){
+  header { padding: 14px 16px; }
+  main { padding: 32px 14px 80px; }
+  .hero { padding: 48px 16px 40px; }
+  .destinations-grid { grid-template-columns: 1fr; }
+  .prog-header { padding: 24px 20px 18px; flex-wrap: wrap; }
+  .budget-breakdown { grid-template-columns: repeat(2,1fr); padding: 16px 20px; }
+  .prog-days { padding: 20px 20px 28px; }
+  .tips-section { margin: 0 20px 28px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <a class="back-btn" href="index.html">- Calendrier</a>
+  <div>
+    <div class="header-title">Destinations</div>
+    <div class="header-sub">Programmes 10 jours pour 7</div>
+  </div>
+  <div class="budget-badge">Budget maitrise</div>
+</header>
+<div class="hero">
+  <div class="hero-eyebrow">Pour votre prochain voyage en equipe</div>
+  <h1>Ou partir a 7<br>sans se ruiner ?</h1>
+  <p>10 destinations avec un programme complet de 10 jours, activites et budget estime par personne.</p>
+  <div class="filters">
+    <button class="filter-pill active" onclick="filterDest('all',this)">Toutes</button>
+    <button class="filter-pill" onclick="filterDest('asie',this)">Asie</button>
+    <button class="filter-pill" onclick="filterDest('europe',this)">Europe</button>
+    <button class="filter-pill" onclick="filterDest('afrique',this)">Afrique</button>
+    <button class="filter-pill premium-pill" onclick="filterDest('premium',this)">Premium</button>
+  </div>
+</div>
+<main>
+  <div class="destinations-grid" id="destGrid"></div>
+</main>
+<div id="progModal" onclick="if(event.target===this)closeModal()">
+  <div class="prog-wrapper" id="progWrapper"></div>
+</div>
+<script>
+var DEST = [];
+
+// Fonction helper pour creer une destination
+function mkDest(id, name, country, flag, emoji, region, color, colorDark, budget, vol, hotel, repas, act, season, tags, desc, tips, days) {
+  return {id:id, name:name, country:country, flag:flag, emoji:emoji, region:region, color:color, colorDark:colorDark,
+    budget:budget, budgetDetail:{vol:vol, hotel:hotel, repas:repas, activites:act},
+    duration:'10 jours', bestSeason:season, tags:tags, description:desc, tips:tips, days:days, premium:region==='premium'};
+}
+
+function mkDay(title, location, color, acts) {
+  return {title:title, location:location, color:color, activities:acts};
+}
+
+function mkAct(icon, name, detail, cost) {
+  return {icon:icon, name:name, detail:detail, cost:cost};
+}
+
+// ===== BALI =====
+DEST.push(mkDest('bali','Bali','Indonesie','flag-bali','emoji-bali','asie','#f59e0b','#92400e',
+  '~1 200 EUR','550 EUR','280 EUR','200 EUR','170 EUR','Avr.-Oct.',
+  ['Plages','Temples','Rizieres','Surf','Fetes'],
+  "L'ile des Dieux entre plages de reve, jungle luxuriante et culture hindoue unique.",
+  [
+    "Reservez vos vols 3-4 mois a l'avance sur Skyscanner",
+    "Louer des scooters a Ubud : 5 EUR/j — ideal pour 7 dans les rizieres",
+    "Budget repas : 2-4 EUR le warung local",
+    "Negociez la villa privee pour 7 : 50-80 EUR/nuit total sur Airbnb",
+    "Avril-octobre = saison seche, ideale. Juillet-aout = plus frequente mais festif"
+  ],
+  [
+    mkDay('Arrivee et Seminyak','Seminyak','#f59e0b',[
+      mkAct('avion','Vol et Arrivee','Atterrissage a Ngurah Rai (DPS). Taxi fixe vers hotel.','Inclus'),
+      mkAct('maison','Check-in villa','Villa 7 personnes avec piscine privee a Seminyak.','~55 EUR/nuit'),
+      mkAct('coucher-soleil','Premier coucher de soleil','Plage de Seminyak — bintang a la main.','~2 EUR'),
+      mkAct('nourriture','Diner Warung Sunset','Nasi goreng, mie goreng, sate ayam.','~4 EUR/pers')
+    ]),
+    mkDay('Kuta et Surf','Kuta Beach','#ef4444',[
+      mkAct('surf','Cours de surf','Ecole de surf a Kuta — 2h de cours avec moniteur.','~12 EUR'),
+      mkAct('vague','Apres-midi plage','Kuta, Legian ou Double Six — eaux chaudes, palmiers.','Gratuit'),
+      mkAct('shopping','Shopping Kuta','Vetements locaux, sarongs et souvenirs.','~10-20 EUR'),
+      mkAct('cocktail','Soiree Bintang','Bars a Seminyak — terrasses rooftop, cocktails.','~10 EUR')
+    ]),
+    mkDay('Uluwatu et Falaises','Peninsule de Bukit','#8b5cf6',[
+      mkAct('scooter','Route en scooter','Descendre la peninsule de Bukit en scooter.','~5 EUR/j'),
+      mkAct('temple','Temple Uluwatu','Temple perche sur la falaise a 70m, singes sacres.','~3 EUR'),
+      mkAct('danse','Danse Kecak','Spectacle de danse Kecak au coucher du soleil.','~8 EUR'),
+      mkAct('poisson','Snorkeling Nusa Dua','Eaux cristallines, poissons tropicaux.','~10 EUR')
+    ]),
+    mkDay('Ubud Culture','Ubud','#10b981',[
+      mkAct('riz','Rizieres de Tegallalang','Les terrasses en escalier emblematiques de Bali.','~1 EUR'),
+      mkAct('singe','Sacred Monkey Forest','Foret sacree avec 700 macaques.','~4 EUR'),
+      mkAct('yoga','Cours de yoga','Ubud capitale du yoga. Session dans un shala en bambou.','~8 EUR'),
+      mkAct('art','Musee Neka','Art balinais et indonesien — peintres locaux.','~3 EUR')
+    ]),
+    mkDay('Volcan Batur','Kintamani','#f97316',[
+      mkAct('volcan','Trek volcan Batur 4h','Lever du soleil depuis le sommet (1717m).','~25 EUR guide'),
+      mkAct('bain','Sources chaudes','Bain dans les sources chaudes naturelles.','~7 EUR'),
+      mkAct('cafe','Cafe Kopi Luwak','Degustation de cafe balinais. Visite plantation.','Gratuit'),
+      mkAct('temple','Temple Pura Ulun Danu','Temple flottant sur le lac Beratan.','~2 EUR')
+    ]),
+    mkDay('Nusa Penida','Ile de Nusa Penida','#06b6d4',[
+      mkAct('bateau','Bateau rapide','Speed boat depuis Sanur — 30 min.','~10 EUR A/R'),
+      mkAct('plage','Kelingking Beach','La plage en forme de T-Rex.','Gratuit'),
+      mkAct('eau','Angels Billabong','Piscine naturelle dans la roche volcanique.','Gratuit'),
+      mkAct('tortue','Crystal Bay','Snorkeling avec raies manta et tortues.','~8 EUR')
+    ]),
+    mkDay('Lovina Nord de Bali','Lovina Beach','#a78bfa',[
+      mkAct('dauphin','Dauphins au lever du soleil','Bateau de pecheur a 6h du matin.','~10 EUR'),
+      mkAct('cascade','Cascade Gitgit','Randonnee jungle jusqu a la cascade (35m).','~2 EUR'),
+      mkAct('village','Village de Munduk','Village perche dans les montagnes.','Gratuit'),
+      mkAct('cuisine','Cours de cuisine balinaise','Apprenez le bumbu et le lawar.','~15 EUR')
+    ]),
+    mkDay('Relaxation et Spa','Seminyak Ubud','#ec4899',[
+      mkAct('massage','Spa balinais','Massage 1h + lulur dans un spa traditionnel.','~12-18 EUR'),
+      mkAct('marche','Marche Ubud','Artisanat local, bijoux en argent, tissus ikat.','~10-30 EUR'),
+      mkAct('ceremonie','Ceremonie temple','Ceremonie balinaise — experience unique.','Gratuit'),
+      mkAct('street','Nuit de warungs','Street food : sate, bakso, pisang goreng.','~5 EUR/pers')
+    ]),
+    mkDay('Plages secretes','Balangan et Padang Padang','#14b8a6',[
+      mkAct('plage','Balangan Beach','Plage secrete — sable blanc, eaux calmes.','Gratuit'),
+      mkAct('cinema','Padang Padang','La plage du film Mange Prie Aime.','~1 EUR'),
+      mkAct('plongee','Plongee Amed','Epaves de WWII et coraux intacts.','~35 EUR 2 plongees'),
+      mkAct('photo','Golden Hour Canggu','Surf, cafes, galeries — la scene tendance de Bali.','~5 EUR cafe')
+    ]),
+    mkDay('Dernier jour et Depart','Aeroport DPS','#6366f1',[
+      mkAct('cadeau','Shopping souvenirs','Batik, cafe Bali, epices, bracelets.','~20-40 EUR'),
+      mkAct('repas','Dernier grand repas','Rijsttafel (festin indonesien de 15 plats).','~12 EUR/pers'),
+      mkAct('avion','Depart DPS','Prevoyez 3h a l avance — controles parfois longs.','~8 EUR taxi'),
+      mkAct('coucher','See you Bali','Selamat jalan ! On repart avec la tete pleine.','coeur')
+    ])
+  ]
+));
+
+// ===== MAROC =====
+DEST.push(mkDest('maroc','Maroc','Maroc','flag-maroc','emoji-maroc','afrique','#dc2626','#7f1d1d',
+  '~700 EUR','180 EUR','220 EUR','150 EUR','150 EUR','Mars-Mai / Sep.-Nov.',
+  ['Medinas','Desert','Riad','Tagine','Montagnes'],
+  "De Marrakech au Sahara en passant par Fes, un voyage dans mille et une nuits.",
+  [
+    "Vol Paris-Marrakech depuis 60 EUR sur easyJet ou Ryanair — reservez 2-3 mois avant",
+    "Negocier est une regle sociale — pratiquez sur les souks avec le sourire",
+    "CTM (bus marocain) entre les villes = 5-8 EUR et tres fiables",
+    "Riad et mint tea — terrasse etoilee, the a la menthe et patisseries",
+    "Le meilleur repas = tajine chez habitant via Airbnb Experiences (12-15 EUR)"
+  ],
+  [
+    mkDay('Marrakech La Perle Rouge','Medina de Marrakech','#dc2626',[
+      mkAct('avion','Arrivee Marrakech RAK','Bus 19 depuis aeroport (0.50 EUR) ou taxi 8 EUR.','~0.50 EUR'),
+      mkAct('place','Jemaa el-Fna','La place mythique : conteurs, charmeurs de serpents, gnawa.','Gratuit'),
+      mkAct('mosquee','Koutoubia','La mosquee-minaret emblematique du XIIe siecle.','Ext. gratuit'),
+      mkAct('nourriture','Diner Jemaa','Kefta, harira, escargots, jus frais sur la place.','~4 EUR')
+    ]),
+    mkDay('Souks et Palais','Medina de Marrakech','#f97316',[
+      mkAct('cuir','Souks des artisans','Cuir, babouches, poterie, ferronnerie.','Shopping ~10-30 EUR'),
+      mkAct('palais','Palais de la Bahia','Chef-oeuvre de architecture arabo-andalouse.','~2 EUR'),
+      mkAct('jardin','Jardin Majorelle','Ancienne propriete de Yves Saint Laurent.','~7 EUR'),
+      mkAct('hammam','Hammam traditionnel','Gommage, savon beldi, massage en medina.','~12 EUR')
+    ]),
+    mkDay('Atlas et Cascades','Vallee de Ourika','#10b981',[
+      mkAct('bus','Day-trip Ourika','Minibus vers la vallee berbere au pied du Toubkal.','~3 EUR transport'),
+      mkAct('cascade','Cascades Setti Fatma','7 bassins naturels, fraicheur bienvenue.','Gratuit'),
+      mkAct('dejeuner','Dejeuner berbere','Couscous dans un restaurant de village.','~5 EUR'),
+      mkAct('village','Ait Benhaddou','Ksar UNESCO, decor de Game of Thrones.','~2 EUR entree')
+    ]),
+    mkDay('Route vers Fes','Fes el-Bali','#8b5cf6',[
+      mkAct('bus','Bus CTM vers Fes','7h a travers les plaines du Moyen Atlas.','~8 EUR'),
+      mkAct('porte','Bab Bou Jeloud','La porte bleue de Fes — entree dans la medina.','Gratuit'),
+      mkAct('medersa','Medersa Bou Inania','Ecole coranique du XIVe — mosaiques epoustouflantes.','~1 EUR'),
+      mkAct('riad','Riad et mint tea','Terrasse etoilee, the a la menthe, patisseries.','~15 EUR/nuit')
+    ]),
+    mkDay('Fes Medina UNESCO','Fes el-Bali','#06b6d4',[
+      mkAct('tannerie','Tanneries Chouara','Plus ancienne tannerie du monde — cuves de couleurs.','Gratuit'),
+      mkAct('epices','Marche aux epices','Cumin, ras el-hanout, henne, eau de rose.','~5-10 EUR achats'),
+      mkAct('musee','Musee Batha','Art berbere et arabe, poterie de Fes.','~2 EUR'),
+      mkAct('tajine','Tajine au citron confit','Le meilleur tajine de votre vie en medina.','~5 EUR')
+    ]),
+    mkDay('Merzouga Sahara','Erg Chebbi','#f59e0b',[
+      mkAct('route','Route des mille kasbahs','Gorges du Todra, vallee du Draa — spectaculaire.','~25 EUR/pers'),
+      mkAct('chameau','Dromadaires coucher soleil','Camp au coeur des dunes de Erg Chebbi (150m).','~20 EUR'),
+      mkAct('etoiles','Nuit sous les etoiles','Camp berbere — silence absolu, ciel etoile, feu.','~25 EUR camp'),
+      mkAct('musique','Musique gnawa','Les musiciens jouent autour du feu toute la nuit.','Inclus')
+    ]),
+    mkDay('Lever de soleil sur les dunes','Erg Chebbi','#f97316',[
+      mkAct('aube','Lever de soleil dunes','Le soleil colore les dunes en or et orange.','Inclus'),
+      mkAct('surf','Sandboard','Descente en sandboard — comme le snowboard mais chaud.','~3 EUR planche'),
+      mkAct('gorges','Gorges du Todra','Failles de 300m — randonnee et baignade.','Gratuit'),
+      mkAct('retour','Route vers Marrakech','Kasbahs de Ouarzazate — decor de Game of Thrones.','Inclus')
+    ]),
+    mkDay('Essaouira Cite des Vents','Essaouira','#14b8a6',[
+      mkAct('bus','Bus vers Essaouira','Supratours depuis gare routiere (2h30 cotiere).','~7 EUR'),
+      mkAct('poisson','Port de peche','Thon, sardines et calamars grilles chez les pecheurs.','~3-5 EUR repas'),
+      mkAct('remparts','Remparts Atlantique','Promenade sur les remparts du XVIIIe siecle.','Gratuit'),
+      mkAct('musique','Festival Gnawa','Concerts gratuits dans toute la ville en juin.','Gratuit')
+    ]),
+    mkDay('Asilah Cote Atlantique','Asilah','#ec4899',[
+      mkAct('train','Train vers Tanger','ONCF depuis Casa ou Rabat — confortable.','~10 EUR'),
+      mkAct('fresques','Medina peinte Asilah','Fresques geantes dans les ruelles bleues.','Gratuit'),
+      mkAct('plage','Plage El Rmilat','Plage sauvage au pied des remparts.','Gratuit'),
+      mkAct('cap','Cap Spartel','Ou la Mediterranee rencontre Atlantique.','~2 EUR')
+    ]),
+    mkDay('Retour Tanger','Tanger Ibn Battuta TNG','#6366f1',[
+      mkAct('cafe','Cafe maure','The, baghrir et msemen dans la Kasbah de Tanger.','~1 EUR'),
+      mkAct('musee','Musee de la Kasbah','Mosaiques et vue sur le detroit de Gibraltar.','~2 EUR'),
+      mkAct('shopping','Souvenirs de Tanger','Savon beldi, argan, babouches, the menthe.','~15-25 EUR'),
+      mkAct('avion','Depart TNG','Vol depuis Tanger ou ferry vers Algeciras.','coeur')
+    ])
+  ]
+));
+
+// ===== ALBANIE =====
+DEST.push(mkDest('albanie','Albanie','Albanie','flag-albanie','emoji-albanie','europe','#e11d48','#881337',
+  '~650 EUR','150 EUR','200 EUR','130 EUR','170 EUR','Mai-Sep.',
+  ['Plages secretes','Montagnes','Bunkers','Raki','Randonnee'],
+  "La perle cachee des Balkans : cote ionienne turquoise, montagnes des Alpes albanaises.",
+  [
+    "L'Albanie est 3-4x moins chere que la France — 35-50 EUR/pers/j tout compris",
+    "Le lek albanais (ALL) — 1 EUR = 100 ALL. Cash est la norme",
+    "Furgon (minibus) entre villes : 1-3 EUR, part quand c'est plein",
+    "La Riviera albanaise = la Grece des annees 80 sans les touristes",
+    "Hospitalite albanaise legendaire — on vous offrira du raki partout"
+  ],
+  [
+    mkDay('Tirana Capitale','Tirana','#e11d48',[
+      mkAct('avion','Arrivee Tirana TIA','Bus depuis aeroport 3 EUR ou taxi 20 EUR.','~3 EUR'),
+      mkAct('place','Place Skanderbeg','Grande place coloree — statue et mosquee Et hem Bey.','Gratuit'),
+      mkAct('bunker','Bunk Art 2','Ancien bunker transforme en musee art contemporain.','~2 EUR'),
+      mkAct('bar','Bloku Le quartier branche','Cafes, bars — ancien quartier de la nomenclature.','~8 EUR soiree')
+    ]),
+    mkDay('Tirana et Kruje','Tirana et Kruje','#f97316',[
+      mkAct('chateau','Kruje Chateau Skanderbeg','Chateau medieval et bazaar ottoman.','~3 EUR'),
+      mkAct('musee','Musee National Histoire','Illyrie a nos jours — mosaique en facade.','~1 EUR'),
+      mkAct('teleph','Parc de Dajti','Telepherique jusqu au mont Dajti (1613m).','~6 EUR'),
+      mkAct('agneau','Tave Kosi','Le plat national : agneau et yaourt au four.','~4 EUR')
+    ]),
+    mkDay('Berat Cite aux Mille Fenetres','Berat UNESCO','#8b5cf6',[
+      mkAct('furgon','Furgon vers Berat','Mini-bus depuis gare routiere Tirana (2h30).','~2 EUR'),
+      mkAct('forteresse','Chateau de Berat','Forteresse byzantine XIIIe avec village vivant.','~1 EUR'),
+      mkAct('maisons','Quartier Mangalem','Maisons ottomanes blanches aux multiples fenetres.','Gratuit'),
+      mkAct('icones','Musee du Berat','Icones byzantines — rouges les plus intenses.','~1 EUR')
+    ]),
+    mkDay('Riviera Albanaise','Himara et Dhermi','#06b6d4',[
+      mkAct('bus','Bus Berat vers Himara','Route cote ionienne — paysages spectaculaires.','~3 EUR'),
+      mkAct('plage','Plage de Livadh','Eaux turquoise, galets blancs — zero touriste.','Gratuit'),
+      mkAct('snorkeling','Snorkeling Jale','Eaux cristallines d une clarte irreelle.','~3 EUR'),
+      mkAct('poisson','Poisson grille plage','Bar, dorade et poulpe grilles a meme la plage.','~6 EUR')
+    ]),
+    mkDay('Gjirokaster Cite de Pierre','Gjirokaster UNESCO','#a78bfa',[
+      mkAct('chateau','Chateau Gjirokaster','Forteresse ottomane — avion US Guerre Froide dedans.','~2 EUR'),
+      mkAct('vieille','Vieille ville ottomane','Maisons-tours pierre grise XVIIIe — presque sans touristes.','Gratuit'),
+      mkAct('festival','Festival folklorique','Plus grand rassemblement musique Balkans.','Gratuit'),
+      mkAct('raki','Raki et byrek','Raki maison et byrek — chausson sale incontournable.','~2 EUR')
+    ]),
+    mkDay('Ksamil Les mini Caraibes','Ksamil','#14b8a6',[
+      mkAct('iles','3 iles turquoise','3 iles a 200m dans eau irreselle. Boat taxi.','~2 EUR bateau'),
+      mkAct('antique','Butrint Cite antique','Site grec, romain et byzantin en reserve naturelle.','~5 EUR'),
+      mkAct('source','Source Bleue Bistrica','Eaux d un bleu surnaturel en pleine foret.','Gratuit'),
+      mkAct('cocktail','Soiree plage Ksamil','Cocktails 2 EUR, coucher soleil sur Corfou.','~5 EUR')
+    ]),
+    mkDay('Alpes Albanaises Valbona','Vallee de Valbona','#10b981',[
+      mkAct('ferry','Ferry Lac Koman','Trajet bateau spectaculaire — fjord encaisse.','~6 EUR'),
+      mkAct('montagne','Vallee de Valbona','Alpes albanaises sauvages — aigles royaux.','Gratuit'),
+      mkAct('trek','Trek Valbona vers Theth','Trek emblematique 6h — col a 1760m.','~5 EUR guide'),
+      mkAct('pension','Guesthouse familiale','Pension chez habitant — demi-pension 10 EUR.','~10 EUR')
+    ]),
+    mkDay('Theth et Cascade','Theth','#f59e0b',[
+      mkAct('cascade','Cascade de Grunas','Randonnee 2h jusqu a la cascade (25m).','Gratuit'),
+      mkAct('piscine','Natural pool Theth','Piscine naturelle glaciaire — eau a 14 degres.','Gratuit'),
+      mkAct('tour','Kulla Tour reconciliation','Tour medievale du Kanun — honneur albanais.','Gratuit'),
+      mkAct('retour','Retour Shkoder Tirana','Jeep depuis Theth (4h piste) puis bus.','~10 EUR total')
+    ]),
+    mkDay('Shkoder et Lac','Shkoder','#ec4899',[
+      mkAct('chateau','Chateau de Rozafa','Forteresse sur rocher — confluent 3 rivieres.','~2 EUR'),
+      mkAct('velo','Velo lac Shkoder','Plus grand lac Balkans — piste cyclable.','~3 EUR velo'),
+      mkAct('ville','Vieille ville','Mosquee, eglise orthodoxe, cathedrale — tolerance unique.','Gratuit'),
+      mkAct('avion','Retour Tirana France','Bus Shkoder Tirana + vol retour.','coeur')
+    ])
+  ]
+));
+
+// ===== VIETNAM =====
+DEST.push(mkDest('vietnam','Vietnam','Vietnam','flag-vietnam','emoji-vietnam','asie','#ef4444','#7f1d1d',
+  '~950 EUR','420 EUR','200 EUR','150 EUR','180 EUR','Nov.-Avr.',
+  ['Pagodes','Ha Long Bay','Street food','Scooter','Culture'],
+  "Du nord au sud : Hanoi la frentetique, Ha Long Bay, Hoi An la romantique et la mer de Chine.",
+  [
+    "Train de nuit Hanoi - Hoi An (35h, 40 EUR, couchette) — experience unique",
+    "Grab remplace les taxis — 5x moins cher, pas de negociation",
+    "Pho et banh mi a 1-2 EUR, biere Bia Hoi a 0.30 EUR le verre a Hanoi",
+    "Reserver Ha Long Bay en catamaran — confort incomparable",
+    "Eviter la saison des typhons (aout-octobre) — privilegier novembre a avril"
+  ],
+  [
+    mkDay('Hanoi Vieille Ville','Hoan Kiem District','#ef4444',[
+      mkAct('avion','Arrivee Hanoi HAN','Bus 86 vers centre-ville (1 EUR).','~1-5 EUR'),
+      mkAct('lac','Hoan Kiem Temple Ngoc Son','Lac sacre et temple sur l ile — coeur de Hanoi.','~0.20 EUR'),
+      mkAct('pho','Pho Bo et Bun Cha','Pho au boeuf et bun cha — plat prefere de Obama.','~2 EUR/plat'),
+      mkAct('biere','Bia Hoi Corner','Carrefour des futs de biere — 0.30 EUR le verre.','~1 EUR')
+    ]),
+    mkDay('Hanoi Culture','Hanoi','#f97316',[
+      mkAct('mausolee','Mausolee Ho Chi Minh','Visite mausolee et maison sur pilotis.','Gratuit'),
+      mkAct('musee','Musee Ethnographie','54 ethnies, maisons traditionnelles reconstituees.','~3 EUR'),
+      mkAct('marionnettes','Theatre marionnettes eau','Art vietnamien Xe siecle — dragons aquatiques.','~5 EUR'),
+      mkAct('scooter','Tour scooter vieille ville','36 rues des guildes en scooter avec guide.','~8 EUR')
+    ]),
+    mkDay('Ha Long Bay Jour 1','Baie de Ha Long','#06b6d4',[
+      mkAct('bus','Transfer vers Ha Long','Bus touristique direct (4h) — depart 8h.','~8-12 EUR'),
+      mkAct('jonque','Monte sur le bateau','Jonque — 1969 ilots karstiques panorama.','~95 EUR 2j/1n'),
+      mkAct('kayak','Kayak dans les grottes','Grottes en kayak — lumieres irreelles.','Inclus'),
+      mkAct('coucher','Coucher de soleil en mer','Diner fruits de mer sur le pont.','Inclus')
+    ]),
+    mkDay('Ha Long Bay Jour 2','Baie de Ha Long','#0ea5e9',[
+      mkAct('lever','Lever de soleil pont','Reveil 5h30 — brume matinale, silence absolu.','Inclus'),
+      mkAct('baignade','Natation et snorkeling','Baignade dans une crique secrete.','Inclus'),
+      mkAct('cuisine','Peche et Cuisine','Rouleaux de printemps avec le chef du bateau.','Inclus'),
+      mkAct('train','Retour train de nuit','Train nuit vers Hue couchette 4 personnes.','~40 EUR')
+    ]),
+    mkDay('Hue Cite Imperiale','Hue','#a78bfa',[
+      mkAct('citadelle','Citadelle Imperiale','Cite Pourpre Interdite — 9 empereurs Nguyen.','~7 EUR'),
+      mkAct('tombeau','Tombeau de Minh Mang','Mausolee imperial en foret — architecture.','~3 EUR'),
+      mkAct('col','Col des Nuages Hai Van','Route cotiere spectaculaire en scooter.','~8 EUR scooter'),
+      mkAct('bun','Cuisine de Hue','Bun bo hue et banh khoai — gastronomie imperiale.','~2 EUR/plat')
+    ]),
+    mkDay('Hoi An Vieille Ville','Hoi An','#f59e0b',[
+      mkAct('lanternes','Vieille Ville UNESCO','Rues pavees, lanternes de soie, maisons chinoises.','~5 EUR pass'),
+      mkAct('tailleur','Tailleur sur mesure','Chemise, robe ou costume en 24h.','~20-40 EUR'),
+      mkAct('plage','An Bang Beach','Plage la plus belle du centre Vietnam.','~2 EUR transat'),
+      mkAct('velo','Velo dans les rizieres','Villages de potiers, forets de cocotiers.','~1 EUR velo')
+    ]),
+    mkDay('Hoi An Activites','Hoi An et alentours','#10b981',[
+      mkAct('cours','Cours de cuisine Hoi An','Cao lau, white rose, mi quang.','~18 EUR'),
+      mkAct('coracle','Coracles en bambou','Paniers-bateaux ronds dans foret cocotiers.','~6 EUR'),
+      mkAct('cham','My Son Sanctuary','Temples cham IVe-XIVe dans la jungle.','~10 EUR'),
+      mkAct('sunset','Cua Dai Beach sunset','Coucher soleil avec bateaux de peche.','Gratuit')
+    ]),
+    mkDay('Ho Chi Minh City','Saigon','#ec4899',[
+      mkAct('avion','Vol vers Saigon','VietJet ou Bamboo Airways depuis Da Nang.','~20-40 EUR'),
+      mkAct('palais','Palais Reunification','Saigon coloniale — cathedrale Notre-Dame rose.','~2 EUR musee'),
+      mkAct('bui','Bui Vien Walking Street','Rue la plus animee Asie — bars, neons.','~5 EUR boissons'),
+      mkAct('street','Street food Saigon','Banh mi, com tam, hu tieu, ca phe trung.','~3 EUR')
+    ]),
+    mkDay('Tunnels Cu Chi et Mekong','Alentours Saigon','#84cc16',[
+      mkAct('tunnels','Tunnels de Cu Chi','250km de tunnels souterrains — saisissant.','~8 EUR'),
+      mkAct('mekong','Delta du Mekong','Marche flottant, fruits exotiques en bateau.','~22 EUR journee'),
+      mkAct('pagode','Pagode Ambassadeurs Jade','Temple taoiste XVIIe — tortues sacrees.','Gratuit'),
+      mkAct('cafe','Cafe egg coffee','Le cafe a l oeuf invente a Hanoi.','~2 EUR')
+    ]),
+    mkDay('Dernier Jour et Depart','Tan Son Nhat SGN','#6366f1',[
+      mkAct('marche','Ben Thanh Market','Epices, soieries, cafe — souvenirs a negocier.','~15-30 EUR'),
+      mkAct('cafe','Trung Nguyen Coffee','Le cafe renomme du Vietnam — ca phe sua da.','~1 EUR'),
+      mkAct('avion','Depart SGN','Aeroport Tan Son Nhat — prevoir 3h avant.','~6 EUR Grab'),
+      mkAct('au-revoir','Au revoir Vietnam','On repart avec la tete pleine de pho et lanternes.','coeur')
+    ])
+  ]
+));
+
+// ===== THAILANDE =====
+DEST.push(mkDest('thailande','Thailande','Thailande','flag-thai','emoji-thai','asie','#3b82f6','#1e3a8a',
+  '~1 100 EUR','480 EUR','250 EUR','180 EUR','190 EUR','Nov.-Mars',
+  ['Iles','Temples','Street food','Elephants','Boxe thai'],
+  "Bangkok la flamboyante, Chiang Mai et la jungle, puis les iles du Sud.",
+  [
+    "Tuk-tuk Bangkok = demander le prix avant (15-60 bath). Grab est plus fiable",
+    "Les temples exigent epaules et genoux couverts — foulard dans le sac",
+    "Marches flottants de week-end (Amphawa, Damnoen Saduak) valent excursion",
+    "Vols domestiques Don Mueang vers Chiang Mai avec AirAsia depuis 20 EUR",
+    "Meilleur pad thai dans un chariot street food a 50 bath (1.40 EUR)"
+  ],
+  [
+    mkDay('Bangkok Arrivee et Temples','Rattanakosin','#3b82f6',[
+      mkAct('avion','Arrivee Suvarnabhumi BKK','Airport Rail Link vers Phaya Thai (0.80 EUR).','~0.80 EUR'),
+      mkAct('bouddha','Wat Pho Bouddha couche','Temple Bouddha couche 46m — dorures, serenite.','~5 EUR'),
+      mkAct('bateau','Bateau Chao Phraya','Bateau-bus sur le fleuve — temples au crepuscule.','~0.40 EUR'),
+      mkAct('khaosan','Khaosan Road','Rue backpackers — pad thai 1 EUR, massages.','~5 EUR')
+    ]),
+    mkDay('Bangkok Royale','Grand Palais et Chatuchak','#f59e0b',[
+      mkAct('palais','Grand Palais','Wat Phra Kaew — Bouddha Emeraude et mosaiques or.','~10 EUR'),
+      mkAct('marche','Marche Chatuchak','15 000 stands sur 35 hectares — le plus grand Asie.','~10-20 EUR'),
+      mkAct('rooftop','Rooftop Bar Silom','Cocktail au-dessus des gratte-ciels — vue 360.','~8 EUR'),
+      mkAct('massage','Massage thai traditionnel','1h de massage a l ecole reconnue (Wat Pho).','~8 EUR')
+    ]),
+    mkDay('Ayutthaya Ancienne Capitale','Ayutthaya','#a78bfa',[
+      mkAct('train','Train vers Ayutthaya','Depuis Hua Lamphong (20 bath, 1h30).','~0.60 EUR'),
+      mkAct('velo','Temples en ruines velo','400 temples UNESCO explores a velo.','~1.40 EUR velo'),
+      mkAct('elephant','Sanctuaire elephants','Observation ethique — baignade avec eux.','~15 EUR'),
+      mkAct('bateau','Tour en bateau','Ile fluviale au coucher de soleil sur les prang.','~4 EUR')
+    ]),
+    mkDay('Chiang Mai Rose du Nord','Chiang Mai','#10b981',[
+      mkAct('avion','Vol vers Chiang Mai','AirAsia depuis Don Mueang — 1h de vol.','~30 EUR'),
+      mkAct('temples','Vieille Ville 300 temples','Wat Chedi Luang et bouddhas naga geants.','Gratuit/~1 EUR'),
+      mkAct('marche','Marche nocturne samedi','Artisanat, batik, sculptures, street food.','~5-10 EUR'),
+      mkAct('boxe','Soiree Muay Thai','Match au Thaphae Boxing Stadium.','~10 EUR')
+    ]),
+    mkDay('Chiang Mai Jungle et Elephants','Montagnes du Nord','#f97316',[
+      mkAct('elephant','Elephant Nature Park','Se baigner et nourrir les elephants sauves.','~55 EUR journee'),
+      mkAct('vtt','VTT dans la jungle','Descente Doi Suthep — villages Karen.','~20 EUR'),
+      mkAct('cuisine','Cours de cuisine thaie','Ferme + marche + cours = 5 plats prepares.','~20 EUR'),
+      mkAct('montagne','Doi Inthanon (toit Thailande)','Le plus haut sommet (2565m) — brume.','~8 EUR parc')
+    ]),
+    mkDay('Ko Lanta Ile Zen','Ko Lanta Krabi','#06b6d4',[
+      mkAct('avion','Vol Chiang Mai vers Krabi','Vol + ferry jusqu a Ko Lanta.','~35 EUR vol + 3 EUR ferry'),
+      mkAct('plage','Plage Klong Dao','3km sable fin, palmiers, coucher soleil orange.','Gratuit'),
+      mkAct('kayak','Kayak de mer coucher soleil','Mangroves, grottes marines et lagons caches.','~10 EUR'),
+      mkAct('bar','Soiree beach bar','Cocktails, musique live et etoiles tropicales.','~8 EUR')
+    ]),
+    mkDay('Ko Lanta Plongee','Parc marin Ko Lanta','#0ea5e9',[
+      mkAct('snorkeling','Excursion 4 iles','Ko Rok, Ko Haa — eaux parmi les plus claires.','~22 EUR'),
+      mkAct('requin','Plongee requins leopards','Ko Haa Yai — requins leopards dans 15m eau.','~35 EUR 2 plongees'),
+      mkAct('village','Village pecheurs Ban Saladan','Maisons sur pilotis, bateaux colores.','~4 EUR repas'),
+      mkAct('coucher','Sunset Viewpoint','Archipel au coucher de soleil — iles en orange.','Gratuit')
+    ]),
+    mkDay('Ko Phi Phi','Ko Phi Phi Don','#ec4899',[
+      mkAct('ferry','Ferry Ko Lanta vers Ko Phi Phi','1h30 vers ile la plus mythique.','~10 EUR'),
+      mkAct('maya','Maya Bay The Beach','Film The Beach — rochers calcaires, eau turquoise.','~5 EUR entree'),
+      mkAct('grotte','Viking Cave snorkeling','Nids hirondelles et coraux intacts.','~15 EUR tour'),
+      mkAct('fire','Soiree Phi Phi Village','Fire show sur la plage, bamboo bars.','~8 EUR')
+    ]),
+    mkDay('Retour Bangkok','Bangkok','#84cc16',[
+      mkAct('ferry','Ferry vers Bangkok','Ferry + bus ou AirAsia direct Krabi Bangkok.','~25-40 EUR'),
+      mkAct('shopping','MBK Center Siam Paragon','Electronique, mode thaie et souvenirs.','~15-30 EUR'),
+      mkAct('spa','Dernier massage et spa','Huile de jasmin, massage pieds, 2h paradis.','~15 EUR'),
+      mkAct('chinatown','Diner Yaowarat Chinatown','Crevettes geantes, dim sum, canard laque.','~5 EUR')
+    ]),
+    mkDay('Depart Bangkok','Suvarnabhumi BKK','#6366f1',[
+      mkAct('temple','Wat Arun lever du soleil','Temple Aube — mosaiques porcelaine, lumiere doree.','~2 EUR'),
+      mkAct('cafe','Cafe thai glace','Oliang ou cha yen — energie pour le retour.','~0.50 EUR'),
+      mkAct('dutyfree','King Power Duty Free','Alcool, cosmetiques, noix cajou, curry.','~15-30 EUR'),
+      mkAct('avion','Sawadee kha Thailande','Retour au froid — plages et temples dans la tete.','coeur')
+    ])
+  ]
+));
+
+// ===== JAPON =====
+DEST.push(mkDest('japon','Japon','Japon','flag-japon','emoji-japon','premium','#ef4444','#7f1d1d',
+  '~2 200 EUR','850 EUR','550 EUR','400 EUR','400 EUR','Mars-Mai / Oct.-Nov.',
+  ['Sakura','Temples','Tokyo','Ramen','Mont Fuji'],
+  "Tokyo la futuriste, Kyoto la millenaire, Osaka la gourmande et le Mont Fuji — le voyage d une vie.",
+  [
+    "Japan Rail Pass 14 jours (~500 EUR) indispensable pour Tokyo-Kyoto-Osaka en Shinkansen",
+    "Reserver les restaurants etoiles 2-3 mois a l avance (Tabelog ou Gurunavi)",
+    "Suica ou IC Card rechargeable pour tous les transports urbains",
+    "Saison des cerisiers fin mars-debut avril — hotels a reserver 6 mois avant",
+    "Les konbini (Lawson, 7-Eleven) servent les meilleurs onigiri du monde a 1-2 EUR"
+  ],
+  [
+    mkDay('Tokyo Shinjuku Arrivee','Shinjuku Tokyo','#ef4444',[
+      mkAct('avion','Arrivee Narita ou Haneda','Narita Express (35 EUR). Activation du JR Pass.','~5-35 EUR'),
+      mkAct('jardin','Shinjuku Gyoen','Jardin imperial — cerisiers, jardins francais et japonais.','~4 EUR'),
+      mkAct('tour','Observatoire Gouvernement','Vue a 360 sur Tokyo depuis 202m — gratuit.','Gratuit'),
+      mkAct('ramen','Ichiran Ramen','Ramen dans un box individuel face au mur.','~8 EUR')
+    ]),
+    mkDay('Tokyo Asakusa et Akihabara','Taito Tokyo','#f97316',[
+      mkAct('temple','Senso-ji Nakamise-dori','Plus vieux temple de Tokyo (628 ap JC).','Gratuit'),
+      mkAct('anime','Akihabara Electric Town','Quartier otaku — arcades, mangas, figurines.','~15 EUR'),
+      mkAct('sushi','Tsukiji Outer Market','Sushis et poissons — thon a 6h du matin.','~12 EUR'),
+      mkAct('croisement','Shibuya Crossing night','1000 personnes qui se croisent a chaque feu vert.','Gratuit')
+    ]),
+    mkDay('Mont Fuji et Hakone','Hakone','#3b82f6',[
+      mkAct('fuji','Vue sur le Fuji depuis Hakone','Ryokan avec onsen face au mont Fuji.','~80 EUR ryokan'),
+      mkAct('onsen','Onsen prive','Bain thermal en plein air sous les etoiles.','Inclus ryokan'),
+      mkAct('cable','Hakone Ropeway','Telepherique au-dessus fumerolles volcaniques.','~12 EUR'),
+      mkAct('musee','Musee en Plein Air Hakone','Sculptures de Rodin et Picasso — vue montagnes.','~15 EUR')
+    ]),
+    mkDay('Kyoto Geishas et Temples','Gion Kyoto','#8b5cf6',[
+      mkAct('bullet','Shinkansen Tokyo vers Kyoto','Nozomi (2h15) a 280km/h — inclus JR Pass.','JR Pass'),
+      mkAct('torii','Fushimi Inari','10 000 torii oranges serpentant la montagne.','Gratuit'),
+      mkAct('gion','Gion au crepuscule','Quartier des geishas — lanternes et kimono.','Gratuit'),
+      mkAct('the','Ceremonie du the','Matcha et wagashi dans maison de the XVIIe.','~15 EUR')
+    ]),
+    mkDay('Kyoto Temples et Bambous','Arashiyama Kyoto','#10b981',[
+      mkAct('bambou','Foret de bambous Arashiyama','Bambous geants bruissants — le matin a 6h.','Gratuit'),
+      mkAct('kinkaku','Kinkaku-ji Pavillon Or','Temple couvert de feuilles or — reflet dans etang.','~4 EUR'),
+      mkAct('philosophe','Philosophers Path','Canal avec cerisiers ou feuilles automne.','Gratuit'),
+      mkAct('kaiseki','Kaiseki dinner','Repas gastronomique japonais 12 services.','~60 EUR')
+    ]),
+    mkDay('Nara et Cerfs Sacres','Nara','#f59e0b',[
+      mkAct('cerf','Parc de Nara','1200 cerfs sacres libres — mangent dans vos mains.','~1.50 EUR senbei'),
+      mkAct('bouddha','Todai-ji','Plus grand batiment bois du monde — Grand Bouddha 15m.','~6 EUR'),
+      mkAct('lanternes','Kasuga Taisha','3000 lanternes de pierre — ferique a l aube.','~5 EUR'),
+      mkAct('bullet','Retour Osaka','Train Nara vers Osaka (40 min).','JR Pass')
+    ]),
+    mkDay('Osaka La Cuisine du Japon','Dotonbori Osaka','#ec4899',[
+      mkAct('takoyaki','Dotonbori Street Food','Takoyaki, okonomiyaki, kushikatsu — festin.','~10 EUR'),
+      mkAct('chateau','Chateau Osaka','Forteresse XVIe de Toyotomi Hideyoshi.','~6 EUR'),
+      mkAct('usj','Universal Studios Japan','Harry Potter, Mario World, Jurassic Park.','~70 EUR'),
+      mkAct('izakaya','Izakaya a Namba','Yakitori, edamame, biere Sapporo.','~15 EUR')
+    ]),
+    mkDay('Hiroshima et Miyajima','Hiroshima','#14b8a6',[
+      mkAct('paix','Memorial de la Paix','Dome Genbaku et musee bombe atomique.','~2 EUR'),
+      mkAct('ferry','Ferry vers Miyajima','Ile sacree accessible en 10 min.','JR Pass'),
+      mkAct('torii','Torii flottant Itsukushima','Torii orange qui flotte sur la mer — image iconique.','Gratuit'),
+      mkAct('cerf','Cerfs sacres Miyajima','Cerfs qui se promenent librement dans le village.','Gratuit')
+    ]),
+    mkDay('Tokyo Harajuku et Shopping','Harajuku et Omotesando','#a78bfa',[
+      mkAct('bullet','Shinkansen retour Tokyo','Osaka vers Tokyo en 2h30 — le plus ponctuel.','JR Pass'),
+      mkAct('harajuku','Takeshita Street Harajuku','Mode kawaii, crepes 10 ingredients, cosplay.','~5 EUR crepe'),
+      mkAct('shopping','Omotesando et Ginza','Champs-Elysees de Tokyo — flagships de luxe.','Leche-vitrine'),
+      mkAct('parc','Shinjuku Garden illumine','Parc illumine la nuit — cerisiers ou automne rouge.','~2 EUR')
+    ]),
+    mkDay('Dernier Jour Tokyo','Odaiba et Aeroport','#6366f1',[
+      mkAct('teamlab','TeamLab Planets','Musee art numerique immersif — forets de fleurs.','~25 EUR'),
+      mkAct('tour','Tokyo Tower coucher soleil','Tour symbole Showa — vue sur la ville.','~8 EUR'),
+      mkAct('omakase','Sushi bar Omakase','Derniere piece au comptoir chef — 15 pieces.','~40 EUR'),
+      mkAct('avion','Sayonara Japon','Le Japon change vos standards de tout.','coeur')
+    ])
+  ]
+));
+
+// ===== USA =====
+DEST.push(mkDest('usa','USA Cote Ouest','Etats-Unis','flag-usa','emoji-usa','premium','#3b82f6','#1e3a8a',
+  '~2 500 EUR','750 EUR','700 EUR','550 EUR','500 EUR','Avr.-Juin / Sep.-Oct.',
+  ['Route 66','Grand Canyon','Las Vegas','Los Angeles','Parcs Nationaux'],
+  "Los Angeles, le desert de Joshua Tree, Las Vegas et le Grand Canyon — road trip legendaire.",
+  [
+    "Location de van/SUV pour 7 = plus economique : ~80 EUR/j = 11 EUR/pers/j",
+    "America the Beautiful Pass (80 USD) = acces illimite tous parcs nationaux 1 an",
+    "Motels routiers (Motel 6, Super 8) : 40-60 EUR/nuit pour chambre double",
+    "Privilegiez diners, food trucks et In-N-Out — restaurants can be expensive",
+    "Reserver Grand Canyon 6 mois avant en ete — campsites partent vite"
+  ],
+  [
+    mkDay('Los Angeles Hollywood','Hollywood et Beverly Hills','#3b82f6',[
+      mkAct('avion','Arrivee LAX','Flyaway Bus vers Downtown (10 USD).','~9 EUR'),
+      mkAct('walk','Hollywood Walk of Fame','Etoiles de Marilyn, Elvis, Chaplin — foule festive.','Gratuit'),
+      mkAct('obs','Griffith Observatory','Vue panoramique sur LA et panneau Hollywood.','Gratuit'),
+      mkAct('burger','In-N-Out Burger','Le burger californien mythique — Double Double.','~8 EUR')
+    ]),
+    mkDay('LA Santa Monica et Venice','Santa Monica','#06b6d4',[
+      mkAct('pier','Santa Monica Pier','Route 66 se termine ici — grande roue, Pacifique.','Gratuit'),
+      mkAct('venice','Venice Beach Boardwalk','Skateparks, body-builders, artistes de rue.','Gratuit'),
+      mkAct('malibu','Malibu Pacific Coast Highway','Drive au bord ocean — dauphins depuis la route.','~10 EUR essence'),
+      mkAct('tacos','Tacos Grand Central Market','Marche Downtown LA — tacos, birria, elotes.','~8 EUR')
+    ]),
+    mkDay('Joshua Tree et Desert','Joshua Tree National Park','#f59e0b',[
+      mkAct('route','Road trip vers Palm Springs','I-10 East — paysage du Pacifique au desert Mojave.','~15 EUR essence'),
+      mkAct('cactus','Joshua Tree NP','Forets de yuccas geants — randonnees dans rochers.','~15 EUR pass'),
+      mkAct('camping','Nuit au desert','Camping sous ciel etoile — Voie Lactee totale.','~20 EUR'),
+      mkAct('lever','Lever soleil Keys View','Vue faille San Andreas depuis 1581m.','Gratuit')
+    ]),
+    mkDay('Las Vegas Neon Jungle','The Strip Las Vegas','#ec4899',[
+      mkAct('strip','The Strip by night','MGM, Bellagio, Caesars — 7km de demesuure illuminee.','Gratuit a voir'),
+      mkAct('bellagio','Fontaines du Bellagio','Spectacle toutes les 30 min — gratuit depuis Strip.','Gratuit'),
+      mkAct('cirque','Spectacle Cirque du Soleil','O ou Ka au MGM Grand — art du cirque ultime.','~80 EUR'),
+      mkAct('buffet','Buffet Vegas style','Homard, sushi, steaks et desserts infinis.','~25 EUR')
+    ]),
+    mkDay('Grand Canyon South Rim','Grand Canyon NP Arizona','#f97316',[
+      mkAct('route','Drive Las Vegas vers Grand Canyon','Route 93 South puis Highway 89 — 4h30.','~20 EUR essence'),
+      mkAct('canyon','South Rim Sunrise','Mather Point au lever du soleil — premier regard.','Gratuit'),
+      mkAct('rando','Bright Angel Trail','Descente dans le canyon — decor extraterrestre.','Gratuit'),
+      mkAct('heli','Survol en helicoptere','30 min au-dessus — perspective saisissante.','~150 EUR optionnel')
+    ]),
+    mkDay('Sedona et Monument Valley','Sedona Arizona','#ef4444',[
+      mkAct('rochers','Sedona Red Rocks','Formations rocheuses rouge sang — Cathedral Rock.','~10 EUR pass'),
+      mkAct('monument','Monument Valley','Buttes de gres rouge des Navajos — route 163.','~20 EUR'),
+      mkAct('navajo','Camping Navajo Nation','Dormir avec guide — histoires et constellations.','~30 EUR'),
+      mkAct('wave','The Wave (si possible)','Formation rare dans Coyote Buttes.','~9 EUR si tire')
+    ]),
+    mkDay('Route 66 et Cote','Arizona vers California','#84cc16',[
+      mkAct('route66','Route 66 Kingman vers Barstow','La Mere des Routes — diners annees 50, motels neon.','~20 EUR essence'),
+      mkAct('diner','Diner historique Route 66','Milkshake, apple pie, burger — jukebox inclus.','~12 EUR'),
+      mkAct('huntington','Huntington Beach','Surf city USA — arrivee triomphale sur Pacifique.','Gratuit'),
+      mkAct('coucher','Coucher de soleil Pacifique','Le soleil plonge dans ocean — 3000 km de route.','Gratuit')
+    ]),
+    mkDay('San Francisco Golden Gate','San Francisco','#a78bfa',[
+      mkAct('gg','Golden Gate Bridge','A pied ou velo — brume matinale recommandee.','Gratuit'),
+      mkAct('cable','Cable Car','Funiculaire historique SF depuis 1873.','~6 EUR'),
+      mkAct('wharf','Fisherman Wharf','Clam Chowder dans pain briooche, lions de mer.','~15 EUR'),
+      mkAct('alcatraz','Alcatraz','La prison la plus celebre du monde en bateau.','~38 EUR')
+    ]),
+    mkDay('Big Sur Cote Pacifique','Highway 1 Big Sur','#14b8a6',[
+      mkAct('highway','Highway 1 Big Sur','Route cotiere — falaises 300m sur Pacifique.','~15 EUR essence'),
+      mkAct('bixby','Bixby Creek Bridge','Arche de beton dans falaises — photos inoubliables.','Gratuit'),
+      mkAct('ele-mer','Elephants de mer San Simeon','Colonie 20 000 elephants de mer sur la plage.','Gratuit'),
+      mkAct('santa-b','Santa Barbara','Riviera californienne — architecture espagnole.','Gratuit')
+    ]),
+    mkDay('Retour Los Angeles','LAX','#6366f1',[
+      mkAct('warner','Warner Bros Studio Tour','Decors de Friends, Harry Potter — 3h coulisses.','~55 EUR'),
+      mkAct('getty','Getty Center','Musee art avec vue sur LA et Pacifique — gratuit.','Gratuit'),
+      mkAct('steak','Dernier repas Steakhouse','Ribeye et vin californien — au revoir America.','~35 EUR'),
+      mkAct('avion','See you USA','Road trip epique dans le retroviseur.','coeur')
+    ])
+  ]
+));
+
+// ===== AUSTRALIE =====
+DEST.push(mkDest('australie','Australie','Australie','flag-aus','emoji-aus','premium','#f59e0b','#78350f',
+  '~2 800 EUR','1100 EUR','700 EUR','500 EUR','500 EUR','Sep.-Nov. / Mars-Mai',
+  ['Grande Barriere','Uluru','Sydney','Kangourous','Surf'],
+  "Sydney et son Opera, la Grande Barriere de Corail, Uluru — le continent des extremes.",
+  [
+    "Reserver la Grande Barriere 3 mois avant — tours serieux partent vite",
+    "Conduire a gauche — prevenez tout le monde avant la location",
+    "Uluru : la montee est interdite depuis 2019. Tours de base au lever du soleil",
+    "HOP-ON HOP-OFF Greyhound Australia entre villes — economique longues distances",
+    "Supermarches Bonus prix raisonnables — cuisiner dans le van economise beaucoup"
+  ],
+  [
+    mkDay('Sydney Opera et Harbour','Sydney CBD','#f59e0b',[
+      mkAct('avion','Arrivee Sydney SYD','Train Airport Link vers Central Station (9 EUR).','~9 EUR'),
+      mkAct('opera','Opera de Sydney et Harbour Bridge','Deux icones australiennes au coucher du soleil.','Gratuit exterieur'),
+      mkAct('rocks','Rocks Historic District','Quartier colonial — pubs irlandais de 1850.','~10 EUR repas'),
+      mkAct('bridge','BridgeClimb option','Escalader Harbour Bridge — vue 360 sur Sydney.','~200 EUR optionnel')
+    ]),
+    mkDay('Bondi et Plages de Sydney','Bondi Beach','#06b6d4',[
+      mkAct('bondi','Bondi Beach','Plage urbaine la plus celebre du monde.','Gratuit'),
+      mkAct('coogee','Bondi to Coogee Walk','Sentier cotier 6km — vues spectaculaires.','Gratuit'),
+      mkAct('pool','Piscines naturelles Coogee','Tidal pools dans rochers — abri vagues et requins.','Gratuit'),
+      mkAct('gelato','Gelato a Bondi','Glace artisanale — ete australien.','~4 EUR')
+    ]),
+    mkDay('Blue Mountains','Katoomba NSW','#10b981',[
+      mkAct('train','Train vers Katoomba','Scenic Sydney Trains (2h).','~5 EUR'),
+      mkAct('sisters','Three Sisters Echo Point','3 soeurs de gres rouge dominant les gorges.','Gratuit'),
+      mkAct('scenic','Scenic World','Telepherique + chemin de fer le plus raide du monde.','~30 EUR'),
+      mkAct('koala','Featherdale Wildlife Park','Kangourous, koalas, wombats et diables Tasmanie.','~18 EUR')
+    ]),
+    mkDay('Vol Cairns Grande Barriere','Cairns Queensland','#0ea5e9',[
+      mkAct('avion','Vol Sydney vers Cairns','Jetstar ou Qantas (2h30).','~60-100 EUR'),
+      mkAct('skyrail','Skyrail Rainforest','Telepherique au-dessus foret tropicale Daintree.','~40 EUR'),
+      mkAct('daintree','Foret tropicale Daintree','Foret 135 millions annees — baignade Mossman Gorge.','~15 EUR tour'),
+      mkAct('cairns','Front Street Cairns','Bars, cocktails tropicaux, barbecue et backpackers.','~8 EUR')
+    ]),
+    mkDay('Grande Barriere de Corail','Outer Reef QLD','#3b82f6',[
+      mkAct('catamaran','Croisiere Outer Reef','Catamaran vers la Grande Barriere.','~100 EUR'),
+      mkAct('plongee','Plongee bouteilles','Poissons-clowns, raies manta, tortues vertes.','~50 EUR 2 plongees'),
+      mkAct('glass','Snorkeling Glass Bottom','Vue sur recif depuis bateau fond de verre.','Inclus'),
+      mkAct('seafood','Festin fruits de mer Cairns','Barramundi grille et tarte aux mangues.','~20 EUR')
+    ]),
+    mkDay('Uluru Le Coeur Rouge','Uluru-Kata Tjuta NP','#ef4444',[
+      mkAct('avion','Vol Cairns vers Ayers Rock','Vol regional vers Connellan Airport.','~80 EUR'),
+      mkAct('lever','Uluru au lever du soleil','Le monolithe sacre s embrase — rouge, orange, violet.','~25 EUR parc'),
+      mkAct('tour','Base Walk 10.6km','Tour complet du rocher — peintures rupestres.','Inclus'),
+      mkAct('light','Diner Field of Light','50 000 spheres lumineuses — diner sous les etoiles.','~100 EUR')
+    ]),
+    mkDay('Kata Tjuta et Red Centre','Kata Tjuta NT','#f97316',[
+      mkAct('olgas','Kata Tjuta The Olgas','36 domes gres rouge — Valley of the Winds.','Inclus parc'),
+      mkAct('kings','Kings Canyon','Gorge 270m dans desert rouge — Lost City.','~10 EUR'),
+      mkAct('etoiles','Nuit dans Outback','Croix du Sud, Voie Lactee, shooting stars.','~30 EUR camping'),
+      mkAct('faune','Faune Outback','Emeus, kangourous roux, perroquets, dingos.','Gratuit')
+    ]),
+    mkDay('Melbourne La Coolest City','Melbourne VIC','#8b5cf6',[
+      mkAct('avion','Vol vers Melbourne','Via Alice Springs ou direct avec Qantas.','~90 EUR'),
+      mkAct('hosier','Hosier Lane Street Art','Ruelles graffitis qui changent chaque semaine.','Gratuit'),
+      mkAct('cafe','Coffee culture Melbourne','Meilleure scene cafe du monde — flat white.','~3 EUR'),
+      mkAct('pingouins','Defile pingouins Phillip Island','Petits pingouins bleus remontent plage au crepuscule.','~20 EUR')
+    ]),
+    mkDay('Great Ocean Road','Great Ocean Road VIC','#14b8a6',[
+      mkAct('route','Great Ocean Road Drive','Route cotiere 243km — rainforest, falaises, Pacifique.','~20 EUR essence'),
+      mkAct('apotres','12 Apotres','Colonnes calcaire emergeant ocean — erosion en direct.','Gratuit'),
+      mkAct('koalas','Foret Otway Rainforest','Koalas sauvages dans eucalyptus — habitat naturel.','Gratuit'),
+      mkAct('gorge','Loch Ard Gorge','Gorge secrete — histoire de naufrage, rochers sculptes.','Gratuit')
+    ]),
+    mkDay('Retour Sydney et Depart','SYD','#6366f1',[
+      mkAct('avion-mel','Vol Melbourne vers Sydney','Derniere liaison interieure — 1h15.','~40 EUR'),
+      mkAct('zoo','Taronga Zoo','Zoo Sydney avec vue Harbour Bridge — koalas.','~35 EUR'),
+      mkAct('vin','Hunter Valley Wine','Vignobles 2h de Sydney — shiraz et semillon.','~15 EUR degus.'),
+      mkAct('depart','G day Australia','Le continent le plus lointain — et le plus manquant.','coeur')
+    ])
+  ]
+));
+
+// ===== ISLANDE =====
+DEST.push(mkDest('islande','Islande','Islande','flag-islande','emoji-islande','premium','#06b6d4','#164e63',
+  '~1 900 EUR','350 EUR','700 EUR','500 EUR','350 EUR','Juin-Aout / Nov.-Fev.',
+  ['Aurores Boreales','Geysers','Cascades','Lagon Bleu','Volcans'],
+  "Terre de feu et de glace — aurores boreales, geysers, cascades et paysages de fin du monde.",
+  [
+    "Vol Paris-Reykjavik depuis 70 EUR sur easyJet ou IcelandAir",
+    "Location de van amenage pour 7 = ~130 EUR/j = 18 EUR/pers — hebergement + transport",
+    "La Ring Road (1332km) fait le tour complet de l ile en 7-10 jours",
+    "Aurores boreales : application Aurora Forecast et KP index superieur a 4",
+    "Supermarchesg Bonus prix raisonnables — cuisiner dans van = economie enorme"
+  ],
+  [
+    mkDay('Reykjavik Petite Grande Capitale','Reykjavik','#06b6d4',[
+      mkAct('avion','Arrivee Keflavik KEF','Flybus vers Reykjavik (30 EUR).','~30 EUR'),
+      mkAct('eglise','Hallgrimskirkja','Eglise colonnes basaltiques — ascenseur au sommet.','~7 EUR'),
+      mkAct('harpa','Harpa Concert Hall','Chef oeuvre architecture verre inspire cristaux basalte.','Gratuit'),
+      mkAct('baleine','Whale Watching','Baleines a bosse et dauphins dans le Faxafloi.','~60 EUR')
+    ]),
+    mkDay('Cercle Or','Golden Circle','#f59e0b',[
+      mkAct('geyser','Geysir et Strokkur','Strokkur jaillit a 30m toutes les 5 minutes.','Gratuit'),
+      mkAct('gullfoss','Gullfoss','Cascade deux paliers — brume arc-en-ciel permanent.','Gratuit'),
+      mkAct('plaques','Thingvellir NP','Marcher entre plaques tectoniques eurasienne et americaine.','Gratuit'),
+      mkAct('lagon','Lagon Bleu','Spa geothermique — eaux bleues a 39 degres.','~60 EUR')
+    ]),
+    mkDay('Cote Sud et Cascades','Cote Sud','#10b981',[
+      mkAct('sel','Seljalandsfoss','Cascade qu on peut contourner — derriere les chutes.','~2 EUR parking'),
+      mkAct('skog','Skogafoss','Cascade 60m large — 527 marches, arc-en-ciel quotidien.','Gratuit'),
+      mkAct('noir','Plage noire Reynisfjara','Sable noir volcanique, basalte en orgues, macareux.','Gratuit'),
+      mkAct('volcan','Eyjafjallajokull','Le volcan de 2010 — visitor center avec vraie histoire.','~5 EUR')
+    ]),
+    mkDay('Glacier Vatnajokull','Jokulsarlon','#3b82f6',[
+      mkAct('lagune','Lagune glaciaire Jokulsarlon','Icebergs qui derivent vers Atlantique — surreal.','Gratuit'),
+      mkAct('diamond','Diamond Beach','Icebergs echoues sur sable noir — diamants sur velours.','Gratuit'),
+      mkAct('glacier','Randonnee sur glacier','Marcher sur Vatnajokull avec crampons et piolet.','~50 EUR'),
+      mkAct('aurores','Aurores boreales si saison','Rideau vert et violet au-dessus des icebergs.','Gratuit')
+    ]),
+    mkDay('Est Islandais Sauvage','Fjords de Est','#8b5cf6',[
+      mkAct('fjords','Fjords de Est','Partie la plus sauvage Islande — fermes isolees.','Gratuit'),
+      mkAct('renard','Renards arctiques','Renards, phoques, macareux — sortez les jumelles.','Gratuit'),
+      mkAct('source','Pot geothermal naturel','Bain 40 degres en pleine nature — gratuit.','Gratuit'),
+      mkAct('van','Van camping fjord','Nuit au bord fjord — vent et vagues pour seul bruit.','~10 EUR camping')
+    ]),
+    mkDay('Nord Akureyri et Baleines','Akureyri','#f97316',[
+      mkAct('husavik','Whale Watching Husavik','Meilleur spot Europe — baleines a bosse garanties.','~70 EUR'),
+      mkAct('godafoss','Godafoss Chute des Dieux','Islande devint chretienne en an 1000 ici.','Gratuit'),
+      mkAct('akureyri','Akureyri Capitale Nord','2eme ville Islande — feux de signalisation en coeur.','Gratuit'),
+      mkAct('krafla','Krafla Caldera','Lac volcanique bouillonnant — paysage martien soufre.','~2 EUR')
+    ]),
+    mkDay('Peninsule de Snaefellsnes','Snaefellsnes','#a78bfa',[
+      mkAct('glacier-jules','Glacier Snaefellsjokull','Glacier du Voyage Centre Terre de Jules Verne.','~40 EUR tour'),
+      mkAct('arnarstapi','Arnarstapi et Hellnar','Villages pecheurs — falaises basaltiques et arches.','Gratuit'),
+      mkAct('phoques','Phoques de Ytri Tunga','Colonie phoques sur rochers — 50m d eux.','Gratuit'),
+      mkAct('minuit','Coucher soleil de minuit','Soleil qui ne se couche pas en ete sur Atlantique.','Gratuit')
+    ]),
+    mkDay('Peninsule de Reykjanes','Reykjanes','#ef4444',[
+      mkAct('lave','Geldingadalir Volcanic Field','Eruption 2021 — champs lave refroidis encore chauds.','Gratuit'),
+      mkAct('pont','Pont entre deux continents','Passerelle entre Eurasie et Amerique du Nord.','~1 EUR'),
+      mkAct('sky','Sky Lagoon','Spa geothermique avec vue Atlantique et Reykjavik.','~45 EUR'),
+      mkAct('soiree','Soiree Reykjavik','Post-rock, bars Laugavegur, Bjork dans les speakers.','~10 EUR')
+    ]),
+    mkDay('Dernier Jour et Depart','Keflavik KEF','#6366f1',[
+      mkAct('souvenirs','Souvenirs islandais','Laine Lopi, chocolat Skyr, rhum bouleau, ceramiques.','~20-40 EUR'),
+      mkAct('skyr','Skyr et Kleina','Yaourt islandais et beignet torsade — petit-dej national.','~3 EUR'),
+      mkAct('bain','Dernier bain geothermal','Piscine publique Sundholl Reykjavikur — quotidien.','~6 EUR'),
+      mkAct('avion','Bless Iceland','Le plus beau pays que vous ayez jamais vu.','coeur')
+    ])
+  ]
+));
+
+// ===== CANADA =====
+DEST.push(mkDest('canada','Canada Quebec','Canada','flag-canada','emoji-canada','premium','#ef4444','#7f1d1d',
+  '~2 100 EUR','700 EUR','650 EUR','400 EUR','350 EUR','Juin-Aout / Sep.-Oct.',
+  ['Chutes Niagara','Montreal','Quebec','Erables','Orignaux'],
+  "Montreal bilingue, Quebec City medievale, les Laurentides sauvages et les Chutes Niagara.",
+  [
+    "STM metro Montreal : 3.50 CAD le trajet ou carnet de 10 a 30 CAD",
+    "Automne fin septembre-octobre = erables rouges — plus beau spectacle naturel",
+    "Montreal parfaitement bilingue — Quebec City a 95 pour cent francophone",
+    "Parcs nationaux du Quebec (SEPAQ) = 9.50 CAD/adulte/j — camping exceptionnel",
+    "Chutes Niagara cote canadien — la vue est infiniment superieure au cote americain"
+  ],
+  [
+    mkDay('Montreal Arrivee et Plateau','Montreal QC','#ef4444',[
+      mkAct('avion','Arrivee Trudeau YUL','Bus 747 Express (11 CAD) ou taxi 50 CAD.','~8 EUR'),
+      mkAct('plateau','Le Plateau-Mont-Royal','Quartier boheme — escaliers colores, murales geantes.','Gratuit'),
+      mkAct('bagel','Bagel de Saint-Viateur','Le plus celebre du monde depuis 1919 — cuit four bois.','~1 EUR'),
+      mkAct('jazz','Soiree jazz Quartier Latin','Capitale jazz Amerique du Nord — concerts gratuits ete.','~8 EUR bieres')
+    ]),
+    mkDay('Montreal Culture et Gastronomie','Vieux-Montreal','#f97316',[
+      mkAct('basilique','Basilique Notre-Dame','Vitraux bleus — son et lumiere Aura le soir.','~7 EUR'),
+      mkAct('vieux-port','Vieux-Port et Bonsecours','Port historique — marche Bonsecours, Saint-Laurent.','Gratuit'),
+      mkAct('mont-royal','Mont Royal coucher soleil','Colline au crepuscule — vue Montreal, orignaux.','Gratuit'),
+      mkAct('smoked','Smoked Meat chez Schwartz','Pastrami fume mythique depuis 1928.','~12 EUR')
+    ]),
+    mkDay('Laurentides Nature Quebecoise','Parc du Mont-Tremblant','#10b981',[
+      mkAct('drive','Drive vers Mont-Tremblant 2h','Autoroute 15 Nord — foret boreale, lacs miroirs.','~15 EUR essence'),
+      mkAct('canot','Canot sur lac Monroe','Paddling — herons, castors et silence absolu.','~18 EUR location'),
+      mkAct('rando','Randonnee La Corniche','Vue lac Tremblant — erables rouges spectaculaires.','~10 EUR parc'),
+      mkAct('orignal','Orignaux au crepuscule','Plus grand cervidé du monde — 700kg, le matin.','Gratuit')
+    ]),
+    mkDay('Quebec City La Vieille Ville','Vieux-Quebec UNESCO','#8b5cf6',[
+      mkAct('route','Route Quebec City 3h','A-20 le long du Saint-Laurent — villages, clochers.','~15 EUR essence'),
+      mkAct('frontenac','Chateau Frontenac','Hotel plus photographie du monde — cafe terrasse.','~5 EUR cafe'),
+      mkAct('fortif','Fortifications de Quebec','Seules fortifications Amerique du Nord debout.','~4 EUR'),
+      mkAct('sirop','Cabane a sucre','Tire d erables, poutine — culture quebecoise pure.','~20 EUR')
+    ]),
+    mkDay('Montmorency et Ile Orleans','Cote de Beaupre','#06b6d4',[
+      mkAct('chutes','Chutes Montmorency','Plus hautes que Niagara (83m) — passerelle suspendue.','~5 EUR parc'),
+      mkAct('ile','Ile Orleans','Fromages et fraises — cidres de glace, eglise XVIIe.','~10 EUR degus.'),
+      mkAct('baleines','Baleines Saint-Laurent','Belugas et rorquals dans fjord du Saguenay.','~50 EUR optionnel'),
+      mkAct('fleuve','Coucher soleil fleuve','Saint-Laurent au crepuscule — flamant orange.','Gratuit')
+    ]),
+    mkDay('Ottawa Capitale Federale','Ottawa Ontario','#f59e0b',[
+      mkAct('route-ott','Drive Quebec vers Ottawa 4h','Via Montreal ou par les Laurentides.','~20 EUR essence'),
+      mkAct('parlement','Parlement du Canada','Neo-gothique sur colline — visite bilingue gratuite.','Gratuit'),
+      mkAct('musee-bx','Musee beaux-arts du Canada','Inuit art, peintres du Groupe des Sept.','~12 EUR'),
+      mkAct('canal','Canal Rideau en kayak','Canal UNESCO — kayak ete, patinoire hiver.','~15 EUR location')
+    ]),
+    mkDay('Toronto La Cosmopolite','Toronto Ontario','#ec4899',[
+      mkAct('via','VIA Rail Ottawa vers Toronto','Train (2h) depuis Ottawa Union Station.','~25 EUR'),
+      mkAct('cn','CN Tower','Ancienne plus haute tour (553m) — tour de verre.','~28 EUR'),
+      mkAct('kensington','Kensington Market et Chinatown','Jamaique, Ethiopie, Portugal en 200m de rues.','~10 EUR repas'),
+      mkAct('hockey','Match NHL si saison','Maple Leafs au Scotiabank Arena — ambiance.','~40-80 EUR')
+    ]),
+    mkDay('Chutes Niagara','Niagara Falls Ontario','#14b8a6',[
+      mkAct('route-niagara','Drive Toronto vers Niagara 1h30','QEW — panaches vapeur visibles depuis autoroute.','~10 EUR essence'),
+      mkAct('horseshoe','Horseshoe Falls Vue canadienne','168m large, 57m haut, 2400 m3 eau/sec.','Gratuit'),
+      mkAct('hornblower','Hornblower Maid of Mist','Poncho obligatoire — au coeur des chutes, trempés.','~20 EUR'),
+      mkAct('notl','Niagara-on-the-Lake','Village victorien — vins de glace du Niagara.','~10 EUR vins')
+    ]),
+    mkDay('Retour Montreal','Montreal','#84cc16',[
+      mkAct('route-mtl','Drive Niagara vers Montreal 7h','Via Toronto puis A-20.','~25 EUR essence'),
+      mkAct('achats','Derniers achats Montreal','Sirop d erable, whisky Canadian Crown Royal, tuques.','~30-50 EUR'),
+      mkAct('biere-art','Microbrasseries du Plateau','Unibroue, Dieu du Ciel — scene biere artisanale.','~8 EUR pintes'),
+      mkAct('depart','Au revoir Tabarnac!','YUL vers CDG — nostalgie poutine dans avion.','coeur')
+    ])
+  ]
+));
+
+// Emojis et flags en texte pour eviter problemes encodage
+var FLAGS = {
+  'flag-bali': '🇮🇩', 'flag-maroc': '🇲🇦', 'flag-albanie': '🇦🇱',
+  'flag-vietnam': '🇻🇳', 'flag-thai': '🇹🇭', 'flag-japon': '🇯🇵',
+  'flag-usa': '🇺🇸', 'flag-aus': '🇦🇺', 'flag-islande': '🇮🇸', 'flag-canada': '🇨🇦'
+};
+var EMOJIS = {
+  'emoji-bali': '🌺', 'emoji-maroc': '🕌', 'emoji-albanie': '🏔️',
+  'emoji-vietnam': '🛖', 'emoji-thai': '🏯', 'emoji-japon': '⛩️',
+  'emoji-usa': '🗽', 'emoji-aus': '🦘', 'emoji-islande': '🌋', 'emoji-canada': '🍁'
+};
+var ICONS = {
+  'avion': '✈️', 'maison': '🏠', 'coucher-soleil': '🌅', 'nourriture': '🍜',
+  'surf': '🏄', 'vague': '🌊', 'shopping': '🛍️', 'cocktail': '🍹',
+  'scooter': '🛵', 'temple': '⛩️', 'danse': '🎭', 'poisson': '🐟',
+  'riz': '🌾', 'singe': '🐒', 'yoga': '🧘', 'art': '🎨',
+  'volcan': '🌋', 'bain': '♨️', 'cafe': '☕', 'eau': '💧',
+  'bateau': '⛵', 'tortue': '🐢', 'dauphin': '🐬', 'cascade': '💧',
+  'village': '🏘️', 'cuisine': '🍛', 'massage': '💆', 'marche': '🛒',
+  'ceremonie': '🌺', 'street': '🍢', 'plage': '🏖️', 'cinema': '🎬',
+  'plongee': '🤿', 'photo': '📸', 'cadeau': '🎁', 'repas': '🍽️',
+  'place': '🏛️', 'mosquee': '🕌', 'bus': '🚌', 'biere': '🍺',
+  'mausolee': '⛪', 'musee': '🏺', 'marionnettes': '🎪', 'jonque': '⛵',
+  'kayak': '🚣', 'lever': '🌄', 'baignade': '🏊', 'train': '🚆',
+  'citadelle': '🏯', 'tombeau': '⛪', 'col': '🛵', 'bun': '🍲',
+  'lanternes': '🏮', 'tailleur': '👗', 'velo': '🚴', 'coracle': '⛵',
+  'cham': '🏛️', 'sunset': '🌅', 'bui': '🌃', 'tunnels': '🪖',
+  'mekong': '🚤', 'pagode': '🏯', 'hot': '🍰', 'lake': '🏮',
+  'pho': '🍜', 'lac': '🏮', 'cuir': '🧶', 'palais': '🏛️',
+  'jardin': '🌿', 'hammam': '🛁', 'cascade-b': '💧', 'route': '🚗',
+  'porte': '🏯', 'medersa': '🕌', 'riad': '🌙', 'tannerie': '🎨',
+  'epices': '📿', 'tajine': '🍲', 'chameau': '🐪', 'etoiles': '⭐',
+  'musique': '🥁', 'aube': '🌅', 'gorges': '🌊', 'retour': '🚐',
+  'remparts': '🌊', 'fresques': '🎨', 'cap': '🌊', 'chateau': '🏰',
+  'fjords': '🏔️', 'renard': '🦊', 'source': '💧', 'van': '🏕️',
+  'husavik': '🐋', 'godafoss': '🌊', 'akureyri': '🏙️', 'krafla': '🌋',
+  'glacier-jules': '🌋', 'arnarstapi': '⛪', 'phoques': '🦭', 'minuit': '🌅',
+  'lave': '🌋', 'pont': '🌉', 'sky': '♨️', 'soiree': '🎶',
+  'souvenirs': '🛍️', 'skyr': '🍦', 'bain': '♨️',
+  'walk': '🎬', 'obs': '🌆', 'burger': '🍔', 'pier': '🎡',
+  'venice': '🛹', 'malibu': '🌊', 'tacos': '🌮', 'cactus': '🌵',
+  'camping': '⭐', 'strip': '🎰', 'bellagio': '⛲', 'cirque': '🎭',
+  'buffet': '🍕', 'canyon': '🏔️', 'rando': '🥾', 'heli': '🚁',
+  'rochers': '🏔️', 'monument': '🏜️', 'navajo': '⭐', 'wave': '🌊',
+  'route66': '🚗', 'diner': '☕', 'huntington': '🌊', 'gg': '🌉',
+  'cable': '🚃', 'wharf': '🦀', 'alcatraz': '🏛️', 'highway': '🚗',
+  'bixby': '🌉', 'ele-mer': '🦭', 'santa-b': '🏖️', 'warner': '🎬',
+  'getty': '🏛️', 'steak': '🥩', 'opera': '🏛️', 'rocks': '🏠',
+  'bridge': '🌉', 'bondi': '🏄', 'coogee': '🥾', 'pool': '🏊',
+  'gelato': '🍦', 'skyrail': '🚡', 'daintree': '🌿', 'cairns': '🍹',
+  'catamaran': '⛴️', 'glass': '🐠', 'seafood': '🦀', 'luz': '🌅',
+  'tour': '🌅', 'light': '⭐', 'olgas': '🏜️', 'kings': '🏔️',
+  'faune': '🦘', 'hosier': '🎨', 'pingouins': '🐧', 'apotres': '🏔️',
+  'koalas': '🦜', 'gorge': '🌊', 'avion-mel': '✈️', 'zoo': '🦘',
+  'vin': '🍷', 'depart': '🦘',
+  'ramen': '🍜', 'anime': '🎮', 'sushi': '🍣', 'croisement': '🚦',
+  'fuji': '🏔️', 'onsen': '♨️', 'torii': '⛩️', 'the': '🍵',
+  'bambou': '🎋', 'kinkaku': '🏯', 'philosophe': '🌸', 'kaiseki': '🍱',
+  'cerf': '🦌', 'bouddha': '🏯', 'lanternes-nara': '⛩️', 'takoyaki': '🦑',
+  'usj': '🎡', 'izakaya': '🍺', 'paix': '🕊️', 'ferry': '⛴️',
+  'harajuku': '🎌', 'teamlab': '🤖', 'omakase': '🍣',
+  'bagel': '🥯', 'jazz': '🎶', 'basilique': '⛪', 'vieux-port': '🏙️',
+  'mont-royal': '🍁', 'smoked': '🍔', 'drive': '🚗', 'canot': '🛶',
+  'rando-a': '🏔️', 'orignal': '🦌', 'frontenac': '🏯', 'fortif': '⚔️',
+  'sirop': '🥞', 'chutes': '💧', 'ile': '🍓', 'baleines': '🐋',
+  'fleuve': '🌅', 'route-ott': '🚗', 'parlement': '🏛️', 'musee-bx': '🎨',
+  'canal': '🛶', 'via': '🚂', 'cn': '🗼', 'kensington': '🏘️',
+  'hockey': '🏒', 'route-niagara': '🚗', 'horseshoe': '🌊',
+  'hornblower': '⛴️', 'notl': '🍷', 'route-mtl': '🚗',
+  'achats': '🛍️', 'biere-art': '🍺',
+  'bullet': '🚅', 'cham-b': '🏛️', 'pho-b': '🍜',
+  'rando': '🥾', 'snorkeling': '🤿',
+  'furgon': '🚐', 'forteresse': '🏯', 'maisons': '🪟', 'icones': '🎻',
+  'cerf-s': '🦌', 'kasr': '🏛️', 'cocktail-al': '🍹',
+  'geyser': '💧', 'gullfoss': '🌊', 'plaques': '🌋', 'lagon': '🛁',
+  'sel': '💧', 'skog': '🌊', 'noir': '🏖️', 'lagune': '🧊',
+  'diamond': '💎', 'glacier': '🥾', 'aurores': '🌌',
+  'husavik-w': '🐋', 'bunker': '🏯', 'bar': '🥂',
+  'coeur': '❤️', 'au-revoir': '🌺'
+};
+
+// Resoudre flag/emoji/icon
+function resolveFlag(f) { return FLAGS[f] || f; }
+function resolveEmoji(e) { return EMOJIS[e] || e; }
+function resolveIcon(i) { return ICONS[i] || i || '📌'; }
+
+// ══════════════════════════════════════════════════════
+//  RENDU
+// ══════════════════════════════════════════════════════
+var currentFilter = 'all';
+
+function renderCards(filter) {
+  var grid = document.getElementById('destGrid');
+  grid.innerHTML = '';
+  var filtered = filter === 'all' ? DEST : DEST.filter(function(d) { return d.region === filter; });
+
+  filtered.forEach(function(dest, i) {
+    var card = document.createElement('div');
+    card.className = 'dest-card';
+    card.style.animationDelay = (i * 0.07) + 's';
+    if (dest.premium) card.style.border = '1px solid rgba(245,200,66,0.35)';
+
+    var flag = resolveFlag(dest.flag);
+    var emoji = resolveEmoji(dest.emoji);
+    var premiumBadge = dest.premium ? '<div class="premium-tag">Destination Premium</div>' : '';
+
+    card.innerHTML =
+      '<div class="dest-banner" style="background:linear-gradient(135deg,' + dest.colorDark + ' 0%,#0a0d12 100%);">' +
+        '<div class="dest-emoji-bg">' + emoji + '</div>' +
+        '<span class="dest-flag">' + flag + '</span>' +
+        '<div class="dest-name-banner"><h3>' + dest.name + '</h3><div class="sub">' + dest.country + ' &middot; ' + dest.duration + '</div></div>' +
+        '<div class="budget-tag" style="color:' + dest.color + '">' + dest.budget + '<br><span style="font-size:9px;opacity:.7">par personne</span></div>' +
+      '</div>' +
+      '<div class="dest-body">' +
+        premiumBadge +
+        '<div class="quick-infos">' +
+          '<div class="qi"><div class="qi-val" style="color:' + dest.color + '">' + dest.budget + '</div><div class="qi-lbl">Budget</div></div>' +
+          '<div class="qi"><div class="qi-val">10j</div><div class="qi-lbl">Duree</div></div>' +
+          '<div class="qi"><div class="qi-val">' + dest.bestSeason + '</div><div class="qi-lbl">Saison</div></div>' +
+        '</div>' +
+        '<div class="tags">' + dest.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
+        '<p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px;">' + dest.description + '</p>' +
+        '<button class="btn-prog" onclick="openProg(\'' + dest.id + '\')">Voir le programme 10 jours</button>' +
+      '</div>';
+
+    grid.appendChild(card);
+  });
+}
+
+function filterDest(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+  btn.classList.add('active');
+  renderCards(f);
+}
+
+function openProg(id) {
+  var dest = null;
+  for (var i = 0; i < DEST.length; i++) { if (DEST[i].id === id) { dest = DEST[i]; break; } }
+  if (!dest) return;
+
+  var flag = resolveFlag(dest.flag);
+
+  var daysHtml = dest.days.map(function(day, i) {
+    var actsHtml = day.activities.map(function(a) {
+      var icon = resolveIcon(a.icon);
+      return '<div class="activity">' +
+        '<div class="activity-icon">' + icon + '</div>' +
+        '<div class="activity-text">' +
+          '<div class="activity-name">' + a.name + '</div>' +
+          '<div class="activity-detail">' + a.detail + '</div>' +
+        '</div>' +
+        '<div class="activity-cost">' + a.cost + '</div>' +
+      '</div>';
+    }).join('');
+
+    return '<div class="day-block" style="animation-delay:' + (i*0.06) + 's">' +
+      '<div class="day-num-col"><div class="day-circle" style="background:' + day.color + '">J' + (i+1) + '</div></div>' +
+      '<div class="day-content">' +
+        '<div class="day-title">' + day.title + '</div>' +
+        '<div class="day-loc">' + day.location + '</div>' +
+        '<div class="day-activities">' + actsHtml + '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  var tipsHtml = dest.tips.map(function(t) {
+    return '<div class="tip-item">' + t + '</div>';
+  }).join('');
+
+  document.getElementById('progWrapper').innerHTML =
+    '<button class="prog-close" onclick="closeModal()">x</button>' +
+    '<div class="prog-header">' +
+      '<div class="prog-flag">' + flag + '</div>' +
+      '<div class="prog-titles"><h2>' + dest.name + ', ' + dest.country + '</h2><div class="prog-sub">Programme 10 jours pour 7 personnes &middot; ' + dest.bestSeason + '</div></div>' +
+      '<div class="prog-budget-big"><div class="pbb-lbl">Budget</div>' + dest.budget + '<div style="font-size:11px;color:var(--muted)">par personne</div></div>' +
+    '</div>' +
+    '<div class="budget-breakdown">' +
+      '<div class="bb-item"><div class="bb-icon">✈️</div><div class="bb-val">' + dest.budgetDetail.vol + '</div><div class="bb-lbl">Vol A/R</div></div>' +
+      '<div class="bb-item"><div class="bb-icon">🏨</div><div class="bb-val">' + dest.budgetDetail.hotel + '</div><div class="bb-lbl">Hebergement</div></div>' +
+      '<div class="bb-item"><div class="bb-icon">🍜</div><div class="bb-val">' + dest.budgetDetail.repas + '</div><div class="bb-lbl">Repas</div></div>' +
+      '<div class="bb-item"><div class="bb-icon">🎟️</div><div class="bb-val">' + dest.budgetDetail.activites + '</div><div class="bb-lbl">Activites</div></div>' +
+    '</div>' +
+    '<div class="prog-days"><h3>Programme jour par jour</h3>' + daysHtml + '</div>' +
+    '<div class="tips-section"><h4>Conseils pratiques pour ' + dest.name + '</h4><div class="tips-list">' + tipsHtml + '</div></div>';
+
+  document.getElementById('progModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('progModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeModal(); });
+
+renderCards('all');
+</script>
+</body>
+</html>
