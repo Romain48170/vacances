@@ -133,12 +133,13 @@ main { max-width: 1240px; margin: 0 auto; padding: 52px 44px 100px; position: re
 <div class="hero">
   <div class="hero-eyebrow">Pour votre prochain voyage en equipe</div>
   <h1>Ou partir a 7<br>sans se ruiner ?</h1>
-  <p>10 destinations avec un programme complet de 10 jours, activites et budget estime par personne.</p>
+  <p>20 destinations avec un programme complet de 10 jours, activites et budget estime par personne.</p>
   <div class="filters">
     <button class="filter-pill active" onclick="filterDest('all',this)">Toutes</button>
     <button class="filter-pill" onclick="filterDest('asie',this)">Asie</button>
     <button class="filter-pill" onclick="filterDest('europe',this)">Europe</button>
     <button class="filter-pill" onclick="filterDest('afrique',this)">Afrique</button>
+    <button class="filter-pill" onclick="filterDest('amerique',this)">Ameriques</button>
     <button class="filter-pill premium-pill" onclick="filterDest('premium',this)">Premium</button>
   </div>
 </div>
@@ -908,16 +909,856 @@ DEST.push(mkDest('canada','Canada Quebec','Canada','flag-canada','emoji-canada',
   ]
 ));
 
+
+
+// ===== GRECE =====
+DEST.push(mkDest('grece','Grece Iles','Grece','flag-grece','emoji-grece','europe','#3b82f6','#1e3a8a',
+  '~1 100 EUR','220 EUR','350 EUR','280 EUR','250 EUR','Mai-Oct.',
+  ['Santorini','Mykonos','Acropole','Mer Egee','Cuisine'],
+  "Athenes et son Acropole, Santorin et ses couchers de soleil, la mer Egee turquoise.",
+  [
+    "Vols Paris-Athenes depuis 50 EUR sur Ryanair ou easyJet — reserver 2 mois avant",
+    "Ferries entre iles : Blue Star Ferries ou SeaJets — reserver en ligne 1 mois avant",
+    "Le gyros pita a 2 EUR est meilleur que dans les restos touristiques — cherchez les tavernes locales",
+    "Santorin en juillet-aout = bondee — preferer juin ou septembre pour les couchers de soleil",
+    "La carte ISIC (etudiant) donne acces gratuit a l Acropole et la plupart des musees"
+  ],
+  [
+    mkDay('Athenes Arrivee et Acropole','Athenes','#3b82f6',[
+      mkAct('avion','Arrivee Athenes ATH','Metro ligne 3 vers Syntagma (10 EUR).','~10 EUR'),
+      mkAct('acropole','Acropole et Parthenon','Le symbole de la Grece antique sur son rocher.','~20 EUR'),
+      mkAct('plaka','Quartier Plaka','Ruelles pittoresques sous l Acropole — tavernes, artisans.','Gratuit'),
+      mkAct('meze','Meze et ouzo','Tzatziki, taramosalata, calamars frits — apero grec.','~8 EUR')
+    ]),
+    mkDay('Athenes Musees et Agora','Athenes','#f97316',[
+      mkAct('musee-a','Musee National Archeologique','Plus grande collection grecque antique du monde.','~12 EUR'),
+      mkAct('agora','Agora Antique','Ou Socrate philosophait — temple Hephaistios intact.','~8 EUR'),
+      mkAct('monastiraki','Monastiraki et Marche aux Puces','Flea market, vinyles, antiquites, street food.','Shopping ~10 EUR'),
+      mkAct('cap','Cap Sounion coucher soleil','Temple de Poseidon au bord des falaises — magique.','~15 EUR')
+    ]),
+    mkDay('Ferry vers Mykonos','Mykonos','#06b6d4',[
+      mkAct('ferry-m','Ferry Athenes vers Mykonos','SeaJets rapide (2h30) ou Blue Star (5h).','~35 EUR'),
+      mkAct('chora','Chora de Mykonos','Ruelles blanches et bleues — moulins a vent iconiques.','Gratuit'),
+      mkAct('pelicans','Les pelicans de Mykonos','Petros le pelican se promene dans les ruelles.','Gratuit'),
+      mkAct('plage-m','Paradise Beach','La plage la plus festive de Grece — bars et DJ.','Gratuit')
+    ]),
+    mkDay('Mykonos Plages et Fetes','Mykonos','#ec4899',[
+      mkAct('super-p','Super Paradise Beach','Eaux cristallines et atmosphere animee.','Gratuit'),
+      mkAct('elia','Elia Beach','La plage la plus longue et la plus calme de Mykonos.','Gratuit'),
+      mkAct('delos','Ile de Delos','Site archeologique classe UNESCO — berceau du dieu Apollon.','~15 EUR'),
+      mkAct('sunset-m','Coucher de soleil Little Venice','Bars suspendus sur la mer — moment unique.','~8 EUR cocktail')
+    ]),
+    mkDay('Ferry vers Santorin','Santorin','#ef4444',[
+      mkAct('ferry-s','Ferry Mykonos vers Santorin','SeaJets (2h) ou bateau lent (4h).','~40 EUR'),
+      mkAct('oia','Oia et ses maisons bleues','Le coucher de soleil le plus photographié du monde.','Gratuit'),
+      mkAct('caldera','Vue sur la Caldera','La caldeira volcanique depuis les falaises — vertigineux.','Gratuit'),
+      mkAct('vin-s','Vin de Santorin','Assyrtiko blanc volcanique — degustation dans une cave.','~15 EUR')
+    ]),
+    mkDay('Santorin Volcan et Plages','Santorin','#f59e0b',[
+      mkAct('volcan-s','Excursion volcan Nea Kameni','Randonnee sur le volcan encore actif — sources chaudes.','~20 EUR'),
+      mkAct('rouge','Plage Rouge et Plage Noire','Sables de couleurs — phenomane volcanique unique.','Gratuit'),
+      mkAct('fira','Fira et le musee Prehistorique','Civilisation minoenne — fresques 3500 ans.','~6 EUR'),
+      mkAct('akrotiri','Akrotiri la Pompei grecque','Cite entierement conservee sous les cendres volcaniques.','~12 EUR')
+    ]),
+    mkDay('Ferry vers Crete','La Canee Crete','#10b981',[
+      mkAct('ferry-c','Ferry vers Crete','Liaison nocturne Santorin - Heraklion (8h).','~30 EUR'),
+      mkAct('canee','La Canee Vieille Ville','Port venitien — mosquee ottomane, phare, ruelles.','Gratuit'),
+      mkAct('samaria','Gorges de Samaria','Plus grande gorge d Europe (16km) — randonnee mythique.','~5 EUR parc'),
+      mkAct('mezze','Cuisine cretoise','Dakos, boureki, apaki — la meilleure cuisine de Grece.','~8 EUR')
+    ]),
+    mkDay('Crete Knossos et Plages','Heraklion Crete','#8b5cf6',[
+      mkAct('knossos','Knossos Palais Minoen','Palais du roi Minos et du Minotaure — 3000 ans av JC.','~15 EUR'),
+      mkAct('elafonisi','Plage Elafonisi','Sable rose et eaux turquoise — paradis de Crete.','Gratuit'),
+      mkAct('rethymno','Rethymno et sa Fortezza','Citadelle venitienne dominant la mer.','~4 EUR'),
+      mkAct('rakii','Raki cretois et meze','La tradition du raki local — une bouteille avec le repas.','~5 EUR')
+    ]),
+    mkDay('Retour Athenes','Athenes','#a78bfa',[
+      mkAct('avion-hkn','Vol Heraklion vers Athenes','Vol domestique Aegean ou Olympic (1h).','~40 EUR'),
+      mkAct('syntagma','Place Syntagma et Evzones','Releve de la garde devant le Parlement — spectacle.','Gratuit'),
+      mkAct('kolonaki','Kolonaki Shopping et cafes','Le quartier chic d Athenes — style grec moderne.','~10 EUR'),
+      mkAct('souvlaki','Dernier souvlaki','Gyros pita au coin d une rue — 2 EUR le meilleur repas.','~2 EUR')
+    ]),
+    mkDay('Depart Athenes','Athenes ATH','#6366f1',[
+      mkAct('pireaus','Port du Piree matin','Marche aux poissons — ambiance pescadores.','Gratuit'),
+      mkAct('honey','Miel et produits grecs','Miel du Hymette, huile Kalamata, olives — souvenirs.','~15-20 EUR'),
+      mkAct('baklava','Baklava et loukoumades','Patisseries au miel — le sucre grec a son meilleur.','~3 EUR'),
+      mkAct('depart-gr','Kalo taxidi Grece!','Retour en France — bronzes, marbre et mer Egee dans la tete.','coeur')
+    ])
+  ]
+));
+
+// ===== PORTUGAL =====
+DEST.push(mkDest('portugal','Portugal','Portugal','flag-portugal','emoji-portugal','europe','#10b981','#064e3b',
+  '~800 EUR','150 EUR','280 EUR','220 EUR','150 EUR','Avr.-Oct.',
+  ['Lisbonne','Porto','Algarve','Fado','Pasteis'],
+  "Lisbonne sur ses collines, Porto et ses caves de porto, et les plages dorees de l Algarve.",
+  [
+    "Vols Paris-Lisbonne depuis 30 EUR sur easyJet ou Transavia — reserver 6 semaines avant",
+    "Le metro de Lisbonne est ideal — 1.50 EUR le trajet, pass journalier a 6.70 EUR",
+    "Pastel de nata a 1.20 EUR chez Pasteis de Belem — la file vaut l attente",
+    "Porto est a 3h de Lisbonne en train (25 EUR) ou 1h en avion — les deux valent le detour",
+    "L Algarve hors saison (mai-juin ou septembre) = plages vides et prix divises par deux"
+  ],
+  [
+    mkDay('Lisbonne Arrivee et Alfama','Lisbonne','#10b981',[
+      mkAct('avion','Arrivee Lisbonne LIS','Metro rouge vers Alameda (1.50 EUR).','~1.50 EUR'),
+      mkAct('alfama','Alfama et Castelo Sao Jorge','Quartier maure — chateau medieval et vue sur le Tage.','~10 EUR'),
+      mkAct('fado','Concert de Fado','La musique de l ame portugaise — restaurant fado Alfama.','~25 EUR repas+fado'),
+      mkAct('ginjinha','Ginjinha et petiscos','Liqueur de cerise bue dans un chocolat — tradition lisbete.','~1.50 EUR')
+    ]),
+    mkDay('Lisbonne Belem et Bairro Alto','Lisbonne','#f59e0b',[
+      mkAct('pasteis','Pasteis de Belem','La patisserie originale depuis 1837 — queue inevitable.','~1.20 EUR/pastel'),
+      mkAct('jeronimos','Monastere des Jeronimos','Chef-oeuvre manuelin — lieu de sepulture de Vasco de Gama.','~10 EUR'),
+      mkAct('torre','Tour de Belem','Symbole de l ere des decouvertes sur le Tage.','~6 EUR'),
+      mkAct('bairro','Bairro Alto la nuit','Bars minuscules, sangria maison, musique dans la rue.','~6 EUR')
+    ]),
+    mkDay('Sintra et Cascais','Sintra','#8b5cf6',[
+      mkAct('sintra','Palais de Pena Sintra','Palais neo-romantique multicolore sur une colline boisee.','~14 EUR'),
+      mkAct('regaleira','Quinta da Regaleira','Palais mystique avec puits initiatique templier.','~10 EUR'),
+      mkAct('cascais','Cascais village','Village de pecheurs devenu station balneaire chic.','Gratuit'),
+      mkAct('cabo','Cabo da Roca','Le point le plus a l ouest de l Europe continentale.','Gratuit')
+    ]),
+    mkDay('Train vers Porto','Porto','#ef4444',[
+      mkAct('train-p','Train Lisbonne vers Porto','Alfa Pendular (3h) — paysages de l Alentejo.','~25 EUR'),
+      mkAct('ribeira','Ribeira et les Caves de Porto','Quartier medieval — caves Taylors, Grahams, sandeman.','~15 EUR degustation'),
+      mkAct('luiz','Pont Dom Luiz au coucher','Vue depuis le pont surlombant le Douro — imprenable.','Gratuit'),
+      mkAct('francesinha','Francesinha','Le sandwich-fondue de Porto — un monument culinaire.','~8 EUR')
+    ]),
+    mkDay('Porto Exploration','Porto','#06b6d4',[
+      mkAct('librairie','Librairie Lello','La plus belle librairie du monde — inspiration de J.K. Rowling.','~5 EUR'),
+      mkAct('clerigos','Tour des Clerigos','Vue a 360 sur Porto depuis la tour baroque.','~3 EUR'),
+      mkAct('azulejos','Chapelle des Ames','La facade en azulejos la plus spectaculaire du Portugal.','Gratuit'),
+      mkAct('porto-wine','Wine Bar a Vila Nova de Gaia','Degustation de vieux Porto vintage en face des caves.','~15 EUR')
+    ]),
+    mkDay('Douro et Vignobles','Vallee du Douro','#f97316',[
+      mkAct('douro','Croisiere sur le Douro','Paysages de vignobles en terrasses depuis le fleuve.','~35 EUR'),
+      mkAct('quinta','Quinta viticole','Visite et degustation dans un domaine produisant le porto.','~20 EUR'),
+      mkAct('pinhao','Village de Pinhao','Gare ornee d azulejos representant la vie du Douro.','Gratuit'),
+      mkAct('repas-d','Repas rural portugais','Caldo verde, bacalhau et vin du Douro — table familiale.','~12 EUR')
+    ]),
+    mkDay('Algarve Lagos et Sagres','Lagos Algarve','#a78bfa',[
+      mkAct('avion-alg','Vol Porto vers Faro','Ryanair ou TAP (1h) — puis bus vers Lagos.','~30 EUR vol + 5 EUR bus'),
+      mkAct('camilo','Plage Camilo et Pinhao','Plages de Lagos — falaises ocre, eaux turquoise.','Gratuit'),
+      mkAct('sagres','Cap de Sagres','Le bout du monde medieval — fortifications et vents.','~3 EUR'),
+      mkAct('poisson-p','Poissons grilles Lagos','Sardines et dourade au charbon — table de pecheurs.','~10 EUR')
+    ]),
+    mkDay('Algarve Albufeira et Grottos','Albufeira','#14b8a6',[
+      mkAct('grottos','Grottes de Ponta da Piedade','Les grottes d or de l Algarve en kayak ou bateau.','~15 EUR'),
+      mkAct('old-town','Vieille ville Albufeira','Ruelles blanches et terrasses ombragees.','Gratuit'),
+      mkAct('marinha','Plage de Marinha','Classee parmi les plus belles d Europe — falaises.','Gratuit'),
+      mkAct('cataplana','Cataplana de fruits de mer','Ragouta mijoteen cuivre — le plat signature de l Algarve.','~18 EUR')
+    ]),
+    mkDay('Evora et Alentejo','Evora','#ec4899',[
+      mkAct('temple-e','Temple romain Evora','Temple du Ier siecle parfaitement conserve en ville.','Gratuit exterieur'),
+      mkAct('os','Chapelle des Os','Construite avec 5000 squelettes de moines — macabre et fascinant.','~4 EUR'),
+      mkAct('alentejan','Cuisine alentejane','Migas, carne de porco a alentejana, vinho alentejano.','~12 EUR'),
+      mkAct('cromeleque','Cromeleque dos Almendres','Stonehenge portugais — megalithes 7000 ans en pleine campagne.','Gratuit')
+    ]),
+    mkDay('Retour Lisbonne et Depart','Lisbonne LIS','#6366f1',[
+      mkAct('mercado','Mercado da Ribeira Time Out','Le meilleur marche gastronomique d Europe.','~10-15 EUR'),
+      mkAct('lx','LX Factory Dimanche','Marche vintage, street art, brunch — quartier Alcantara.','Shopping ~15 EUR'),
+      mkAct('ceramique','Ceramiques et azulejos','Achats de carreaux peints a la main — souvenirs uniques.','~10-30 EUR'),
+      mkAct('depart-pt','Ate logo Portugal!','LIS vers CDG — saudade garantie des pasteis et du fado.','coeur')
+    ])
+  ]
+));
+
+// ===== MEXIQUE =====
+DEST.push(mkDest('mexique','Mexique','Mexique','flag-mexique','emoji-mexique','amerique','#f97316','#7c2d12',
+  '~1 800 EUR','700 EUR','400 EUR','350 EUR','350 EUR','Nov.-Avr.',
+  ['Chichen Itza','Cancun','Tulum','Mezcal','Street food'],
+  "Mexico la megalopole, Chichen Itza et les Mayas, Tulum et la Riviera Maya.",
+  [
+    "Vols Paris-Mexico depuis 450 EUR — reserver 3 mois avant sur ITA ou Air France",
+    "L ADO (bus interurbain) est excellent et pas cher — Mexico vers Oaxaca 20 USD",
+    "Street food est la meilleure cuisine du Mexique : tacos de carnitas 0.50 USD",
+    "Cenotes du Yucatan : piscines naturelles dans caves — certaines accessibles a pied",
+    "Oaxaca est la capitale gastronomique du Mexique — mole negro, tlayudas, mezcal"
+  ],
+  [
+    mkDay('Mexico Arrivee et Zocalo','Mexico CDMX','#f97316',[
+      mkAct('avion','Arrivee Mexico MEX','Metro ligne 5 depuis aeroport (0.25 USD).','~0.30 EUR'),
+      mkAct('zocalo','Zocalo et Cathedrale Metropolitaine','La plus grande place d Amerique latine — grandeur baroque.','Gratuit'),
+      mkAct('azteca','Templo Mayor Azteca','Pyramide decouverte sous la ville en 1978.','~5 EUR'),
+      mkAct('tacos-mx','Tacos de carnitas et guacamole','Le vrai taco mexicain avec coriandre et salsa verte.','~2 EUR')
+    ]),
+    mkDay('Mexico Frida et Teotihuacan','Mexico','#ec4899',[
+      mkAct('frida','Musee Frida Kahlo','La Maison Bleue de Frida — art, vie et amour.','~10 EUR'),
+      mkAct('teo','Pyramides de Teotihuacan','Pyramide du Soleil (65m) et Lune — ville precolombienne.','~4 EUR'),
+      mkAct('lucha','Lucha Libre','Catch mexicain masque — spectacle folklorique delirant.','~8 EUR'),
+      mkAct('churros','Churros et chocolate caliente','Churros frits trempes dans chocolat chaud epais.','~2 EUR')
+    ]),
+    mkDay('Mexico Xochimilco et Gastronomie','Mexico','#10b981',[
+      mkAct('xochi','Xochimilco les chinampas','Canaux pre-hispaniques en barque coloree avec mariachis.','~15 EUR'),
+      mkAct('mercado-mx','Mercado de Jamaica','Marche aux fleurs et fruits exotiques — couleurs explosives.','Gratuit'),
+      mkAct('mole','Restaurant mole negro','Mole poblano — sauce 30 ingredients dont chocolat et piment.','~12 EUR'),
+      mkAct('mezcal','Bar a mezcal','Mezcal artisanal de Oaxaca — fumate, complexe, unique.','~6 EUR 2 shots')
+    ]),
+    mkDay('Vol vers Oaxaca','Oaxaca','#f59e0b',[
+      mkAct('avion-oax','Vol Mexico vers Oaxaca','Aeromexico ou Volaris (1h) — paysage montagneux.','~50 EUR'),
+      mkAct('monte','Monte Alban','Cite zapoteque du Ve siecle au sommet d une montagne.','~5 EUR'),
+      mkAct('tlayuda','Tlayuda oaxaquena','La pizza mexicaine — tortilla croustillante, haricots, quesillo.','~4 EUR'),
+      mkAct('zocalo-oax','Zocalo Oaxaca','Place animee le soir — marimba, danseurs, mezcal.','Gratuit')
+    ]),
+    mkDay('Oaxaca Artisanat et Hierve','Oaxaca','#a78bfa',[
+      mkAct('hierve','Hierve el Agua','Cascades petrifiees et piscines naturelles perchees.','~5 EUR'),
+      mkAct('manos','Artisanat zapoteque','Textiles, ceramiques noires barro negro — artisans en atelier.','~10-30 EUR'),
+      mkAct('tule','Arbre de Tule','Le tronc le plus gros du monde — 2000 ans de memoire.','~1 EUR'),
+      mkAct('chapulines','Chapulines au marche','Les sauterelles grilees de Oaxaca — une experience !','~1 EUR')
+    ]),
+    mkDay('Vol vers Cancun','Cancun','#06b6d4',[
+      mkAct('avion-cun','Vol Oaxaca vers Cancun','Via Mexico si necesaire — 2h de vol total.','~60 EUR'),
+      mkAct('chichen','Chichen Itza','La pyramide Maya du Kukulcan — 7e merveille du monde.','~27 EUR'),
+      mkAct('cenote-ik','Cenote Ik Kil','Piscine naturelle souterraine a cote de Chichen Itza.','~5 EUR'),
+      mkAct('valladolid','Valladolid ville coloniale','Ville coloniale coloree sur la route entre Chichen et Cancun.','Gratuit')
+    ]),
+    mkDay('Riviera Maya et Tulum','Tulum','#14b8a6',[
+      mkAct('tulum','Site Maya de Tulum','Pyramides mayas au bord des falaises sur la mer des Caraibes.','~5 EUR'),
+      mkAct('cenote-grand','Grand Cenote de Tulum','Le plus beau cenote avec stalactites et poissons.','~20 EUR'),
+      mkAct('plage-tulum','Plage de Tulum','Sable blanc, mer turquoise et jungle derriere.','Gratuit'),
+      mkAct('sian','Biosphere Sian Kaan','Reserve naturelle UNESCO — dauphins, flamants, tortues.','~40 EUR tour')
+    ]),
+    mkDay('Playa del Carmen et Cozumel','Playa del Carmen','#3b82f6',[
+      mkAct('quinta','5e Avenue Playa','La rue pietonne la plus festive du Mexique — boutiques et bars.','~8 EUR'),
+      mkAct('cozumel','Ile de Cozumel','Plongee dans le recif de Mesoamerique — 2e recif mondial.','~35 EUR 2 plongees'),
+      mkAct('xcaret','Parc Xcaret','Cenotes naturels, tortues marines, ballet folklorique.','~60 EUR'),
+      mkAct('ceviche','Ceviche et poissons grilles','Poissons du jour avec citron vert et piment.','~8 EUR')
+    ]),
+    mkDay('Isla Mujeres','Isla Mujeres','#ec4899',[
+      mkAct('ferry-im','Ferry vers Isla Mujeres','Traversee 20 min depuis Cancun Puerto Juarez.','~5 EUR A/R'),
+      mkAct('golf-cart','Golf-cart tour de l ile','Louer un golf-cart et faire le tour en 1h — paysages sublimes.','~30 EUR pour 4'),
+      mkAct('playa-norte','Playa Norte','Classee parmi les plus belles plages des Caraibes.','Gratuit'),
+      mkAct('langouste','Langouste Cancun','Langouste grillee avec beurre citron — dernier festin.','~20 EUR')
+    ]),
+    mkDay('Depart Cancun','Cancun CUN','#6366f1',[
+      mkAct('mercado-28','Mercado 28 Cancun','Artisanat : masques, tequila, vanille — negotiation requise.','~15-20 EUR'),
+      mkAct('tequila','Degustation de tequila','Blanco, reposado, anejo — la lecon de tequila mexicaine.','~5 EUR'),
+      mkAct('tamales','Tamales de depart','La pate de mais farcie vapeur — la comfort food de tout Mexicain.','~2 EUR'),
+      mkAct('depart-mx','Adios Mexico!','CUN vers CDG — tacos et mariachis dans les reves.','coeur')
+    ])
+  ]
+));
+
+// ===== PEROU =====
+DEST.push(mkDest('perou','Perou','Perou','flag-perou','emoji-perou','amerique','#f5c842','#78350f',
+  '~2 000 EUR','750 EUR','500 EUR','350 EUR','400 EUR','Avr.-Oct.',
+  ['Machu Picchu','Cusco','Lac Titicaca','Ceviche','Inca'],
+  "Cusco la cite inca, Machu Picchu la citadelle dans les nuages, le Lac Titicaca et Lima.",
+  [
+    "Vol Paris-Lima depuis 650 EUR — reserver 3 mois avant, escale Madrid ou Amsterdam",
+    "Le mal des montagnes a Cusco (3400m) est reel — arriver la veille et se reposer",
+    "Billet Machu Picchu en ligne 3 mois avant — seulement 5040 visiteurs/j depuis 2023",
+    "Peru Hop (bus tourist) entre Lima, Cusco, Puno = economique et flexible",
+    "Le ceviche au Mercado 1 de Surquillo Lima = meilleur du monde a 4 EUR"
+  ],
+  [
+    mkDay('Lima Arrivee et Miraflores','Lima','#f5c842',[
+      mkAct('avion','Arrivee Lima LIM','Bus Airportbus direct vers Miraflores (3 USD).','~3 EUR'),
+      mkAct('ceviche-l','Ceviche au Mercado Surquillo','Le vrai ceviche limeno — poisson frais, citron vert, aji.','~4 EUR'),
+      mkAct('larco','Musee Larco','Collection d art precolombien la plus complete du monde.','~13 EUR'),
+      mkAct('miraflores','Parc Kennedy et Miraflores','Chats partout, artisanat, vue Pacifique depuis les falaises.','Gratuit')
+    ]),
+    mkDay('Lima Gastronomie et Barranco','Lima','#ef4444',[
+      mkAct('central','Restaurant Central ou Maido','2 des meilleurs restos du monde selon la liste San Pellegrino.','~80 EUR degustation'),
+      mkAct('barranco','Barranco quartier boheme','Galeries, boutiques vintage, bars — le Montmartre de Lima.','Gratuit'),
+      mkAct('pisco','Pisco Sour experience','Le cocktail national — pisco, citron vert, blanc d oeuf, amargo.','~4 EUR'),
+      mkAct('anti','Anticuchos et chifa','Brochettes de coeur de boeuf et cuisine chino-peruvienne.','~6 EUR')
+    ]),
+    mkDay('Vol vers Cusco','Cusco','#a78bfa',[
+      mkAct('avion-cus','Vol Lima vers Cusco','LATAM ou Sky Airline (1h15) — atterrissage a 3400m.','~60 EUR'),
+      mkAct('repos-cus','Repos acclimatation','Mate de coca, pas d alcool, balade lente dans la ville.','Gratuit'),
+      mkAct('plaza-cus','Plaza de Armas Cusco','Cathedrale et Compania de Jesus — baroque colonial sur murs incas.','Gratuit'),
+      mkAct('lomo','Lomo saltado','Le stir-fry pisco-boeuf-tomate-frites — plat fusion typique.','~6 EUR')
+    ]),
+    mkDay('Cusco Ruines et Sacsayhuaman','Cusco','#10b981',[
+      mkAct('sacsay','Sacsayhuaman','Forteresse inca avec blocs de 100 tonnes — mystere des batisseurs.','~25 EUR boleto turistico'),
+      mkAct('qorikancha','Qorikancha Temple du Soleil','Couvent baroque construit sur le temple en or des incas.','~12 EUR'),
+      mkAct('san-blas','Quartier San Blas','Ateliers d artisans — ceramique, textile, joaillerie andine.','Gratuit'),
+      mkAct('chicha','Chicha de jora','La biere inca de mais fermente — gouter dans une chicheria locale.','~1 EUR')
+    ]),
+    mkDay('Vallee Sacree des Incas','Ollantaytambo','#f97316',[
+      mkAct('pisac','Pisac et son marche','Ruines incas en terrasses et marche artisanal du dimanche.','~15 EUR'),
+      mkAct('ollanta','Ollantaytambo','Forteresse inca encore habitee par descendants directs incas.','~25 EUR boleto'),
+      mkAct('urubamba','Vallee de Urubamba','Les terrasses en escalier les mieux conservees du monde.','Gratuit'),
+      mkAct('llamas','Llamas et alpacas','Caresser les lamas dans les terrasses — incontournable.','Gratuit')
+    ]),
+    mkDay('Train vers Machu Picchu','Aguas Calientes','#06b6d4',[
+      mkAct('train-mp','Train PeruRail vers Aguas Calientes','Vue sur les Andes depuis le train panoramique.','~40 EUR'),
+      mkAct('aguas','Aguas Calientes','Petit village au pied de Machu Picchu — thermes naturels.','~3 EUR thermes'),
+      mkAct('bains-mp','Bains thermaux apres trek','Sources chaudes de la riviere Urubamba — bien merite.','~3 EUR'),
+      mkAct('resto-ag','Diner Aguas Calientes','Alpaca a la braise avec quinoa — cuisine andine authentique.','~10 EUR')
+    ]),
+    mkDay('Machu Picchu','Machu Picchu','#ef4444',[
+      mkAct('bus-mp','Bus vers Machu Picchu 5h30','Arriver tot — la citadelle dans la brume au lever du soleil.','~12 EUR A/R'),
+      mkAct('citadelle','Citadelle de Machu Picchu','La merveille inca — terrasses, temples, llamas libres.','~45 EUR entree'),
+      mkAct('soleil-mp','Temple du Soleil et Intihuatana','La pierre d attache du soleil — astronomie inca.','Inclus'),
+      mkAct('condor','Porte du Soleil Intipunku','Vue panoramique sur toute la citadelle depuis le sommet.','Inclus')
+    ]),
+    mkDay('Retour Cusco puis Puno','Puno Lac Titicaca','#3b82f6',[
+      mkAct('train-cus','Train retour vers Cusco','Paysages andins depuis le domo panoramique.','~40 EUR'),
+      mkAct('bus-puno','Bus Cusco vers Puno','Route altiplanique (6h) — Andahuaylillas et La Raya.','~15 EUR'),
+      mkAct('titicaca','Arrivee Lac Titicaca 3800m','Le plus haut lac navigable du monde — coucher de soleil.','Gratuit'),
+      mkAct('trucha','Trucha du Titicaca','La truite du lac — poissonnerie locale, prix modique.','~5 EUR')
+    ]),
+    mkDay('Iles du Titicaca','Iles Uros et Taquile','#14b8a6',[
+      mkAct('uros','Iles flottantes Uros','Iles construites en roseau totora par les Uros — incroyable.','~15 EUR tour'),
+      mkAct('taquile','Ile Taquile','Communaute inca qui n a connu ni colonisation ni alcool.','~20 EUR avec repas'),
+      mkAct('tissage','Tissage andin UNESCO','Les hommes de Taquile tissent — patrimoine immatériel UNESCO.','Inclus'),
+      mkAct('canots','Canots en totora','Naviguer sur le Titicaca dans un bateau de roseau traditionnel.','~5 EUR')
+    ]),
+    mkDay('Retour Lima et Depart','Lima LIM','#6366f1',[
+      mkAct('avion-lima','Vol Puno vers Lima','Via Cusco ou direct — 2h de voyage au-dessus des Andes.','~80 EUR'),
+      mkAct('larco-market','Marche artisanal Miraflores','Textile andin, bijoux or et argent, ceramiques incas.','~15-30 EUR'),
+      mkAct('lucuma','Glace a la lucuma','La lucuma — fruit andin qui n existe que là, saveur unique.','~2 EUR'),
+      mkAct('depart-pe','Hasta luego Peru!','LIM vers CDG — Machu Picchu et ceviche dans les reves.','coeur')
+    ])
+  ]
+));
+
+// ===== TANZANIE =====
+DEST.push(mkDest('tanzanie','Tanzanie Safari','Tanzanie','flag-tanzanie','emoji-tanzanie','premium','#f59e0b','#78350f',
+  '~3 200 EUR','1000 EUR','1200 EUR','400 EUR','600 EUR','Juin-Oct. / Jan.-Mars',
+  ['Safari','Serengeti','Zanzibar','Kilimandjaro','Big Five'],
+  "Le Serengeti et la grande migration, le Kilimandjaro, Zanzibar et ses plages blanches.",
+  [
+    "Safari en 4x4 partagé a 7 = plus economique — organiser via agence locale sur place",
+    "Zanzibar : visa e-visa USA/EU en ligne (50 USD) — integrer dans le billet Tanzanie",
+    "Vaccin fievre jaune obligatoire et antipaludiques essentiels — consulter medecin 8 sem avant",
+    "Grande migration Serengeti : juillet-octobre = croisements riviere Mara (spectaculaire)",
+    "Stone Town Zanzibar = medina arabo-swahilie UNESCO — se perdre dans les ruelles le soir"
+  ],
+  [
+    mkDay('Arusha Arrivee et Preparations','Arusha','#f59e0b',[
+      mkAct('avion','Arrivee Kilimanjaro JRO','Vol avec escale Nairobi ou Addis-Abeba.','~900 EUR A/R'),
+      mkAct('briefing','Briefing safari','Rencontre avec le guide-chauffeur, organisation logistique.','Inclus safari'),
+      mkAct('marche-aru','Marche local Arusha','Epices, fruits tropicaux, artisanat Maasai — vie locale.','~5 EUR'),
+      mkAct('nyama','Nyama choma et ugali','Viande grillee et polenta de mais — repas traditionnel.','~5 EUR')
+    ]),
+    mkDay('Ngorongoro Cratere','Cratere du Ngorongoro','#10b981',[
+      mkAct('safari-ng','Descente dans le cratere','Le zoo naturel le plus dense de la planete — 25 000 animaux.','~70 EUR/pers droits'),
+      mkAct('lion','Lions et hyenes','Les Big Five visibles en 1 journee dans ce cirque naturel.','Inclus'),
+      mkAct('flamant','Lac Magadi et flamants','Des milliers de flamants roses sur le lac au fond du cratere.','Inclus'),
+      mkAct('observ','Sundowner sur le cratere','Coucher de soleil depuis le bord — girafe silhouette.','Inclus')
+    ]),
+    mkDay('Route vers Serengeti','Serengeti Nord','#f97316',[
+      mkAct('game','Game drive matinal','Depart 6h — les predateurs sont actifs a l aube.','Inclus'),
+      mkAct('acacia','Paysage acacia','Les plaines infinies parsemees d acacias — l Afrique de carte postale.','Inclus'),
+      mkAct('camp','Tented camp Serengeti','Tente de luxe au milieu de la savane — lions la nuit.','~200 EUR/nuit'),
+      mkAct('etoiles-tz','Etoiles sur la savane','Ciel noir total — Voie Lactee visible a l oeil nu.','Inclus')
+    ]),
+    mkDay('Grande Migration','Serengeti Riviere Mara','#ef4444',[
+      mkAct('migration','Grande Migration','1.5 million de gnous et zebres — traversee riviere Mara.','Inclus (saisonnier)'),
+      mkAct('croco','Crocodiles et gnous','Les crocodiles du Nil attendent les gnous a la riviere.','Inclus'),
+      mkAct('leopard','Leopard et guepard','Les felins les plus discrets — les chercher dans les arbres.','Inclus'),
+      mkAct('sundowner-s','Sundowner en brousse','Champagne au coucher du soleil en pleine savane.','Inclus')
+    ]),
+    mkDay('Tarangire et Elephants','Parc National Tarangire','#a78bfa',[
+      mkAct('elephants-t','Elephants de Tarangire','Plus grande concentration d elephants d Afrique de l Est.','~40 EUR droits'),
+      mkAct('baobabs','Allee des baobabs','Des centaines de baobabs millénaires — decor jurassique.','Inclus'),
+      mkAct('oiseaux','Paradis des oiseaux','600 especes d oiseaux dont la grue couronnee nationale.','Inclus'),
+      mkAct('maasai-village','Village Maasai','Visite authentique — sauts, chants, vie nomade pastorale.','~15 EUR')
+    ]),
+    mkDay('Ferry vers Zanzibar','Stone Town Zanzibar','#06b6d4',[
+      mkAct('avion-zan','Vol Arusha vers Zanzibar','Precision Air (45 min) ou ferry depuis Dar es Salaam.','~60 EUR'),
+      mkAct('stone','Stone Town medina','Ruelles arabes, portes sculptes, bazar d epices.','Gratuit'),
+      mkAct('forodhani','Forodhani Gardens','Marche nocturne de street food — calamars, lobster, chapati.','~5 EUR'),
+      mkAct('freddie','Maison natale Freddie Mercury','La rock star reine etait de Zanzibar — petit musee.','~2 EUR')
+    ]),
+    mkDay('Zanzibar Plages Nord','Nungwi et Kendwa','#3b82f6',[
+      mkAct('nungwi','Plage de Nungwi','Sable blanc, eaux turquoise, dhows de pecheurs.','Gratuit'),
+      mkAct('kendwa','Kendwa Rocks Full Moon','Fete de pleine lune mensuelle legendaire — plage et musique.','~5 EUR'),
+      mkAct('tortues-z','Ferme aux tortues','Tortues geantes centenaires en semi-liberte.','~3 EUR'),
+      mkAct('snorkel-z','Snorkeling recif corallien','Poissons tropicaux, raies, requins-nourrices.','~15 EUR')
+    ]),
+    mkDay('Zanzibar Spice Tour et Plongee','Zanzibar','#14b8a6',[
+      mkAct('epices','Spice Tour ferme','Girofle, vanille, poivre, cannelle, muscade — sentir et gouter.','~15 EUR'),
+      mkAct('prison','Prison Island','Iles aux tortues geantes et fort colonial — dhow traditionnel.','~20 EUR'),
+      mkAct('plongee-z','Plongee Mnemba','Mnemba Atoll — l un des meilleurs sites de plongee Afrique.','~50 EUR 2 plongees'),
+      mkAct('seafood-z','Seafood BBQ de plage','Langouste, crevettes et poissons du jour grilles sur la plage.','~15 EUR')
+    ]),
+    mkDay('Plages Sud Zanzibar','Jambiani et Paje','#ec4899',[
+      mkAct('jambiani','Village de pecheurs Jambiani','Vie authentique swahilie — pirogue, filets, lagon.','Gratuit'),
+      mkAct('kite','Kitesurf a Paje','Paje = spot kitesurf mondial — vents reguliers de mousson.','~40 EUR cours'),
+      mkAct('algues','Fermes d algues','Les femmes de Zanzibar cultivent les algues dans le lagon.','Gratuit'),
+      mkAct('biryani','Biryani et pilau zanzibarite','Riz epice aromatique au poulet ou chevre — cuisine arabe.','~4 EUR')
+    ]),
+    mkDay('Depart Zanzibar','Zanzibar ZNZ','#6366f1',[
+      mkAct('marche-z','Marche aux epices Zanzibar','Epices en vrac, huile de coco, essence de rose, henné.','~10-15 EUR'),
+      mkAct('kikoi','Kikoi et kangas','Tissus traditionnels swahilis — parfaits en pareo ou cadeau.','~5-10 EUR'),
+      mkAct('coconut','Cocktail noix de coco fraiche','Boire directement dans la noix — rafraichissement ultime.','~1 EUR'),
+      mkAct('depart-tz','Kwaheri Tanzania!','ZNZ vers CDG — safari et plages de Zanzibar dans la tete.','coeur')
+    ])
+  ]
+));
+
+// ===== COLOMBIE =====
+DEST.push(mkDest('colombie','Colombie','Colombie','flag-colombie','emoji-colombie','amerique','#f5c842','#78350f',
+  '~1 700 EUR','650 EUR','420 EUR','330 EUR','300 EUR','Dec.-Mars / Juil.-Aout',
+  ['Cartagena','Medellin','Cafe','Cumbia','Andes'],
+  "Cartagena la coloniale aux murs jaunes, Medellin la resiliente, la region cafeiere et Bogota.",
+  [
+    "Vol Paris-Bogota ou Cartagena depuis 500 EUR — escale Madrid ou Miami",
+    "Taxi en Colombie = Uber ou InDriver — negocier le prix avant de monter",
+    "Sécurité : rester dans les zones touristiques, eviter de sortir les telephones trop visible",
+    "La region cafeiere (Eje Cafetero) est UNESCO — visiter une finca productrice en mars/oct",
+    "Medellin transformee depuis les annees 2000 — le miracle urbanistique le plus etudie du monde"
+  ],
+  [
+    mkDay('Cartagena Arrivee et Vieille Ville','Cartagena','#f5c842',[
+      mkAct('avion','Arrivee Cartagena CTG','Taxi officiel vers centre historique.','~8 EUR'),
+      mkAct('murallas','Murallas coloniales','Remparts du XVIe qui cerclent la ville — promenade coucher soleil.','Gratuit'),
+      mkAct('getsemani','Getsemani street art','Quartier populaire transforme par les fresques murales.','Gratuit'),
+      mkAct('arepas','Arepas et jugos naturales','Galettes de mais farcies + jus de fruits tropicaux frais.','~2 EUR')
+    ]),
+    mkDay('Cartagena Iles du Rosaire','Iles du Rosaire','#06b6d4',[
+      mkAct('bateau-idr','Bateau vers Iles du Rosaire','Archipel coralien a 35 km — eaux cristallines.','~15 EUR A/R'),
+      mkAct('snorkel-col','Snorkeling Iles Rosaire','Coraux multicolores et poissons tropicaux.','~10 EUR'),
+      mkAct('coctel-fr','Coctel de camaron','Crevettes dans sauce tomate-citron vert — classique Caribe.','~5 EUR'),
+      mkAct('playa-bla','Plage Playa Blanca','La plus belle plage pres de Cartagena — ambiance caribéenne.','Gratuit')
+    ]),
+    mkDay('Cartagena Gastronomie et Culture','Cartagena','#ec4899',[
+      mkAct('sanpedro','Quartier San Pedro Claver','Eglise baroque — saint patron des esclaves.','~3 EUR'),
+      mkAct('palenque','Comunidad Palenquera','Premier village libre d Amerique — culture africaine preservee.','~15 EUR tour'),
+      mkAct('cumbia','Soiree Cumbia et Vallenato','La danse nationale colombienne — rythmes africains et amerindiens.','~5 EUR'),
+      mkAct('mojito-col','Mojito a la creme de coco','La version caribéenne du mojito — avec noix de coco fraiche.','~3 EUR')
+    ]),
+    mkDay('Vol vers Medellin','Medellin','#a78bfa',[
+      mkAct('avion-med','Vol Cartagena vers Medellin','Avianca ou Latam (1h) — survol des Andes.','~40 EUR'),
+      mkAct('metro-med','Metro et Metrocable','Le metro aérien de Medellin — symbole de la renaissance.','~0.80 EUR'),
+      mkAct('laureles','Quartier Laureles','Le quartier des expats — cafes, restaurants, parcs.','Gratuit'),
+      mkAct('bandeja','Bandeja paisa','Le plat national : haricots, riz, chicharron, arepa, oeuf.','~5 EUR')
+    ]),
+    mkDay('Medellin Pablo Escobar et Art','Medellin','#10b981',[
+      mkAct('pablo','Tour historique Pablo Escobar','Historia complexe — guides anciens du quartier.','~15 EUR'),
+      mkAct('botero','Musee et sculptures Botero','Les voluptueuses sculptures de Fernando Botero — poids et ironie.','Gratuit exterieur'),
+      mkAct('comuna13','Comuna 13 transformation','Le quartier le plus dangereux des annees 90 devenu haut lieu art.','~15 EUR tour'),
+      mkAct('guanabana','Jugo guanabana et buñuelos','Jus de corossol et beignets de fromage — gout colombien.','~2 EUR')
+    ]),
+    mkDay('Region Cafeiere Salento','Salento','#f97316',[
+      mkAct('bus-sal','Bus Medellin vers Salento','Route andine spectaculaire (5h).','~8 EUR'),
+      mkAct('cocora','Vallee de Cocora','Palmiers de cire de 60m — les plus grands du monde en montagne.','~5 EUR'),
+      mkAct('finca','Visite finca cafeiere','Cueillette, tri, sechage, torrefaction — tout le processus.','~15 EUR'),
+      mkAct('cafe-col','Cafe colombien fraichement torrefie','Une tasse de Juan Valdez en altitude.','~1 EUR')
+    ]),
+    mkDay('Salento et Armenia','Armenia','#14b8a6',[
+      mkAct('jeep','Jeep Willy tour','Jeeps americaines de la Seconde Guerre en taxi partage.','~2 EUR'),
+      mkAct('hot-spring','Termales de Santa Rosa','Sources thermales naturelles dans la montagne.','~10 EUR'),
+      mkAct('artisanat-s','Artisanat Quindio','Panamas, sacs en fique, ceramiques — souvenirs uniques.','~10-20 EUR'),
+      mkAct('trucha-sal','Truite du Quindio','Truite elevee dans les rivières andines — restaurant Salento.','~8 EUR')
+    ]),
+    mkDay('Vol vers Bogota','Bogota','#3b82f6',[
+      mkAct('avion-bog','Vol Armenia vers Bogota','Avianca (1h) — survol Andes centrales.','~35 EUR'),
+      mkAct('candelaria','La Candelaria vieille ville','Quartier colonial — Palais de Justice et Cathedrale Primada.','Gratuit'),
+      mkAct('gold','Museo del Oro Bogota','50 000 pieces en or precolombien — le Louvre de la Colombie.','~2 EUR'),
+      mkAct('arepa-bog','Changua et tamales bogotanos','Soupe au lait et tamales du dimanche — tradition cachaca.','~3 EUR')
+    ]),
+    mkDay('Bogota Zipaquira et Monserrate','Bogota','#8b5cf6',[
+      mkAct('zipaquira','Cathedrale de sel Zipaquira','Cathedrale souterraine dans une mine de sel — unique au monde.','~15 EUR'),
+      mkaAct_fix','Monserrate au cable','Colline de 3150m — basilique et vue panoramique sur Bogota.','~5 EUR cable car'),
+      mkAct('usaquen','Usaquen marche du dimanche','Antiquaires, artisans, foodtrucks — le quartier chic colonial.','~8 EUR'),
+      mkAct('aguardiente','Aguardiente et chicharron','Eau de vie d anis — la boisson nationale colombienne.','~2 EUR')
+    ]),
+    mkDay('Depart Bogota','Bogota BOG','#6366f1',[
+      mkAct('paloquemao','Marche Paloquemao','Le plus grand marche de fleurs et fruits tropicaux du monde.','Gratuit'),
+      mkAct('cacao','Chocolat artisanal colombien','Le meilleur cacao du monde selon les experts.','~5-15 EUR'),
+      mkAct('emeraude','Emeraudes colombiennes','70% des emeraudes mondiales viennent de Colombie.','~10-50 EUR'),
+      mkAct('depart-col','Hasta luego Colombia!','BOG vers CDG — cafes, cumbia et Andes dans le coeur.','coeur')
+    ])
+  ]
+));
+
+// ===== NOUVELLES DESTINATIONS BUDGET =====
+
+// ===== GEORGIE =====
+DEST.push(mkDest('georgie','Georgie','Georgie','flag-georgie','emoji-georgie','europe','#f59e0b','#78350f',
+  '~750 EUR','200 EUR','220 EUR','180 EUR','150 EUR','Avr.-Juin / Sep.-Oct.',
+  ['Tbilissi','Caucase','Vin georgien','Khachapuri','Monasteres'],
+  "Tbilissi la capitale boheme entre Orient et Occident, les montagnes du Grand Caucase et les vignobles.",
+  [
+    "Vol Paris-Tbilissi depuis 80 EUR sur Wizzair ou Ryanair — reserver 2 mois avant",
+    "La Georgie est moins chere que la France — budget 35-50 EUR/pers/j tout compris",
+    "Le khachapuri (pain au fromage) a 2 EUR et le khinkali (ravioli) a 0.30 EUR piece",
+    "Le vin georgien en amphore (qvevri) = la plus ancienne tradition viticole du monde (8000 ans)",
+    "Location voiture 4x4 pour aller en Kakheti ou Kazbegi — routes de montagne spectaculaires"
+  ],
+  [
+    mkDay('Tbilissi Vieille Ville','Tbilissi','#f59e0b',[
+      mkAct('avion','Arrivee Tbilissi TBS','Metro vers Rustaveli (0.40 EUR) ou taxi 5 EUR.','~0.40 EUR'),
+      mkAct('metekhi','Eglise Metekhi et Narikala','Forteresse medievale dominant le Mtkvari — vue panoramique.','Gratuit'),
+      mkAct('bath','Quartier des bains soufreux','Les bains du XVIIe siecle — eau chaude naturelle a 37 degres.','~5 EUR bain'),
+      mkAct('khacha','Khachapuri adjaruli','Pain en forme de barque avec oeuf et beurre — specialite Adjarie.','~2.50 EUR')
+    ]),
+    mkDay('Tbilissi Culture et Modernite','Tbilissi','#10b981',[
+      mkAct('narikala','Forteresse Narikala et Jardin Botanique','Funiculaire et jardins sur la falaise.','~3 EUR'),
+      mkAct('rustaveli','Avenue Rustaveli','Opera, Parlement, musees — le boulevard de l identite georgienne.','Gratuit'),
+      mkAct('saburtalo','Marche Dezertirs Bazar','Le marche populaire de Tbilissi — fromages, epices, tkemali.','Gratuit'),
+      mkAct('vin-geo','Bar a vins naturels','La Georgie a 500 cepages — degustation chez un vigneron.','~8 EUR')
+    ]),
+    mkDay('Mtskheta et Monasteres','Mtskheta','#8b5cf6',[
+      mkAct('sveti','Cathedrale Svetitskhoveli','La Jerusalem de Georgie — cathedrale du Xe siecle.','~1 EUR'),
+      mkAct('jvari','Monastere Jvari','Monastere du Ve au confluent des deux rivieres — panorama.','Gratuit'),
+      mkAct('samtavro','Monastere Samtavro','Sanctuaire Ste Nino — premiere catechiste de Georgie.','Gratuit'),
+      mkAct('churchkhela','Churchkhela et sujuk','La bougie georgienne en raisin et noix — snack traditionnel.','~1 EUR')
+    ]),
+    mkDay('Kazbegi Montagnes du Caucase','Kazbegi','#06b6d4',[
+      mkAct('route-geo','Route Militaire Georgienne','Arche de l Amitie sovietique et lac Jinvali — paysages epiques.','~15 EUR taxi partagé'),
+      mkAct('gergeti','Eglise Gergeti Trinity','Eglise medievale a 2170m face au Kazbegi (5047m).','Gratuit'),
+      mkAct('kazbek','Randonnee vers les glaciers','Les glaciers du Grand Caucase a 2h de marche.','Gratuit'),
+      mkAct('mtsvadi','Mtsvadi au feu de bois','Brochettes de porc au feu — repas du berger caucasien.','~5 EUR')
+    ]),
+    mkDay('Kakheti Vignobles','Kakheti','#f97316',[
+      mkAct('bodbe','Monastere Bodbe','Tombeau de Ste Nino — source miraculeuse dans le jardin.','Gratuit'),
+      mkAct('signagi','Signagi le village romantique','Village de maisons colorees en bordure des vignobles.','Gratuit'),
+      mkAct('qvevri','Vinification en qvevri','Les amphores de vin enterrees — 8000 ans de tradition.','~12 EUR avec repas'),
+      mkAct('alazani','Vallee Alazani au coucher soleil','Les plaines de Kakheti parsemees de vignes et d eglises.','Gratuit')
+    ]),
+    mkDay('Uplistsikhe et Gori','Gori','#a78bfa',[
+      mkAct('upli','Uplistsikhe cite rupestre','Ville entierement creusee dans la roche — epoque hellenistique.','~3 EUR'),
+      mkAct('staline','Musee Staline Gori','Ville natale de Staline — musee controverse et unique.','~5 EUR'),
+      mkAct('ateni','Eglise Ateni Sioni','Chef-oeuvre du VIIe siecle dans une vallee verdoyante.','Gratuit'),
+      mkAct('lobiani','Lobiani et chvishtari','Galette aux haricots et galette au fromage de mais.','~1.50 EUR')
+    ]),
+    mkDay('Mestia et Svaneti','Mestia Svaneti','#14b8a6',[
+      mkAct('avion-mes','Vol Tbilissi vers Mestia','Vanilla Sky Airlines — petit avion dans les montagnes.','~40 EUR'),
+      mkAct('tours-svan','Tours medievales Svaneti','Chaque famille avait sa tour de defense — paysage unique.','Gratuit'),
+      mkAct('ushba','Vue sur Ushba (4700m)','Le Cervin du Caucase — double sommet enneige spectaculaire.','Gratuit'),
+      mkAct('kubdari','Kubdari et tarragon','Tourte viande de porc et khinkali a l estragon local.','~3 EUR')
+    ]),
+    mkDay('Borjomi et Batumi','Batumi','#ec4899',[
+      mkAct('borjomi','Source minerale Borjomi','L eau la plus connue du Caucase — gouter directement a la source.','Gratuit'),
+      mkAct('batumi-arch','Batumi architecture de fantaisie','La Dubai du Caucase — tours biscornues et casinos neons.','Gratuit'),
+      mkAct('plage-bat','Plage de galets Batumi','Mer Noire — galets noirs, eau verte, soleil du Caucase.','Gratuit'),
+      mkAct('adjarian','Cuisine adjarie','Poulardes en sauce aux noix et haricots — le sommet de la cuisine.','~5 EUR')
+    ]),
+    mkDay('Tbilissi Derniere Journee','Tbilissi','#3b82f6',[
+      mkAct('fabrika','Fabrika Tbilissi','Ancienne fabrique reconvertie en lieu de creation et vie nocturne.','Gratuit'),
+      mkAct('dry-bridge','Dry Bridge Marche','Marche aux antiquites — objets sovietiques, icones, bijoux.','~5-20 EUR'),
+      mkAct('rkatsiteli','Rkatsiteli et mtsvivani','Les deux cepages emblematiques — bouteille a ramener.','~5-8 EUR bouteille'),
+      mkAct('depart-geo','Gamarjoba Georgie!','TBS vers CDG — khachapuri et vin en amphore dans les reves.','coeur')
+    ])
+  ]
+));
+
+// ===== INDONESIE JAVA =====
+DEST.push(mkDest('java','Indonesie Java','Indonesie','flag-java','emoji-java','asie','#ef4444','#7f1d1d',
+  '~1 100 EUR','500 EUR','250 EUR','180 EUR','170 EUR','Avr.-Oct.',
+  ['Borobudur','Volcan','Yogyakarta','Batik','Wayang'],
+  "Yogyakarta et ses sultanats, Borobudur le temple bouddhiste, les volcans actifs de Java.",
+  [
+    "Vol Paris-Jakarta depuis 420 EUR en escale a Doha ou Dubai — Yogyakarta vols interieurs",
+    "Le train Gajayana Jakarta-Yogyakarta (9h nuit) est excellent et ponctuel — 8 USD",
+    "Batik a Yogyakarta : atelier de creation mains sur motifs a la cire — 3h pour 15 USD",
+    "Borobudur le matin tot (5h30) = lever de soleil sur les stupas dans la brume",
+    "Nasi goreng, mie goreng, gado-gado : less than 2 USD les vrais plats javanais"
+  ],
+  [
+    mkDay('Yogyakarta Arrivee et Kraton','Yogyakarta','#ef4444',[
+      mkAct('avion','Arrivee Yogyakarta YIA','Taxi vers centre historique.','~8 EUR'),
+      mkAct('kraton','Kraton Palais du Sultan','Le palais vivant — le sultan y reside encore.','~3 EUR'),
+      mkAct('keraton-w','Wayang kulit ombre','Theatre de marionnettes d ombre sur cuir — art UNESCO.','~5 EUR'),
+      mkAct('gudeg','Gudeg et bakpia','Jackfruit mijote sucrée et galettes fourrees — specialite Yogya.','~2 EUR')
+    ]),
+    mkDay('Borobudur au Lever du Soleil','Borobudur','#f59e0b',[
+      mkAct('lever-b','Borobudur 5h30 lever soleil','Temple bouddhiste du VIIIe dans la brume matinale — spirituel.','~25 EUR'),
+      mkAct('stupas','1460 bas-reliefs et 72 stupas','La plus grande structure bouddhiste du monde.','Inclus'),
+      mkAct('village-b','Village artisan autour Borobudur','Potiers et tisserands — artisanat rural javanais.','Gratuit'),
+      mkAct('jamu','Jamu traditionnel','Elixir sante a base de curcuma, gingembre, tamarin.','~0.50 EUR')
+    ]),
+    mkDay('Prambanan et Temples Hindous','Prambanan','#8b5cf6',[
+      mkAct('prambanan','Temples Prambanan','250 temples hindous du IXe — Shiva, Vishnu, Brahma.','~25 EUR'),
+      mkAct('ramayana','Ballet du Ramayana','Spectacle en plein air face aux temples illumines.','~15 EUR'),
+      mkAct('batik-work','Atelier batik','Apprendre le batik a la cire — emporter sa creation.','~15 EUR'),
+      mkAct('soto','Soto ayam et tempeh','Soupe de poulet et frites de tempeh — dejeuner javanais.','~2 EUR')
+    ]),
+    mkDay('Volcan Merapi','Mont Merapi','#f97316',[
+      mkAct('jeep-merapi','Jeep Lava Tour Merapi','Explorer les ruines de l eruption 2010 en jeep.','~15 EUR'),
+      mkAct('bunker','Bunker de l eruption','Abri ou des villageois ont survecu — musee vivant.','~2 EUR'),
+      mkAct('volcano-view','Vue sur le cratere actif','Le Merapi est le volcan le plus actif d Indonesie.','~10 EUR guide'),
+      mkAct('angkringan','Angkringan nuit','Chariot de street food nocturne — nasi kucing, sate.','~1 EUR')
+    ]),
+    mkDay('Dieng Plateau Volcanique','Plateau Dieng','#10b981',[
+      mkAct('dieng','Plateau Dieng a 2000m','Lac de cratere color, solfatares, temples hindous dans brouillard.','~10 EUR droits'),
+      mkAct('telaga','Telaga Warna lac de couleurs','Lac dont la couleur change selon les mineraux — turquoise, vert.','~2 EUR'),
+      mkAct('carica','Carica fruit local','Papaye de montagne — specialite de Dieng, en sirop ou confiture.','~1 EUR'),
+      mkAct('arjuna','Temples Arjuna','Complexes hindous du VIIe les plus anciens de Java.','~5 EUR')
+    ]),
+    mkDay('Ijen Volcan de Soufre Bleu','Kawah Ijen','#06b6d4',[
+      mkAct('ijen-nuit','Trek Ijen 1h du matin','Feu bleu du soufre visible seulement de nuit.','~10 EUR guide'),
+      mkAct('cratere-ij','Lac acide du cratere','Lac turquoise le plus grand et acide du monde.','Inclus'),
+      mkAct('porteurs','Porteurs de soufre','Les mineurs portent 90kg de soufre — rencontre humanisante.','Gratuit'),
+      mkAct('mie-bakso','Mie bakso et tempe mendoan','Nouilles boulettes de boeuf et tempeh frais frit.','~1.50 EUR')
+    ]),
+    mkDay('Bromo Lever de Soleil','Mont Bromo','#a78bfa',[
+      mkAct('jeep-bromo','4x4 vers Bromo 3h du matin','Point de vue Penanjakan — soleil sur la mer de sable.','~15 EUR'),
+      mkAct('bromo-crater','Descente au cratere Bromo','Chemin a travers la mer de sable volcanique vers le bord.','~5 EUR droits'),
+      mkAct('caldeira','Caldeira et Semeru','Le Semeru (3676m) fume en arriere plan — paysage lunaire.','Inclus'),
+      mkAct('nasi-rawon','Nasi rawon','Bouillon noir de keluak avec boeuf — specialite Java Est.','~2 EUR')
+    ]),
+    mkDay('Malang et Art Java','Malang','#14b8a6',[
+      mkAct('malang','Malang ville coloniale','Architecture hollandaise — cafes, musees, marchés.','Gratuit'),
+      mkAct('coban','Cascade Coban Rondo','Chute de 84m dans la jungle — randonnee fraiche.','~2 EUR'),
+      mkAct('batu','Batu Kwan','Marche aux pommes et fraises en altitude.','~3 EUR'),
+      mkAct('rawon','Restoran warung soto','Soto malang, bakso et onde-onde — specialites locales.','~2 EUR')
+    ]),
+    mkDay('Ferry vers Lombok ou Bali','Bali ou Lombok','#ec4899',[
+      mkAct('ferry-bl','Ferry Banyuwangi vers Bali','Traversee 45 min — retour sur ile des Dieux.','~2 EUR'),
+      mkAct('rinjani','Vue sur Rinjani depuis Lombok','Le 2e plus haut volcan d Indonesie — silhouette majestueuse.','Optionnel'),
+      mkAct('gili','Iles Gili','Trois iles sans voiture — plongee, hammacs, couchers de soleil.','~30 EUR A/R'),
+      mkAct('sunset-bali','Coucher de soleil Tanah Lot','Temple sur rocher en mer — le plus beau coucher de Bali.','~3 EUR')
+    ]),
+    mkDay('Depart Jakarta ou Bali','Aeroport','#6366f1',[
+      mkAct('batik-souvenir','Batik et kris en souvenir','Tissu batik et dague javanaise ceremonielle.','~10-30 EUR'),
+      mkAct('kopi','Kopi luwak et kopi java','Le cafe de civette et le cafe des montagnes de Java.','~5-10 EUR'),
+      mkAct('wayang-souvenir','Marionnette wayang','Marionnette de cuir peinte — art artisanal unique.','~10-20 EUR'),
+      mkAct('depart-java','Sampai jumpa Indonesia!','Retour en France — Borobudur et feu bleu dans les reves.','coeur')
+    ])
+  ]
+));
+
+// ===== COSTA RICA =====
+DEST.push(mkDest('costarica','Costa Rica','Costa Rica','flag-cr','emoji-cr','premium','#10b981','#064e3b',
+  '~2 100 EUR','750 EUR','550 EUR','400 EUR','400 EUR','Dec.-Avr.',
+  ['Rainforest','Volcans','Sloth','Surf','Pura Vida'],
+  "Le pays de Pura Vida — biodiversite mondiale, volcans, plages et la plus grande concentration de pares naturels.",
+  [
+    "Vol Paris-San Jose depuis 600 EUR — escale Miami ou Panama City",
+    "Location 4x4 obligatoire pour les parcs — routes de terre impossibles en voiture normale",
+    "Le Costa Rica est 30% plus cher que ses voisins — budget realiste 80-100 EUR/pers/j",
+    "Casado (riz, haricots, viande, salade) = le repas local a 4-6 USD dans les sodas locaux",
+    "Pura Vida = expression nationale = Tout va bien, c est la belle vie, sans stress"
+  ],
+  [
+    mkDay('San Jose Arrivee et Mercado','San Jose','#10b981',[
+      mkAct('avion','Arrivee San Jose SJO','Taxi officiel orange-jaune vers le centre.','~15 EUR'),
+      mkAct('mercado-cr','Mercado Central','Sodas locales, frutas tropicales, artesania tica.','~5 EUR'),
+      mkAct('musee-pre','Musee Pre-Colombien Or','30 000 pieces en or des peuples precolombiens.','~8 EUR'),
+      mkAct('casado','Casado tico','Le repas national : gallo pinto, arroz y frijoles.','~4 EUR')
+    ]),
+    mkDay('Volcan Arenal et Tabacon','La Fortuna Arenal','#ef4444',[
+      mkAct('route-are','Drive vers La Fortuna','Route panoramique a travers les plaines du Guanacaste.','~15 EUR essence'),
+      mkAct('arenal','Randonee Volcan Arenal','Chemin de lave solidifiee — derniereruption 2010.','~15 EUR parc'),
+      mkAct('tabacon','Tabacon Hot Springs','Sources thermales chauffees par le volcan — paradis tropical.','~40 EUR'),
+      mkAct('ceviche-cr','Ceviche et patacones','Ceviche de corvina et plantains frits deux fois.','~6 EUR')
+    ]),
+    mkDay('Hanging Bridges et Foret Nuageuse','Monteverde','#8b5cf6',[
+      mkAct('cloud','Reserve Foret Nuageuse Monteverde','La foret dans les nuages — biodiversite extreme.','~18 EUR'),
+      mkAct('quetzal','Quetzal et toucan','Les oiseaux de la jungle — quetzal resplendissant a crête.','~15 EUR guide'),
+      mkAct('canopy','Tyrolienne Monteverde','La plus haute tyrolienne d Amerique centrale — 1km de cable.','~45 EUR'),
+      mkAct('pont','Pont suspendu dans la canopee','Marcher au-dessus de la foret — vue a 360 sur la jungle.','~20 EUR')
+    ]),
+    mkDay('Manuel Antonio Plage et Singes','Manuel Antonio','#06b6d4',[
+      mkAct('parc-ma','Parc National Manuel Antonio','4 types de singes, paresseux, ratons laveurs en liberte.','~18 EUR'),
+      mkAct('singe-ma','Singes capucins et squirrel','Les singes prennent les sacs — garder les affaires fermees.','Inclus'),
+      mkAct('plage-ma','Plage Manuel Antonio','La plus belle plage du Costa Rica — jungle et mer ensemble.','Inclus'),
+      mkAct('mariscos','Fruits de mer Quepos','Langouste, crevettes, mahi mahi — peche du Pacifique.','~15 EUR')
+    ]),
+    mkDay('Dominical et Surf','Dominical','#a78bfa',[
+      mkAct('surf-cr','Cours de surf Dominical','Vagues parfaites pour debutants — plage de sable noir.','~30 EUR 2h'),
+      mkAct('nauyaca','Cascades Nauyaca a cheval','2h a cheval dans la jungle jusqu aux cascades.','~50 EUR'),
+      mkAct('whale','Baleines et dauphins','Saison octobre-fevrier — dauphins-toupies en tout temps.','~40 EUR tour'),
+      mkAct('viuda','Casado en soda locale','Repas authentique chez l habitant — true tico experience.','~4 EUR')
+    ]),
+    mkDay('Osa Peninsula Corcovado','Peninsula Osa','#f59e0b',[
+      mkAct('corcovado','Parc Corcovado','La zone de biodiversite la plus intense du monde — NatGeo.','~15 EUR parc'),
+      mkAct('jaguar','Jaguar et tapir','Corcovado = seul parc ou voir jaguar en liberte Costa Rica.','Inclus guide obligatoire'),
+      mkAct('lapa','Ara macaw et singes araignee','Perroquets rouge et bleu en troupe dans les arbres.','Inclus'),
+      mkAct('pirogue','Pirogue vers Sierpe','Mangrove en pirogue — crocodiles, egrets, herons.','~10 EUR')
+    ]),
+    mkDay('Tortuguero Tortues Marines','Tortuguero','#14b8a6',[
+      mkAct('bateau-t','Bateau vers Tortuguero','Canaux de la jungle — route fluviale unique, pas de route.','~20 EUR'),
+      mkAct('tortues-t','Ponte des tortues marines','Les tortues geantes pondent la nuit sur la plage — emotionnel.','~15 EUR guide nocturne'),
+      mkAct('caiman','Caiman et dalmatiens','Caimans dans les canaux — observation en barque.','~15 EUR'),
+      mkAct('ranas','Rainettes et insectes nuit','Marche nocturne — grenouilles venimeuses, arthropodes exotiques.','~10 EUR')
+    ]),
+    mkDay('Sarapiqui Rafting','Sarapiqui','#ec4899',[
+      mkAct('rafting','Rafting Rio Sarapiqui','Classe III-IV — rapides dans la jungle tropicale.','~40 EUR'),
+      mkAct('serpents','Serpentarium','Boa, fer de lance, eyelash viper — spectacle securise.','~10 EUR'),
+      mkAct('choco','Atelier cacao','Plantation de cacao — de la feve au chocolat artisanal.','~15 EUR'),
+      mkAct('guapote','Pesca del guapote','Pecher dans la riviere — espece endemique du Costa Rica.','~20 EUR')
+    ]),
+    mkDay('Retour San Jose','San Jose','#3b82f6',[
+      mkAct('theatro','Teatro Nacional San Jose','Le plus beau batiment du Costa Rica — opera du XIXe.','~5 EUR'),
+      mkAct('barrio-ame','Barrio Amon et cafes','Maisons victoriennes et cafes artisanaux — le hip San Jose.','Gratuit'),
+      mkAct('cafe-cr-buy','Cafe Tarrazzu et Dota','Les meilleures regions cafeieres d Amerique centrale.','~5-10 EUR'),
+      mkAct('artesania','Artesania tica','Poteries chorotega, masques boruca, bijoux jadeit.','~10-25 EUR')
+    ]),
+    mkDay('Depart San Jose','San Jose SJO','#6366f1',[
+      mkAct('salsa-beat','Salsa Lizano et condiments','La sauce nationale depuis 1920 — dans tous les supermarchesg.','~3 EUR'),
+      mkAct('ron-cr','Ron Centenario','Le rhum costaricain — bouteille en bois de cafe.','~8 EUR'),
+      mkAct('chocolat-cr','Chocolat Nahua','Chocolat bean-to-bar 100% costaricain — premium.','~5-10 EUR'),
+      mkAct('depart-cr','Pura Vida Costa Rica!','SJO vers CDG — singes, volcans et tortues dans le coeur.','coeur')
+    ])
+  ]
+));
+
+// ===== ESPAGNE =====
+DEST.push(mkDest('espagne','Espagne du Sud','Espagne','flag-espagne','emoji-espagne','europe','#ef4444','#7f1d1d',
+  '~850 EUR','120 EUR','300 EUR','250 EUR','180 EUR','Avr.-Juin / Sep.-Oct.',
+  ['Barcelona','Sevilla','Granada','Flamenco','Tapas'],
+  "Barcelone et Gaudi, Seville et le flamenco, Grenade et l Alhambra — la vie espagnole.",
+  [
+    "Vol Paris-Barcelone depuis 30 EUR sur Volotea ou Vueling — reserver 6 semaines avant",
+    "Renfe (train espagnol) Barcelone-Seville en AVE (4h30) = 40-60 EUR — 2x plus vite que le bus",
+    "Tapas gratuites avec le verre a Grenade et Granada — tradition andalouse",
+    "Sagrada Familia et Alhambra = reserver en ligne 2 mois avant — souvent epuises",
+    "Le dejeuner espagnol (almuerzo) 14h-16h = le meilleur moment pour manger — menu 10 EUR"
+  ],
+  [
+    mkDay('Barcelona Arrivee et Gothic Quarter','Barcelona','#ef4444',[
+      mkAct('avion','Arrivee Barcelona BCN','Metro L9 vers centre (5.15 EUR) ou bus Aerobus.','~5 EUR'),
+      mkAct('gothic','Barri Gotic medieval','Ruelles romaines et medievales — cathedrale du XIVe.','Gratuit'),
+      mkAct('boqueria','Mercat de la Boqueria','Le marche le plus coloré d Europe — jamón, olives, fruits.','Shopping ~10 EUR'),
+      mkAct('tapas-bcn','Tapas et Vermut','Patatas bravas, croquetas, pimientos de padron.','~8 EUR')
+    ]),
+    mkDay('Barcelona Gaudi','Barcelona','#f97316',[
+      mkAct('sagrada','Sagrada Familia','La basilique inachevee de Gaudi — chef-oeuvre du XXe.','~26 EUR'),
+      mkAct('parc-guell','Parc Guell','Terrasse aux mosaiques de Gaudi avec vue panoramique sur la ville.','~10 EUR'),
+      mkAct('pedrera','La Pedrera et Batllo','Les deux immeubles Gaudi sur le Passeig de Gracia.','~25 EUR les deux'),
+      mkAct('barceloneta','Barceloneta Beach','Plage en pleine ville — cocktails, paella, soleil catalan.','Gratuit')
+    ]),
+    mkDay('Barcelona Montjuic et Nuit','Barcelona','#8b5cf6',[
+      mkAct('montjuic','Montjuic et Fondation Miro','Vue sur la ville et mer, art de Miro.','~12 EUR'),
+      mkAct('tibidabo','Tibidabo au coucher du soleil','L autre colline de Barcelone — parc attraction du XXe.','~5 EUR entree partiielle'),
+      mkAct('elborn','El Born et Santa Maria del Mar','Le quartier le plus authentique de Barcelone.','Gratuit'),
+      mkAct('sangria','Sangria et flamenco catalan','Tableau flamenco dans un restaurant du Gothic.','~20 EUR repas+spectacle')
+    ]),
+    mkDay('Train vers Seville','Seville','#f59e0b',[
+      mkAct('train-ave','AVE Barcelona vers Seville','5h30 de train — paysage espagnol a grande vitesse.','~50 EUR'),
+      mkAct('giralda','Cathedrale et Giralda','Cathedrale gothique la plus grande du monde — minaret devenu clocher.','~10 EUR'),
+      mkAct('alcazar','Real Alcazar','Palais mudéjar — Game of Thrones y a ete tourne.','~12 EUR'),
+      mkAct('manzanilla','Manzanilla et jamon iberico','Fino de Jerez et jambon pata negra — apero sevillan.','~5 EUR')
+    ]),
+    mkDay('Seville Flamenco et Quartiers','Seville','#10b981',[
+      mkAct('triana','Barrio Triana','L autre rive du Guadalquivir — ceramiques, bars, flamenco.','Gratuit'),
+      mkAct('flamenco','Tablao flamenco El Arenal','Flamenco pur dans une salle intimiste — emotion garantie.','~30 EUR'),
+      mkAct('maria-luisa','Parc Maria Luisa','Le plus beau parc d Espagne — canards, rosiers, patios.','Gratuit'),
+      mkAct('gazpacho','Gazpacho et salmorejo','Soupe froide andalouse — avec chorizo et oeuf dur.','~4 EUR')
+    ]),
+    mkDay('Ronda et Jerez de la Frontera','Ronda','#06b6d4',[
+      mkAct('ronda-gorge','Gorge et vieux pont Ronda','Pont du XVIIIe sur une gorge de 120m — vertigineux.','Gratuit'),
+      mkAct('arenes','Les Arenes de Ronda','La plus ancienne arene de corrida d Espagne — XIIIe.','~8 EUR'),
+      mkAct('jerez','Bodegas de Jerez','Les caves du sherry — degustation Fino, Oloroso, Pedro Ximenez.','~10 EUR'),
+      mkAct('churros-sev','Churros con chocolate','La tradition espagnole supreme — au chocolate espais.','~3 EUR')
+    ]),
+    mkDay('Cordoue','Cordoue','#a78bfa',[
+      mkAct('mesquita','Mezquita-Catedral','La mosquee-cathedrale — 856 colonnes de jaspe et marbre.','~11 EUR'),
+      mkAct('juderia-cor','Juderia de Cordoue','Le quartier juif medieval — fleurs aux balcons, fontaines.','Gratuit'),
+      mkAct('patios','Festival des Patios','En mai — patios fleuris ouverts au public, concours de fleurs.','Gratuit'),
+      mkAct('flamenquin','Flamenquin et rabo de toro','Rollito de jamon frit et queue de taureau — specialites.','~8 EUR')
+    ]),
+    mkDay('Granada et Alhambra','Granada','#ec4899',[
+      mkAct('alhambra','Alhambra et Generalife','Le palais nasride — le Taj Mahal d Europe.','~14 EUR'),
+      mkAct('albaicin','Mirador San Nicolas au coucher','Vue sur l Alhambra depuis le quartier maure — le plus beau de Grenade.','Gratuit'),
+      mkAct('sacromonte','Sacromonte grottes gitanes','Quartier troglodyte — tetes de flamenco gitane improvisee.','~5 EUR'),
+      mkAct('tapas-gra','Tapas gratuites Granada','Avec chaque verre — tapa gratuite, tradition unique en Espagne.','~2 EUR verre')
+    ]),
+    mkDay('Granada Alpujarras','Alpujarras','#14b8a6',[
+      mkAct('alpujarras','Villages blancs Alpujarras','Villages berberes des montagnes — hammams arabes, miel.','Gratuit'),
+      mkAct('sierra','Sierra Nevada','Le massif le plus meridional d Europe — ski en hiver.','~8 EUR bus'),
+      mkAct('mora-alba','Moratalla et Moraleda','Villages perdus dans la sierra — la vraie Andalousie rurale.','Gratuit'),
+      mkAct('morcilla','Morcilla et migas','Boudin noir de Granada et migas aux petits pois.','~5 EUR')
+    ]),
+    mkDay('Retour Barcelona ou Vol Direct','Barcelona ou Madrid','#6366f1',[
+      mkAct('artesania-esp','Ceramiques et azulejos','Ceramiques talavera, azulejos peints — souvenirs espagnols.','~10-30 EUR'),
+      mkAct('iberico','Iberico et manchego','Derniers achats en charcuterie et fromages — tresors.','~15-20 EUR'),
+      mkAct('turron','Turron et polvorones','Nougat aux amandes et sables aux noix — patisseries espagnoles.','~5 EUR'),
+      mkAct('depart-esp','Hasta luego Espana!','BCN ou MAD vers CDG — Gaudi et flamenco dans le coeur.','coeur')
+    ])
+  ]
+));
+
+// ===== EGYPTE =====
+DEST.push(mkDest('egypte','Egypte','Egypte','flag-egypte','emoji-egypte','afrique','#f5c842','#78350f',
+  '~1 200 EUR','350 EUR','350 EUR','250 EUR','250 EUR','Oct.-Avr.',
+  ['Pyramides','Louxor','Nil','Pharaons','Plongee'],
+  "Les pyramides de Gizeh, les temples de Louxor, la Vallee des Rois et la mer Rouge.",
+  [
+    "Vol Paris-Le Caire depuis 180 EUR sur Air Arabia ou Egypt Air — reserver 2 mois avant",
+    "Le train couchette Le Caire - Louxor (12h) est emblematique — 15 USD en 1ere classe",
+    "Ne jamais boire l eau du robinet — eau en bouteille partout a 0.20 EUR",
+    "Negocier est une necessite : taxi, feloucca, souvenirs — commencer a 20% du prix annonce",
+    "Koshary a 0.50 EUR = le plat national (riz, lentilles, pates, sauce tomate) — le meilleur fast-food"
+  ],
+  [
+    mkDay('Le Caire Arrivee et Antiquites','Le Caire','#f5c842',[
+      mkAct('avion','Arrivee Le Caire CAI','Taxi officiel prepaye vers centre (15 USD).','~12 EUR'),
+      mkAct('egyptien','Musee Egyptien Tahrir','Momies royales, masque de Toutankhamon — 3h minimum.','~15 EUR'),
+      mkAct('khan','Khan el-Khalili bazar','Bazar du XIVe — bijoux, epices, parfums, papyrus.','Shopping ~10 EUR'),
+      mkAct('koshary','Koshary et fuul medammes','Les deux plats nationaux egyptiens — street food divine.','~1 EUR')
+    ]),
+    mkDay('Pyramides de Gizeh','Gizeh','#f97316',[
+      mkAct('pyramides','Pyramides de Gizeh','Kheops, Khephren, Mykerin — les seules des 7 merveilles encore debout.','~12 EUR entree'),
+      mkAct('sphinx','Grand Sphinx','La face enigmatique de 57m — 4500 ans de mystere.','Inclus'),
+      mkAct('son-lumieres','Son et Lumiere pyramides','Spectacle nocturne sur les pyramides illuminees.','~15 EUR'),
+      mkAct('chameau','Tour en chameau','Le cliche incontournable — panorama du desert.','~10 EUR')
+    ]),
+    mkDay('Memphis Saqqara et Dahchour','Memphis','#10b981',[
+      mkAct('saqqara','Saqqara pyramide a degres','La plus ancienne pyramide du monde — Djoser 2650 av JC.','~10 EUR'),
+      mkAct('dahchour','Dahchour pyramide rouge','La premiere pyramide parfaite — moins de touristes.','~8 EUR'),
+      mkAct('memphis','Memphis et Ramses II','Statue colossale de Ramses II — capitale de Ancient Empire.','~5 EUR'),
+      mkAct('ful','Ful medammes et tamia','Feves braisees et falafel egyptien — petit-dej du Caire.','~1 EUR')
+    ]),
+    mkDay('Train vers Louxor','Louxor','#8b5cf6',[
+      mkAct('train-lux','Train couchette vers Louxor','12h de voyage sur le Nil — phenomene ferroviaire egyptien.','~12 EUR'),
+      mkAct('karnak','Temple de Karnak','Le plus grand complexe religieux de l antiquite — 100 temples.','~10 EUR'),
+      mkAct('louxor-t','Temple de Louxor','Avenue des sphinx reliant Karnak — illumine le soir.','~8 EUR'),
+      mkAct('felucca','Coucher de soleil en felucca','Voilier traditionnel sur le Nil au coucher du soleil.','~8 EUR')
+    ]),
+    mkDay('Vallee des Rois','Rive Ouest Louxor','#ef4444',[
+      mkAct('val-rois','Vallee des Rois','62 tombes royales dont Toutankhamon — fresques intactes.','~15 EUR + suppl tombes'),
+      mkAct('hatshepsut','Temple Hatshepsout','Le temple a gradins de la reine pharaon — colosse architectural.','~8 EUR'),
+      mkAct('colosses','Colosses de Memnon','Les deux gardiens de pierre de 18m — symbole de Louxor.','Gratuit'),
+      mkAct('deir','Village de Deir el-Medina','Le village des artisans qui ont construit les tombes royales.','~6 EUR')
+    ]),
+    mkDay('Croisiere sur le Nil vers Assouan','Nil','#06b6d4',[
+      mkAct('croisiere','Croisiere Nil Louxor-Assouan','3 jours sur le Nil en dahabiya ou bateau de croisiere.','~80 EUR/nuit tout compris'),
+      mkAct('edfu','Temple Edfu','Le temple egyptien le mieux conserve — ptolemaique.','~9 EUR'),
+      mkAct('koom-ombo','Temple de Koom Ombo','Double temple crocodiles — momies de crocodiles en exposition.','~8 EUR'),
+      mkAct('nil-coucher','Coucher de soleil sur le Nil','Le fleuve roi aux couleurs or et rouge.','Inclus')
+    ]),
+    mkDay('Assouan et Abu Simbel','Assouan','#a78bfa',[
+      mkAct('abu','Abu Simbel','Temples de Ramses II sauves du lac Nasser — transplantes en 1968.','~25 EUR + avion ~80 EUR'),
+      mkAct('philae','Temple de Philae','Temple d Isis sur une ile — deplace lors de la construction Barrage.','~8 EUR'),
+      mkAct('barrage','Grand Barrage Assouan','Prouesse sovieto-egyptienne de 1970 — lac artificiel 500km.','~3 EUR'),
+      mkAct('nubian','Village nubien','Les maisons colorees et la culture du peuple Nubien.','~15 EUR tour')
+    ]),
+    mkDay('Vol vers Hurghada ou Charm','Hurghada ou Charm el-Cheikh','#3b82f6',[
+      mkAct('avion-mer','Vol vers la mer Rouge','Assouan vers Hurghada ou Charm (1h).','~40 EUR'),
+      mkAct('plongee-rouge','Plongee mer Rouge','Parmi les meilleurs recifs au monde — poissons, coraux.','~35 EUR 2 plongees'),
+      mkAct('snorkel-rouge','Snorkeling Giftun Island','Ile nationale — tortues, dauphins, coraux intacts.','~20 EUR'),
+      mkAct('crevettes-eg','Crevettes grillees egyptiennes','Peche du matin grilee le soir — the a la menthe.','~8 EUR')
+    ]),
+    mkDay('Mer Rouge et Repos','Hurghada','#14b8a6',[
+      mkAct('quad','Quad dans le desert','Safari quad dans les dunes du Sahara — lever de soleil.','~25 EUR'),
+      mkAct('bedouin','Nuit bedouine','Bivouac dans le desert — the, shisha, etoiles du Sahara.','~20 EUR'),
+      mkAct('mosque-eg','Grande Mosquee du Caire virtuel','Comprendre l Islam egyptien — cours culture locale.','Inclus'),
+      mkAct('hamam-eg','Hammam egyptien','Bain maure traditionnel avec gommage — tradition du Nil.','~10 EUR')
+    ]),
+    mkDay('Depart Le Caire','Le Caire CAI','#6366f1',[
+      mkAct('papyrus','Papyrus et parfums','Papyrus peint a la main et essences de parfum Khan el-Khalili.','~10-20 EUR'),
+      mkAct('alabatre','Albâtre et statue pharaon','Statuettes en albâtre — cadeau typiquement egyptien.','~5-15 EUR'),
+      mkAct('gateaux','Gateaux egyptiens aux dattes','Om Ali au lait, baklava egyptien et konafa.','~3 EUR'),
+      mkAct('depart-eg','Ma salaama Masr!','CAI vers CDG — Nil, pharaons et deserts dans les yeux.','coeur')
+    ])
+  ]
+));
+
 // Emojis et flags en texte pour eviter problemes encodage
 var FLAGS = {
   'flag-bali': '🇮🇩', 'flag-maroc': '🇲🇦', 'flag-albanie': '🇦🇱',
   'flag-vietnam': '🇻🇳', 'flag-thai': '🇹🇭', 'flag-japon': '🇯🇵',
-  'flag-usa': '🇺🇸', 'flag-aus': '🇦🇺', 'flag-islande': '🇮🇸', 'flag-canada': '🇨🇦'
+  'flag-usa': '🇺🇸', 'flag-aus': '🇦🇺', 'flag-islande': '🇮🇸', 'flag-canada': '🇨🇦',
+  'flag-grece': '🇬🇷', 'flag-portugal': '🇵🇹', 'flag-mexique': '🇲🇽', 'flag-perou': '🇵🇪',
+  'flag-tanzanie': '🇹🇿', 'flag-colombie': '🇨🇴', 'flag-georgie': '🇬🇪', 'flag-java': '🇮🇩',
+  'flag-costarica': '🇨🇷', 'flag-espagne': '🇪🇸', 'flag-egypte': '🇪🇬'
 };
 var EMOJIS = {
   'emoji-bali': '🌺', 'emoji-maroc': '🕌', 'emoji-albanie': '🏔️',
   'emoji-vietnam': '🛖', 'emoji-thai': '🏯', 'emoji-japon': '⛩️',
-  'emoji-usa': '🗽', 'emoji-aus': '🦘', 'emoji-islande': '🌋', 'emoji-canada': '🍁'
+  'emoji-usa': '🗽', 'emoji-aus': '🦘', 'emoji-islande': '🌋', 'emoji-canada': '🍁',
+  'emoji-grece': '🏛️', 'emoji-portugal': '🐟', 'emoji-mexique': '🌮', 'emoji-perou': '🦙',
+  'emoji-tanzanie': '🦁', 'emoji-colombie': '☕', 'emoji-georgie': '🍷', 'emoji-java': '🌋',
+  'emoji-costarica': '🦥', 'emoji-espagne': '💃', 'emoji-egypte': '🔱'
 };
 var ICONS = {
   'avion': '✈️', 'maison': '🏠', 'coucher-soleil': '🌅', 'nourriture': '🍜',
