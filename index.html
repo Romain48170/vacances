@@ -485,19 +485,37 @@ const MONTHS  = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Ao�
 //  PERIODES SCOLAIRES 2025-2026 (zone B - Bordeaux, Lyon, Nantes...)
 // ══════════════════════════════════════════════════════
 const SCHOOL_PERIODS = [
-  // Vacances scolaires zone B 2025-2026
-  { label: 'Toussaint',    start: '2025-10-18', end: '2025-11-02', color: '#f97316' },
-  { label: 'Noel',         start: '2025-12-20', end: '2026-01-04', color: '#60a5fa' },
-  { label: 'Hiver',        start: '2026-02-07', end: '2026-02-22', color: '#a78bfa' },
-  { label: 'Printemps',    start: '2026-04-04', end: '2026-04-19', color: '#4ade80' },
-  { label: 'Grandes vac.', start: '2026-07-04', end: '2026-08-31', color: '#f5c842' },
+  // Zone B (Bordeaux, Lyon, Nantes, Nice, Rennes, Strasbourg)
+  // 2025-2026
+  { label: 'Toussaint 25',  start: '2025-10-18', end: '2025-11-02', color: '#f97316' },
+  { label: 'Noel 25',       start: '2025-12-20', end: '2026-01-04', color: '#60a5fa' },
+  { label: 'Hiver 26',      start: '2026-02-07', end: '2026-02-22', color: '#a78bfa' },
+  { label: 'Printemps 26',  start: '2026-04-04', end: '2026-04-19', color: '#4ade80' },
+  { label: 'Ete 26',        start: '2026-07-04', end: '2026-08-31', color: '#f5c842' },
+  // 2026-2027
+  { label: 'Toussaint 26',  start: '2026-10-17', end: '2026-11-01', color: '#f97316' },
+  { label: 'Noel 26',       start: '2026-12-19', end: '2027-01-03', color: '#60a5fa' },
+  { label: 'Hiver 27',      start: '2027-02-13', end: '2027-02-28', color: '#a78bfa' },
+  { label: 'Printemps 27',  start: '2027-04-10', end: '2027-04-25', color: '#4ade80' },
+  { label: 'Ete 27',        start: '2027-07-03', end: '2027-08-31', color: '#f5c842' },
+  // 2027-2028
+  { label: 'Toussaint 27',  start: '2027-10-23', end: '2027-11-07', color: '#f97316' },
+  { label: 'Noel 27',       start: '2027-12-18', end: '2028-01-02', color: '#60a5fa' },
+  { label: 'Hiver 28',      start: '2028-02-19', end: '2028-03-05', color: '#a78bfa' },
+  { label: 'Printemps 28',  start: '2028-04-15', end: '2028-04-30', color: '#4ade80' },
+  { label: 'Ete 28',        start: '2028-07-01', end: '2028-08-31', color: '#f5c842' },
+  // 2028-2029
+  { label: 'Toussaint 28',  start: '2028-10-20', end: '2028-11-04', color: '#f97316' },
+  { label: 'Noel 28',       start: '2028-12-22', end: '2029-01-06', color: '#60a5fa' },
+  { label: 'Hiver 29',      start: '2029-02-10', end: '2029-02-25', color: '#a78bfa' },
+  { label: 'Printemps 29',  start: '2029-04-05', end: '2029-04-20', color: '#4ade80' },
+  { label: 'Ete 29',        start: '2029-07-05', end: '2029-08-31', color: '#f5c842' },
 ];
 
 function getSchoolPeriod(dateKey) {
-  const d = new Date(dateKey);
+  // Comparaison directe de strings YYYY-MM-DD — pas de probleme de fuseau horaire
   for (const p of SCHOOL_PERIODS) {
-    const s = new Date(p.start), e = new Date(p.end);
-    if (d >= s && d <= e) return p;
+    if (dateKey >= p.start && dateKey <= p.end) return p;
   }
   return null;
 }
@@ -970,6 +988,7 @@ function renderCalendar() {
     const cell=document.createElement('div');
     cell.className='day-cell'+(other?' other-month':'')+(isPast?' past-day':'')+(isMine?' selected-mine':'');
     cell.dataset.key=key;
+    cell.style.position='relative';
 
     const numDiv=document.createElement('div');
     numDiv.className='day-num'+(isToday?' today-num':'');
@@ -1006,6 +1025,20 @@ function renderCalendar() {
       cell.appendChild(bar);
     }
 
+    // ── Période scolaire : barre colorée + label ──
+    if(!other){
+      const sp = getSchoolPeriod(key);
+      if(sp){
+        const topBar = document.createElement('div');
+        topBar.style.cssText = 'position:absolute;top:0;left:0;right:0;height:3px;background:'+sp.color+';opacity:.8;z-index:3;';
+        cell.appendChild(topBar);
+        const lbl = document.createElement('div');
+        lbl.style.cssText = 'position:absolute;top:4px;right:3px;font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px;z-index:3;line-height:1.3;background:'+sp.color+'33;color:'+sp.color+';';
+        lbl.textContent = sp.label;
+        cell.appendChild(lbl);
+      }
+    }
+
     if(!other&&!isPast){
       cell.addEventListener('click',()=>{ if(!isDragging) toggleDay(key); });
       cell.addEventListener('contextmenu',e=>{ e.preventDefault(); openModal(key); });
@@ -1040,16 +1073,23 @@ function renderSchoolLegend() {
   const el = document.getElementById('schoolLegend');
   if (!el) return;
   el.innerHTML = '<h4>🎒 Vacances scolaires</h4>';
-  SCHOOL_PERIODS.forEach(p => {
+  // Afficher les periodes du mois visible + les 12 prochains mois
+  const viewDate = new Date(viewYear, viewMonth, 1);
+  const limitDate = new Date(viewYear + 1, viewMonth, 1);
+  const relevant = SCHOOL_PERIODS.filter(p => {
+    const end = new Date(p.end);
+    const start = new Date(p.start);
+    return end >= viewDate && start <= limitDate;
+  });
+  const toShow = relevant.length > 0 ? relevant : SCHOOL_PERIODS.slice(0, 5);
+  toShow.forEach(p => {
     const s = new Date(p.start), e = new Date(p.end);
     const sd = s.getDate() + ' ' + MONTHS[s.getMonth()].slice(0,3) + '.';
     const ed = e.getDate() + ' ' + MONTHS[e.getMonth()].slice(0,3) + '.';
     const item = document.createElement('div');
     item.className = 'period-item';
-    item.innerHTML = `
-      <div class="period-dot" style="background:${p.color}"></div>
-      <span><strong>${p.label}</strong> ${sd} – ${ed}</span>
-    `;
+    item.innerHTML = '<div class="period-dot" style="background:'+p.color+'"></div>'
+      + '<span><strong>'+p.label+'</strong> '+sd+' – '+ed+'</span>';
     el.appendChild(item);
   });
 }
