@@ -250,6 +250,38 @@ main{max-width:1160px;margin:0 auto;padding:26px 44px 80px;position:relative;z-i
   .header-btn span{display:none;}
   .member-grid{grid-template-columns:repeat(3,1fr);}
 }
+
+/* ═══ AUTH - MOT DE PASSE ═══ */
+.auth-step { display:none; }
+.auth-step.active { display:block; }
+.auth-back-btn { background:none; border:none; color:var(--muted); font-size:13px; cursor:pointer; font-family:'DM Sans',sans-serif; padding:0; margin-bottom:18px; display:flex; align-items:center; gap:6px; transition:color .15s; }
+.auth-back-btn:hover { color:var(--text); }
+.auth-avatar-big { width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:30px; margin:0 auto 14px; }
+.auth-name-big { font-size:20px; font-weight:700; margin-bottom:6px; }
+.auth-hint { font-size:12px; color:var(--muted); margin-bottom:20px; line-height:1.5; }
+.auth-input { width:100%; background:var(--surface2); border:1px solid var(--border); border-radius:10px; color:var(--text); font-family:'DM Sans',sans-serif; font-size:15px; padding:12px 16px; outline:none; transition:border-color .2s; margin-bottom:8px; text-align:center; letter-spacing:2px; }
+.auth-input:focus { border-color:var(--accent); }
+.auth-btn { width:100%; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#000; border:none; border-radius:10px; padding:12px; font-family:'DM Sans',sans-serif; font-weight:700; font-size:15px; cursor:pointer; transition:opacity .15s; margin-top:4px; }
+.auth-btn:hover { opacity:.9; }
+.auth-error { color:var(--red); font-size:12px; min-height:18px; margin-bottom:6px; text-align:center; }
+.auth-change-pw { background:none; border:none; color:var(--muted); font-size:11px; cursor:pointer; font-family:'DM Sans',sans-serif; text-decoration:underline; margin-top:12px; display:block; width:100%; text-align:center; }
+.auth-change-pw:hover { color:var(--text); }
+.pw-strength { height:3px; border-radius:2px; margin-bottom:8px; transition:all .3s; background:var(--border); }
+.pw-strength.weak   { background:#ef4444; width:33%; }
+.pw-strength.medium { background:#f59e0b; width:66%; }
+.pw-strength.strong { background:#4ade80; width:100%; }
+/* Badges membres */
+.member-btn .auth-badge { position:absolute; top:-4px; right:-4px; width:14px; height:14px; border-radius:50%; border:2px solid var(--surface); font-size:7px; display:flex; align-items:center; justify-content:center; }
+.member-btn { position:relative; }
+.member-btn .auth-badge.set { background:#4ade80; }
+.member-btn .auth-badge.unset { background:#f59e0b; }
+/* Admin reset password */
+.admin-reset-list { display:flex; flex-direction:column; gap:8px; }
+.admin-reset-item { display:flex; align-items:center; gap:10px; background:var(--surface2); border-radius:8px; padding:8px 12px; }
+.admin-reset-item .ari-name { flex:1; font-size:13px; }
+.admin-reset-btn { background:rgba(248,113,113,.1); border:1px solid rgba(248,113,113,.3); color:var(--red); border-radius:6px; padding:4px 10px; font-size:11px; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s; }
+.admin-reset-btn:hover { background:rgba(248,113,113,.2); }
+.admin-reset-btn.admin-set-btn { background:rgba(74,222,128,.08); border-color:rgba(74,222,128,.3); color:#4ade80; }
 </style>
 </head>
 <body>
@@ -259,21 +291,47 @@ main{max-width:1160px;margin:0 auto;padding:26px 44px 80px;position:relative;z-i
 ════════════════════════════════════════════════════ -->
 <div class="overlay" id="memberOverlay">
   <div class="card" style="max-width:520px;">
-    <span class="icon">🌴</span>
-    <h2>Qui es-tu ?</h2>
-    <p>Sélectionne ton prénom pour rejoindre le calendrier partagé de l'équipe.</p>
-    <div class="member-grid" id="memberGrid"></div>
-    <div class="error-msg" id="memberError"></div>
-    <!-- Champ mot de passe admin (caché par défaut) -->
-    <div id="adminPassWrapper" style="display:none;margin-bottom:12px;">
-      <input type="password" id="adminPassInput" placeholder="Mot de passe admin…"
-             onkeydown="if(event.key==='Enter') joinAsAdmin()"/>
-      <div class="error-msg" id="adminPassError"></div>
-      <button class="btn-primary" onclick="joinAsAdmin()">Connexion admin 🔐</button>
+
+    <!-- ÉTAPE 1 : Choisir son prénom -->
+    <div class="auth-step active" id="authStep1">
+      <span class="icon">🌴</span>
+      <h2>Qui es-tu ?</h2>
+      <p>Sélectionne ton prénom pour accéder au calendrier.</p>
+      <div class="member-grid" id="memberGrid"></div>
+      <div class="error-msg" id="memberError"></div>
     </div>
-    <button class="btn-primary" id="joinBtn" onclick="joinCalendar()" style="display:block;">
-      Rejoindre →
-    </button>
+
+    <!-- ÉTAPE 2 : Saisir le mot de passe -->
+    <div class="auth-step" id="authStep2">
+      <button class="auth-back-btn" onclick="authGoBack()">← Retour</button>
+      <div class="auth-avatar-big" id="authAvatarBig"></div>
+      <div class="auth-name-big" id="authNameBig"></div>
+      <div class="auth-hint" id="authHint">Entre ton mot de passe pour accéder au calendrier.</div>
+      <input type="password" class="auth-input" id="authPwInput"
+             placeholder="••••••••"
+             onkeydown="if(event.key==='Enter') authSubmitPw()"/>
+      <div class="auth-error" id="authPwError"></div>
+      <button class="auth-btn" onclick="authSubmitPw()" id="authSubmitBtn">Entrer →</button>
+      <button class="auth-change-pw" id="authForgotBtn" onclick="authForgotPw()" style="display:none;">Mot de passe oublié ? Contacter Romain</button>
+    </div>
+
+    <!-- ÉTAPE 3 : Changer le mot de passe (première connexion) -->
+    <div class="auth-step" id="authStep3">
+      <span class="icon">🔑</span>
+      <h2>Choisis ton mot de passe</h2>
+      <p class="auth-hint">Première connexion ! Crée un mot de passe personnel.<br>Minimum 4 caractères.</p>
+      <input type="password" class="auth-input" id="authNewPw1"
+             placeholder="Nouveau mot de passe"
+             oninput="authCheckStrength()"
+             onkeydown="if(event.key==='Enter') authSetNewPw()"/>
+      <div class="pw-strength" id="pwStrengthBar"></div>
+      <input type="password" class="auth-input" id="authNewPw2"
+             placeholder="Confirme le mot de passe"
+             onkeydown="if(event.key==='Enter') authSetNewPw()"/>
+      <div class="auth-error" id="authNewPwError"></div>
+      <button class="auth-btn" onclick="authSetNewPw()">Créer mon mot de passe 🔐</button>
+    </div>
+
   </div>
 </div>
 
@@ -289,6 +347,7 @@ main{max-width:1160px;margin:0 auto;padding:26px 44px 80px;position:relative;z-i
     <div class="admin-tabs">
       <button class="admin-tab active" onclick="switchAdminTab('membres',this)">👥 Membres</button>
       <button class="admin-tab" onclick="switchAdminTab('dispos',this)">📅 Disponibilités</button>
+      <button class="admin-tab" onclick="switchAdminTab('mdp',this)">🔑 Mots de passe</button>
       <button class="admin-tab" onclick="switchAdminTab('actions',this)">⚡ Actions</button>
     </div>
 
@@ -315,6 +374,28 @@ main{max-width:1160px;margin:0 auto;padding:26px 44px 80px;position:relative;z-i
       <div class="admin-section">
         <h3>Disponibilités par membre</h3>
         <div id="adminMemberList"></div>
+      </div>
+    </div>
+
+    <!-- Onglet Mots de passe -->
+    <div class="admin-tab-content" id="tab-mdp">
+      <div class="admin-section">
+        <h3>Réinitialiser un mot de passe</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.5;">
+          Si un membre a oublié son mot de passe, réinitialise-le ici. Il devra en créer un nouveau à sa prochaine connexion.
+        </p>
+        <div class="admin-reset-list" id="adminPwResetList"></div>
+      </div>
+      <div class="admin-section">
+        <h3>Définir un mot de passe pour quelqu'un</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Utile pour aider quelqu'un à se connecter.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;" id="adminSetPwForm">
+          <select id="adminSetPwMember" style="flex:1;min-width:120px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;"></select>
+          <input type="text" id="adminSetPwValue" placeholder="Nouveau mot de passe"
+                 style="flex:1;min-width:150px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 12px;outline:none;"/>
+          <button onclick="adminSetPassword()" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000;border:none;border-radius:8px;padding:8px 14px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;">Définir</button>
+        </div>
+        <div id="adminSetPwMsg" style="font-size:12px;color:var(--green);margin-top:8px;min-height:16px;"></div>
       </div>
     </div>
 
@@ -597,29 +678,129 @@ function selectMember(name) {
   selectedMember = name;
   document.querySelectorAll('.member-btn').forEach(b => b.classList.toggle('selected', b.dataset.name === name));
   document.getElementById('memberError').textContent = '';
-
-  if (name === ADMIN_NAME) {
-    document.getElementById('adminPassWrapper').style.display = 'block';
-    document.getElementById('joinBtn').style.display = 'none';
-    setTimeout(() => document.getElementById('adminPassInput').focus(), 50);
-  } else {
-    document.getElementById('adminPassWrapper').style.display = 'none';
-    document.getElementById('joinBtn').style.display = 'block';
-  }
+  // Passer à l'étape mot de passe
+  authShowStep2(name);
 }
 
 function joinCalendar() {
-  if (!selectedMember) { document.getElementById('memberError').textContent = '⚠️ Sélectionne ton prénom !'; return; }
-  finishJoin(selectedMember, false);
+  if (!selectedMember) { document.getElementById('memberError').textContent = 'Selectionne ton prenom !'; return; }
+  authShowStep2(selectedMember);
 }
 
-function joinAsAdmin() {
-  const pw = document.getElementById('adminPassInput').value;
-  if (pw !== ADMIN_PASSWORD) {
-    document.getElementById('adminPassError').textContent = '❌ Mot de passe incorrect';
-    return;
+// ══ SYSTÈME AUTH COMPLET ═══════════════════════════════
+
+function authGoBack() {
+  authShowStep(1);
+  document.getElementById('authPwInput').value = '';
+  document.getElementById('authPwError').textContent = '';
+}
+
+function authShowStep(n) {
+  document.querySelectorAll('.auth-step').forEach(function(s){ s.classList.remove('active'); });
+  var el = document.getElementById('authStep' + n);
+  if (el) el.classList.add('active');
+}
+
+function authShowStep2(name) {
+  var m = MEMBERS.find(function(x){ return x.name === name; });
+  var bigAv = document.getElementById('authAvatarBig');
+  var bigNm = document.getElementById('authNameBig');
+  var hint   = document.getElementById('authHint');
+  var forgot = document.getElementById('authForgotBtn');
+
+  if (bigAv) { bigAv.style.background = m ? m.color : '#888'; bigAv.textContent = m ? m.emoji : name[0]; }
+  if (bigNm) bigNm.textContent = name;
+
+  // Vérifier si le membre a déjà un mot de passe dans Firebase
+  var pwKey = 'passwords/' + sanitizeName(name);
+  if (db) {
+    db.ref(pwKey).once('value', function(snap) {
+      var hasPw = snap.val() !== null;
+      if (hint) hint.textContent = hasPw
+        ? 'Entre ton mot de passe pour acceder au calendrier.'
+        : 'Premiere connexion ! Tu vas devoir creer ton mot de passe.';
+      if (forgot) forgot.style.display = hasPw && name !== ADMIN_NAME ? 'block' : 'none';
+      document.getElementById('authSubmitBtn').textContent = hasPw ? 'Entrer →' : 'Continuer →';
+    });
   }
-  finishJoin(ADMIN_NAME, true);
+
+  authShowStep(2);
+  setTimeout(function(){ document.getElementById('authPwInput').focus(); }, 100);
+}
+
+function authSubmitPw() {
+  var pw    = document.getElementById('authPwInput').value;
+  var name  = selectedMember;
+  var errEl = document.getElementById('authPwError');
+  errEl.textContent = '';
+
+  if (!pw) { errEl.textContent = 'Entre ton mot de passe !'; return; }
+
+  var pwKey = 'passwords/' + sanitizeName(name);
+
+  if (db) {
+    db.ref(pwKey).once('value', function(snap) {
+      var storedPw = snap.val();
+
+      if (storedPw === null) {
+        // Première connexion — aller créer le mot de passe
+        if (pw.length < 4) { errEl.textContent = 'Minimum 4 caracteres !'; return; }
+        document.getElementById('authNewPw1').value = pw;
+        authShowStep(3);
+        setTimeout(function(){ document.getElementById('authNewPw2').focus(); }, 100);
+      } else if (storedPw === pw) {
+        // Bon mot de passe
+        var admin = (name === ADMIN_NAME && pw === ADMIN_PASSWORD) || (name === ADMIN_NAME);
+        // Vérifier le vrai mot de passe admin
+        if (name === ADMIN_NAME) {
+          admin = true;
+        }
+        finishJoin(name, admin);
+      } else {
+        errEl.textContent = 'Mot de passe incorrect !';
+        document.getElementById('authPwInput').value = '';
+        document.getElementById('authPwInput').focus();
+      }
+    });
+  }
+}
+
+function authCheckStrength() {
+  var pw  = document.getElementById('authNewPw1').value;
+  var bar = document.getElementById('pwStrengthBar');
+  if (!bar) return;
+  if (pw.length < 4) { bar.className = 'pw-strength weak'; }
+  else if (pw.length < 8) { bar.className = 'pw-strength medium'; }
+  else { bar.className = 'pw-strength strong'; }
+}
+
+function authSetNewPw() {
+  var pw1   = document.getElementById('authNewPw1').value;
+  var pw2   = document.getElementById('authNewPw2').value;
+  var errEl = document.getElementById('authNewPwError');
+  errEl.textContent = '';
+
+  if (pw1.length < 4) { errEl.textContent = 'Minimum 4 caracteres !'; return; }
+  if (pw1 !== pw2)    { errEl.textContent = 'Les mots de passe ne correspondent pas !'; return; }
+
+  var name  = selectedMember;
+  var pwKey = 'passwords/' + sanitizeName(name);
+
+  if (db) {
+    db.ref(pwKey).set(pw1).then(function() {
+      var admin = (name === ADMIN_NAME);
+      finishJoin(name, admin);
+      showToast('Mot de passe cree ! Bienvenue ' + name + ' !');
+    });
+  }
+}
+
+function authForgotPw() {
+  showToast('Contacte Romain pour reinitialiser ton mot de passe.');
+}
+
+function sanitizeName(name) {
+  return (name || '').replace(/[.#$\[\]]/g, '_');
 }
 
 function finishJoin(name, admin) {
@@ -676,7 +857,78 @@ function switchAdminTab(tab, btn) {
 function renderAdminPanel() {
   renderAdminMembersTab();
   renderAdminDisposTab();
+  renderAdminPwTab();
   buildEmojiPicker();
+}
+
+function renderAdminPwTab() {
+  // Liste reset
+  var resetList = document.getElementById('adminPwResetList');
+  if (resetList) {
+    resetList.innerHTML = '';
+    MEMBERS.forEach(function(m) {
+      if (m.name === ADMIN_NAME) return; // pas besoin de reset Romain via cette liste
+      var pwKey = 'passwords/' + sanitizeName(m.name);
+      var item = document.createElement('div');
+      item.className = 'admin-reset-item';
+      item.innerHTML =
+        '<div class="admin-avatar" style="background:' + m.color + '">' + m.emoji + '</div>' +
+        '<span class="ari-name">' + m.name + '</span>' +
+        '<span id="pw-status-' + sanitizeName(m.name) + '" style="font-size:10px;color:var(--muted)">...</span>' +
+        '<button class="admin-reset-btn" data-resetname="' + m.name + '">↩️ Réinitialiser</button>';
+      // Event listener sur le bouton reset
+      item.querySelector('[data-resetname]').addEventListener('click', (function(name){
+        return function(){ adminResetPw(name); };
+      })(m.name));
+      resetList.appendChild(item);
+      // Vérifier si le membre a un mot de passe
+      if (db) {
+        db.ref(pwKey).once('value', function(snap) {
+          var el = document.getElementById('pw-status-' + sanitizeName(m.name));
+          if (el) el.textContent = snap.val() ? '✅ Configuré' : '⚠️ Pas encore';
+        });
+      }
+    });
+  }
+
+  // Select membres pour set password
+  var sel = document.getElementById('adminSetPwMember');
+  if (sel) {
+    sel.innerHTML = '';
+    MEMBERS.forEach(function(m) {
+      var opt = document.createElement('option');
+      opt.value = m.name;
+      opt.textContent = m.emoji + ' ' + m.name;
+      sel.appendChild(opt);
+    });
+  }
+}
+
+function adminResetPw(name) {
+  if (!confirm('Réinitialiser le mot de passe de ' + name + ' ? Il devra en créer un nouveau.')) return;
+  var pwKey = 'passwords/' + sanitizeName(name);
+  if (db) {
+    db.ref(pwKey).remove().then(function() {
+      showToast('Mot de passe de ' + name + ' réinitialisé !');
+      renderAdminPwTab();
+    });
+  }
+}
+
+function adminSetPassword() {
+  var name = document.getElementById('adminSetPwMember').value;
+  var pw   = document.getElementById('adminSetPwValue').value.trim();
+  var msg  = document.getElementById('adminSetPwMsg');
+  if (!pw || pw.length < 4) { if (msg) msg.style.color = 'var(--red)'; if (msg) msg.textContent = 'Minimum 4 caractères !'; return; }
+  var pwKey = 'passwords/' + sanitizeName(name);
+  if (db) {
+    db.ref(pwKey).set(pw).then(function() {
+      if (msg) { msg.style.color = 'var(--green)'; msg.textContent = '✅ Mot de passe défini pour ' + name + ' !'; }
+      document.getElementById('adminSetPwValue').value = '';
+      renderAdminPwTab();
+      setTimeout(function(){ if (msg) msg.textContent = ''; }, 3000);
+    });
+  }
 }
 
 // Onglet Membres : liste avec suppression
