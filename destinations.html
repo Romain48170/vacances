@@ -2313,6 +2313,9 @@ function smapRender() {
   tiles.innerHTML = '';
   tiles.style.transform = '';
 
+  // Après le rendu des tuiles, repositionner les marqueurs
+  setTimeout(function() { smapUpdateMarkerPositions(); }, 0);
+
   var servers = ['a','b','c'];
   for (var tx = tileMinX; tx < tileMaxX; tx++) {
     for (var ty = tileMinY; ty < tileMaxY; ty++) {
@@ -2341,31 +2344,32 @@ function smapLonLatToScreen(lon, lat) {
   return { x: px - cpx + W/2, y: py - cpy + H/2 };
 }
 
+var GPS_COORDS = {
+  bali:[115.09,-8.34], vietnam:[108.27,14.06], maroc:[-7.09,31.79],
+  albanie:[19.83,41.33], thailande:[100.99,15.87], japon:[138.25,36.20],
+  usa:[-119.00,37.09], australie:[133.77,-25.27], islande:[-19.02,64.96],
+  canada:[-71.73,53.13], grece:[21.82,39.07], portugal:[-8.22,39.40],
+  mexique:[-102.55,23.63], perou:[-75.01,-9.19], tanzanie:[34.89,-6.37],
+  colombie:[-74.30,4.57], georgie:[43.35,42.31], java:[110.01,-7.61],
+  costarica:[-83.75,9.75], espagne:[-3.75,40.46], egypte:[30.80,26.82],
+};
+
 function smapPlaceMarkers(filtered) {
   var container = document.getElementById('mapMarkers'); if (!container) return;
+  // Vider et recréer seulement si les destinations ont changé
+  // Toujours recréer pour avoir les bonnes positions
   container.innerHTML = '';
-  container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
-
-  var GPS = {
-    bali:[115.09,-8.34], vietnam:[108.27,14.06], maroc:[-7.09,31.79],
-    albanie:[19.83,41.33], thailande:[100.99,15.87], japon:[138.25,36.20],
-    usa:[-119.00,37.09], australie:[133.77,-25.27], islande:[-19.02,64.96],
-    canada:[-71.73,53.13], grece:[21.82,39.07], portugal:[-8.22,39.40],
-    mexique:[-102.55,23.63], perou:[-75.01,-9.19], tanzanie:[34.89,-6.37],
-    colombie:[-74.30,4.57], georgie:[43.35,42.31], java:[110.01,-7.61],
-    costarica:[-83.75,9.75], espagne:[-3.75,40.46], egypte:[30.80,26.82],
-  };
+  container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:hidden;';
 
   filtered.forEach(function(dest) {
-    var gps = GPS[dest.id]; if (!gps) return;
-    var pos = smapLonLatToScreen(gps[0], gps[1]);
-    var c   = dest.color;
-    var flag = resolveFlag(dest.flag);
+    var gps = GPS_COORDS[dest.id]; if (!gps) return;
+    var c    = dest.color;
 
     var marker = document.createElement('div');
     marker.className = 'map-marker';
-    marker.style.left = pos.x + 'px';
-    marker.style.top  = pos.y + 'px';
+    marker.dataset.lon = gps[0];
+    marker.dataset.lat = gps[1];
+    marker.dataset.id  = dest.id;
     marker.style.pointerEvents = 'auto';
     marker.innerHTML =
       '<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' +
@@ -2385,6 +2389,47 @@ function smapPlaceMarkers(filtered) {
 
     container.appendChild(marker);
   });
+
+  // Positionner correctement tous les marqueurs
+  smapUpdateMarkerPositions();
+}
+
+// Séparer la création et le positionnement
+// smapUpdateMarkerPositions recalcule les positions SANS recréer les éléments DOM
+function smapUpdateMarkerPositions() {
+  var container = document.getElementById('mapMarkers'); if (!container) return;
+  var s  = window._smap; if (!s) return;
+  var el = smapGetContainer(); if (!el) return;
+  var W  = el.offsetWidth;
+  var H  = el.offsetHeight;
+
+  // Centre en pixels dans la projection mercator au zoom actuel
+  var cpx = lon2x(s.lon, s.zoom);
+  var cpy = lat2y(s.lat, s.zoom);
+
+  var markers = container.querySelectorAll('.map-marker');
+  markers.forEach(function(marker) {
+    var lon = parseFloat(marker.dataset.lon);
+    var lat = parseFloat(marker.dataset.lat);
+    // Position pixel du marqueur
+    var px = lon2x(lon, s.zoom);
+    var py = lat2y(lat, s.zoom);
+    // Position relative au centre de la carte
+    var sx = px - cpx + W / 2;
+    var sy = py - cpy + H / 2;
+    marker.style.left = sx + 'px';
+    marker.style.top  = sy + 'px';
+  });
+
+  // Repositionner aussi le popup si visible
+  var popup = document.getElementById('mapPopup');
+  if (popup && popup.style.display !== 'none' && popup.dataset.lon) {
+    var plon = parseFloat(popup.dataset.lon);
+    var plat = parseFloat(popup.dataset.lat);
+    var pp = smapLonLatToScreen(plon, plat);
+    popup.style.left = pp.x + 'px';
+    popup.style.top  = pp.y + 'px';
+  }
 }
 
 function showMapPopup(dest, lon, lat) {
@@ -2419,6 +2464,9 @@ function showMapPopup(dest, lon, lat) {
   popup.style.display = 'block';
   popup.style.left = pos.x + 'px';
   popup.style.top  = pos.y + 'px';
+  // Stocker coords pour repositionnement lors zoom/pan
+  popup.dataset.lon = lon;
+  popup.dataset.lat = lat;
 }
 
 // ── Drag ────────────────────────────────────────────────
@@ -2433,12 +2481,14 @@ function smapDragMove(e) {
   var el = smapGetContainer(); if (!el) return;
   var dx = e.clientX - s.startX;
   var dy = e.clientY - s.startY;
-  var scale = 256 * Math.pow(2, s.zoom);
-  s.lon = s.startLon - dx / scale * 360;
-  s.lat = y2lat(lat2y(s.startLat, s.zoom) - dy, s.zoom);
+  // Déplacer le centre en pixels
+  var startCpx = lon2x(s.startLon, s.zoom);
+  var startCpy = lat2y(s.startLat, s.zoom);
+  s.lon = x2lon(startCpx - dx, s.zoom);
+  s.lat = y2lat(startCpy - dy, s.zoom);
   s.lon = Math.max(-180, Math.min(180, s.lon));
   smapRender();
-  smapPlaceMarkers(window._smapFiltered || []);
+  smapUpdateMarkerPositions();
 }
 function smapDragEnd() { if (window._smap) window._smap.dragging = false; }
 
@@ -2459,13 +2509,34 @@ function smapTouchEnd() { smapDragEnd(); }
 // ── Zoom ────────────────────────────────────────────────
 function smapWheel(e) {
   e.preventDefault();
-  slippyZoom(e.deltaY < 0 ? 0.5 : -0.5);
+  var s  = window._smap; if (!s) return;
+  var el = smapGetContainer(); if (!el) return;
+  var rect = el.getBoundingClientRect();
+  // Position du curseur relative au centre de la carte
+  var mx = e.clientX - rect.left - el.offsetWidth  / 2;
+  var my = e.clientY - rect.top  - el.offsetHeight / 2;
+  // Convertir en coordonnées géo avant zoom
+  var cpx = lon2x(s.lon, s.zoom) + mx;
+  var cpy = lat2y(s.lat, s.zoom) + my;
+  var geoLon = x2lon(cpx, s.zoom);
+  var geoLat = y2lat(cpy, s.zoom);
+  // Appliquer le zoom
+  var dz = e.deltaY < 0 ? 0.5 : -0.5;
+  s.zoom = Math.max(1, Math.min(8, s.zoom + dz));
+  // Ajuster le centre pour que le point sous le curseur reste fixe
+  var newPx = lon2x(geoLon, s.zoom);
+  var newPy = lat2y(geoLat, s.zoom);
+  s.lon = x2lon(newPx - mx, s.zoom);
+  s.lat = y2lat(newPy - my, s.zoom);
+  smapRender();
+  smapUpdateMarkerPositions();
 }
 function slippyZoom(delta) {
   var s = window._smap; if (!s) return;
   s.zoom = Math.max(1, Math.min(8, s.zoom + delta));
   smapRender();
-  smapPlaceMarkers(window._smapFiltered || []);
+  // Repositionner les marqueurs sans les recréer
+  smapUpdateMarkerPositions();
 }
 
 // Fermer popup au clic sur la carte
