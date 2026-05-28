@@ -138,16 +138,30 @@ input[type=range] { flex:1; min-width:150px; accent-color:var(--accent); cursor:
 /* ═══ CARTE MONDE ═══ */
 #mapView { display:none; }
 #mapView.active { display:block; }
-.map-container { position:relative; width:100%; max-width:1000px; margin:0 auto; user-select:none; }
+.map-container { position:relative; width:100%; max-width:1100px; margin:0 auto; user-select:none; }
 .map-container svg { width:100%; height:auto; display:block; }
-.map-pin { cursor:pointer; transition:transform .2s; transform-origin:center bottom; }
-.map-pin:hover { transform:scale(1.3); }
-.map-pin circle { transition:all .2s; }
-.map-pin:hover circle { filter:drop-shadow(0 0 8px currentColor); }
-.map-tooltip { position:absolute; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; font-size:12px; pointer-events:none; z-index:50; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,.4); transform:translate(-50%,-110%); }
-.map-tooltip h4 { font-size:13px; font-weight:700; margin-bottom:3px; }
-.map-tooltip .mt-budget { color:var(--accent); font-weight:600; }
-.map-tooltip .mt-arrow { position:absolute; bottom:-6px; left:50%; transform:translateX(-50%); width:10px; height:6px; background:var(--surface); border-right:1px solid var(--border); border-bottom:1px solid var(--border); clip-path:polygon(0 0,100% 0,50% 100%); }
+.map-pin { cursor:pointer; transition:transform .2s cubic-bezier(.34,1.56,.64,1); transform-origin:center center; }
+.map-pin:hover { transform:scale(1.4); }
+.map-pin:hover .pin-halo { opacity:0.4 !important; r:22; }
+@keyframes pinPulse { 0%,100%{opacity:.12;} 50%{opacity:.28;} }
+.pin-halo { animation:pinPulse 2.5s ease-in-out infinite; }
+.map-tooltip {
+  position:absolute; background:var(--surface2);
+  border:1px solid var(--border); border-radius:12px;
+  padding:12px 16px; font-size:12px; pointer-events:none; z-index:50;
+  white-space:nowrap; box-shadow:0 12px 32px rgba(0,0,0,.5);
+  transform:translate(-50%,-120%);
+  backdrop-filter:blur(8px);
+  animation:tipIn .15s ease;
+}
+@keyframes tipIn { from{opacity:0;transform:translate(-50%,-100%);} to{opacity:1;transform:translate(-50%,-120%);} }
+.map-tooltip h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
+.map-tooltip .mt-budget { color:var(--accent); font-weight:700; font-size:13px; }
+.map-tooltip .mt-season { color:var(--muted); font-size:11px; margin-top:2px; }
+.map-tooltip .mt-arrow { position:absolute; bottom:-7px; left:50%; transform:translateX(-50%); width:12px; height:7px; background:var(--surface2); border-right:1px solid var(--border); border-bottom:1px solid var(--border); clip-path:polygon(0 0,100% 0,50% 100%); }
+.map-legend { display:flex; gap:16px; flex-wrap:wrap; margin-top:14px; padding:12px 16px; background:var(--surface); border:1px solid var(--border); border-radius:10px; font-size:11px; color:var(--muted); }
+.map-legend-item { display:flex; align-items:center; gap:6px; }
+.map-legend-dot { width:10px; height:10px; border-radius:50%; }
 
 /* ═══ COMPARATEUR ═══ */
 .compare-bar { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px 20px; margin-bottom:20px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
@@ -194,7 +208,27 @@ input[type=range] { flex:1; min-width:150px; accent-color:var(--accent); cursor:
 .cc-score { display:flex; gap:2px; }
 .cc-star { font-size:12px; }
 .winner-badge { display:inline-block; background:rgba(245,200,66,.15); border:1px solid rgba(245,200,66,.3); color:var(--accent); border-radius:6px; padding:2px 8px; font-size:10px; font-weight:700; margin-top:4px; }
+
+/* ═══ SLIPPY MAP - OSM vanilla, zero dependance ═══ */
+#slippyMap { width:100%; height:520px; border-radius:16px; border:1px solid var(--border); background:#0d1117; position:relative; overflow:hidden; cursor:grab; user-select:none; }
+#slippyMap:active { cursor:grabbing; }
+#slippyTiles { position:absolute; top:0; left:0; will-change:transform; }
+#slippyTiles img { position:absolute; width:256px; height:256px; image-rendering:auto; }
+.map-marker { position:absolute; transform:translate(-50%,-50%); cursor:pointer; transition:transform .15s; z-index:10; }
+.map-marker:hover { transform:translate(-50%,-50%) scale(1.3); z-index:20; }
+.map-marker svg { display:block; filter:drop-shadow(0 2px 6px rgba(0,0,0,.7)); }
+.map-popup { position:absolute; background:#181c27; border:1px solid #2a2f42; border-radius:14px; padding:16px 18px; min-width:210px; max-width:240px; box-shadow:0 16px 48px rgba(0,0,0,.8); z-index:30; transform:translate(-50%,-110%); pointer-events:auto; }
+.map-popup::after { content:''; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); border:8px solid transparent; border-top-color:#2a2f42; }
+.map-popup::before { content:''; position:absolute; bottom:-7px; left:50%; transform:translateX(-50%); border:7px solid transparent; border-top-color:#181c27; z-index:1; }
+.map-zoom-ctrl { position:absolute; top:12px; right:12px; z-index:20; display:flex; flex-direction:column; gap:2px; }
+.map-zoom-btn { width:32px; height:32px; background:#181c27; border:1px solid #2a2f42; border-radius:6px; color:#e8eaf0; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+.map-zoom-btn:hover { background:#232840; }
+.map-attrib { position:absolute; bottom:0; right:0; font-size:9px; color:#2a3550; background:rgba(10,13,18,.7); padding:2px 6px; border-radius:4px 0 0 0; z-index:15; }
+.map-attrib a { color:#2a3550; }
 </style>
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
 </head>
 <body>
 <header>
@@ -254,15 +288,17 @@ input[type=range] { flex:1; min-width:150px; accent-color:var(--accent); cursor:
 
   <!-- VUE CARTE -->
   <div id="mapView">
-    <div class="map-container" id="mapContainer">
-      <div id="mapTooltip" class="map-tooltip" style="display:none;position:absolute;">
-        <h4 id="ttName"></h4>
-        <div id="ttCountry" style="font-size:11px;color:var(--muted);margin-bottom:4px;"></div>
-        <div id="ttBudget" class="mt-budget"></div>
-        <div id="ttSeason" style="font-size:10px;color:var(--muted);margin-top:2px;"></div>
-        <div class="mt-arrow"></div>
+    <div id="slippyMap">
+      <div id="slippyTiles"></div>
+      <div id="mapMarkers"></div>
+      <div id="mapPopup" class="map-popup" style="display:none;"></div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="slippyZoom(1)">+</button>
+        <button class="map-zoom-btn" onclick="slippyZoom(-1)">−</button>
       </div>
+      <div class="map-attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a></div>
     </div>
+    <div class="map-legend" id="mapLegend"></div>
   </div>
 </main>
 
@@ -1970,14 +2006,17 @@ function resolveIcon(i) { return ICONS[i] || i || '📌'; }
 // ══════════════════════════════════════════════════════
 //  RENDU
 // ══════════════════════════════════════════════════════
-var currentFilter = 'all';
+var currentFilter    = 'all';
+var currentBudgetMax = 99999;
+var currentViewMode  = 'grid';
+var compareList      = [];
 
 function renderCards(filter) {
   var grid = document.getElementById('destGrid');
   if (!grid) return;
   grid.innerHTML = '';
-  var filtered = getFilteredDest();
 
+  var filtered = getFilteredDest();
   var countEl = document.getElementById('budgetCount');
   if (countEl) countEl.textContent = filtered.length + ' / ' + DEST.length + ' destinations';
 
@@ -1995,43 +2034,66 @@ function renderCards(filter) {
     var flag  = resolveFlag(dest.flag);
     var emoji = resolveEmoji(dest.emoji);
     var premiumBadge = dest.premium ? '<div class="premium-tag">Destination Premium</div>' : '';
-    var inCompare  = compareList.indexOf(dest.id) >= 0;
-    var cmpClass   = 'compare-add-btn' + (inCompare ? ' in-compare' : '');
-    var cmpLabel   = inCompare ? '✕ Retirer' : '+ Comparer';
+    var inCompare = compareList.indexOf(dest.id) >= 0;
+    var cmpClass  = 'compare-add-btn' + (inCompare ? ' in-compare' : '');
+    var cmpLabel  = inCompare ? '&#10005; Retirer' : '+ Comparer';
 
-    card.innerHTML =
-      '<div class="dest-banner" style="background:linear-gradient(135deg,' + dest.colorDark + ' 0%,#0a0d12 100%);">' +
-        '<div class="dest-emoji-bg">' + emoji + '</div>' +
-        '<span class="dest-flag">' + flag + '</span>' +
-        '<div class="dest-name-banner"><h3>' + dest.name + '</h3><div class="sub">' + dest.country + ' &middot; ' + dest.duration + '</div></div>' +
-        '<div class="budget-tag" style="color:' + dest.color + '">' + dest.budget + '<br><span style="font-size:9px;opacity:.7">par personne</span></div>' +
+    // Banner
+    var banner = document.createElement('div');
+    banner.className = 'dest-banner';
+    banner.style.background = 'linear-gradient(135deg,' + dest.colorDark + ' 0%,#0a0d12 100%)';
+    banner.innerHTML =
+      '<div class="dest-emoji-bg">' + emoji + '</div>' +
+      '<span class="dest-flag">' + flag + '</span>' +
+      '<div class="dest-name-banner"><h3>' + dest.name + '</h3><div class="sub">' + dest.country + ' &middot; ' + dest.duration + '</div></div>' +
+      '<div class="budget-tag" style="color:' + dest.color + '">' + dest.budget + '<br><span style="font-size:9px;opacity:.7">par personne</span></div>';
+
+    // Body
+    var body = document.createElement('div');
+    body.className = 'dest-body';
+
+    // Tags HTML
+    var tagsHtml = dest.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('');
+
+    body.innerHTML =
+      premiumBadge +
+      '<div class="quick-infos">' +
+        '<div class="qi"><div class="qi-val" style="color:' + dest.color + '">' + dest.budget + '</div><div class="qi-lbl">Budget</div></div>' +
+        '<div class="qi"><div class="qi-val">10j</div><div class="qi-lbl">Duree</div></div>' +
+        '<div class="qi"><div class="qi-val">' + dest.bestSeason + '</div><div class="qi-lbl">Saison</div></div>' +
       '</div>' +
-      '<div class="dest-body">' +
-        premiumBadge +
-        '<div class="quick-infos">' +
-          '<div class="qi"><div class="qi-val" style="color:' + dest.color + '">' + dest.budget + '</div><div class="qi-lbl">Budget</div></div>' +
-          '<div class="qi"><div class="qi-val">10j</div><div class="qi-lbl">Duree</div></div>' +
-          '<div class="qi"><div class="qi-val">' + dest.bestSeason + '</div><div class="qi-lbl">Saison</div></div>' +
-        '</div>' +
-        '<div class="tags">' + dest.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
-        '<p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">' + dest.description + '</p>' +
-        '<div style="display:flex;gap:8px;">' +
-          '<button class="btn-prog" style="flex:1" onclick="openProg(\'' + dest.id + '\')">Voir le programme</button>' +
-          '<button class="' + cmpClass + '" data-cmpid="' + dest.id + '">' + cmpLabel + '</button>' +
-        '</div>' +
-      '</div>';
+      '<div class="tags">' + tagsHtml + '</div>' +
+      '<p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">' + dest.description + '</p>';
 
-    // Event listener pour le bouton comparer
-    var cmpBtn = card.querySelector('[data-cmpid]');
-    if (cmpBtn) {
-      cmpBtn.addEventListener('click', function() {
-        toggleCompare(dest.id);
-      });
-    }
+    // Boutons créés proprement sans onclick inline
+    var btnRow = document.createElement('div');
+    btnRow.style.cssText = 'display:flex;gap:8px;';
 
+    var btnProg = document.createElement('button');
+    btnProg.className = 'btn-prog';
+    btnProg.style.flex = '1';
+    btnProg.textContent = 'Voir le programme';
+    btnProg.addEventListener('click', (function(id) {
+      return function() { openProg(id); };
+    })(dest.id));
+
+    var btnCmp = document.createElement('button');
+    btnCmp.className = cmpClass;
+    btnCmp.innerHTML = cmpLabel;
+    btnCmp.addEventListener('click', (function(id) {
+      return function() { toggleCompare(id); };
+    })(dest.id));
+
+    btnRow.appendChild(btnProg);
+    btnRow.appendChild(btnCmp);
+    body.appendChild(btnRow);
+
+    card.appendChild(banner);
+    card.appendChild(body);
     grid.appendChild(card);
   });
 }
+
 
 function filterDest(f, btn) {
   currentFilter = f;
@@ -2134,7 +2196,6 @@ function getBudgetNum(dest) {
 }
 
 // ══ BUDGET SLIDER ══════════════════════════════════
-var currentBudgetMax = 99999;
 function onBudgetSlider() {
   var val = parseInt(document.getElementById('budgetSlider').value);
   currentBudgetMax = val >= 4000 ? 99999 : val;
@@ -2149,7 +2210,6 @@ function getFilteredDest() {
 }
 
 // ══ VUES GRILLE / CARTE ══════════════════════════
-var currentViewMode = 'grid';
 function switchView(mode, btn) {
   currentViewMode = mode;
   document.querySelectorAll('.view-tab').forEach(function(b){ b.classList.remove('active'); });
@@ -2167,246 +2227,254 @@ function renderCurrentView() {
 
 // ══ CARTE MONDE ══════════════════════════════════
 function renderMap() {
-  var container = document.getElementById('mapContainer');
-  var filtered  = getFilteredDest();
+  var filtered = getFilteredDest();
+  var countEl  = document.getElementById('budgetCount');
+  if (countEl) countEl.textContent = filtered.length + ' / ' + DEST.length + ' destinations';
 
-  // SVG carte simplifiee du monde (Mercator)
-  var svgW = 1000, svgH = 540;
-  var svg = '<svg viewBox="0 0 ' + svgW + ' ' + svgH + '" xmlns="http://www.w3.org/2000/svg" style="background:#0a0d12;border-radius:14px;border:1px solid #232840;">';
-
-  // Continents simplifies (formes approximatives)
-  var continents = [
-    // Amerique du Nord
-    'M 80 60 L 220 50 L 240 80 L 260 120 L 220 160 L 180 180 L 140 200 L 100 190 L 70 160 L 60 120 Z',
-    // Amerique du Sud
-    'M 150 210 L 200 205 L 230 240 L 240 300 L 220 360 L 190 390 L 160 380 L 140 340 L 130 280 L 135 240 Z',
-    // Europe
-    'M 420 50 L 500 45 L 530 70 L 520 110 L 490 120 L 450 115 L 420 95 L 410 70 Z',
-    // Afrique
-    'M 440 135 L 540 130 L 580 160 L 590 220 L 570 300 L 540 360 L 500 390 L 460 380 L 430 330 L 415 260 L 420 190 L 430 155 Z',
-    // Asie
-    'M 530 40 L 750 30 L 840 60 L 870 120 L 830 170 L 780 200 L 700 210 L 630 190 L 570 160 L 535 120 L 520 75 Z',
-    // Australie
-    'M 790 350 L 880 340 L 920 380 L 910 440 L 860 460 L 800 450 L 770 410 L 775 375 Z',
-    // Islande
-    'M 395 48 L 418 44 L 425 55 L 415 62 L 398 60 Z',
-  ];
-
-  svg += '<g opacity="0.25">';
-  continents.forEach(function(d) {
-    svg += '<path d="' + d + '" fill="#2a3550" stroke="#3a4560" stroke-width="1"/>';
-  });
-  svg += '</g>';
-
-  // Grille legere
-  for (var gx = 0; gx <= svgW; gx += 100) {
-    svg += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="' + svgH + '" stroke="#232840" stroke-width="0.5"/>';
+  // Initialiser la slippy map si besoin
+  if (!window._smap) {
+    window._smap = {
+      zoom: 2,
+      lat:  20,
+      lon:  10,
+      dragging: false,
+      startX: 0, startY: 0,
+      startOffX: 0, startOffY: 0,
+      offX: 0, offY: 0,
+    };
+    var el = document.getElementById('slippyMap');
+    if (!el) return;
+    el.addEventListener('mousedown',  smapDragStart);
+    el.addEventListener('mousemove',  smapDragMove);
+    el.addEventListener('mouseup',    smapDragEnd);
+    el.addEventListener('mouseleave', smapDragEnd);
+    el.addEventListener('wheel',      smapWheel, {passive:false});
+    el.addEventListener('touchstart', smapTouchStart, {passive:true});
+    el.addEventListener('touchmove',  smapTouchMove,  {passive:false});
+    el.addEventListener('touchend',   smapTouchEnd);
   }
-  for (var gy = 0; gy <= svgH; gy += 90) {
-    svg += '<line x1="0" y1="' + gy + '" x2="' + svgW + '" y2="' + gy + '" stroke="#232840" stroke-width="0.5"/>';
-  }
+  window._smapFiltered = filtered;
+  smapRender();
+  smapPlaceMarkers(filtered);
 
-  // Pins des destinations
-  var allDest = getFilteredDest();
-  allDest.forEach(function(dest) {
-    var coords = DEST_COORDS[dest.id];
-    if (!coords) return;
-    var cx = coords.x / 100 * svgW;
-    var cy = coords.y / 100 * svgH;
-    var flag = resolveFlag(dest.flag);
-    var emoji = resolveEmoji(dest.emoji);
-
-    svg += '<g class="map-pin" data-id="' + dest.id + '" data-x="' + coords.x + '" data-y="' + coords.y + '" style="cursor:pointer">';
-    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="14" fill="' + dest.color + '" opacity="0.2"/>';
-    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="9" fill="' + dest.color + '" opacity="0.85"/>';
-    svg += '<circle cx="' + cx + '" cy="' + cy + '" r="4" fill="white" opacity="0.9"/>';
-    svg += '<title>' + dest.name + ' - ' + dest.budget + '</title>';
-    svg += '</g>';
-  });
-
-  svg += '</svg>';
-
-  // Remplacer le contenu en gardant le tooltip
-  var tooltip = document.getElementById('mapTooltip');
-  container.innerHTML = svg;
-  container.appendChild(tooltip);
-  tooltip.style.display = 'none';
-
-  // Ajouter les event listeners sur les pins
-  container.querySelectorAll('.map-pin').forEach(function(pin) {
-    var id = pin.getAttribute('data-id');
-    var px = parseFloat(pin.getAttribute('data-x'));
-    var py = parseFloat(pin.getAttribute('data-y'));
-    pin.addEventListener('click', function() { openProg(id); });
-    pin.addEventListener('mouseenter', function(e) { showMapTip(e, id, px, py); });
-    pin.addEventListener('mouseleave', function() { hideMapTip(); });
-  });
-
-  document.getElementById('budgetCount').textContent = allDest.length + ' / ' + DEST.length + ' destinations';
-}
-
-function showMapTip(e, destId, pctX, pctY) {
-  var dest = DEST.find(function(d){ return d.id === destId; });
-  if (!dest) return;
-  var tt = document.getElementById('mapTooltip');
-  var flag = resolveFlag(dest.flag);
-  document.getElementById('ttName').textContent = flag + ' ' + dest.name;
-  document.getElementById('ttCountry').textContent = dest.country;
-  document.getElementById('ttBudget').textContent = dest.budget + ' / pers.';
-  document.getElementById('ttSeason').textContent = 'Saison : ' + dest.bestSeason;
-  tt.style.display = 'block';
-  tt.style.left = pctX + '%';
-  tt.style.top  = pctY + '%';
-}
-
-function hideMapTip() {
-  document.getElementById('mapTooltip').style.display = 'none';
-}
-
-// ══ COMPARATEUR ══════════════════════════════════
-var compareList = [];
-
-function toggleCompare(destId) {
-  var idx = compareList.indexOf(destId);
-  if (idx >= 0) {
-    compareList.splice(idx, 1);
-  } else {
-    if (compareList.length >= 3) { showToast2('Max 3 destinations a comparer !'); return; }
-    compareList.push(destId);
-  }
-  updateCompareBar();
-  renderCurrentView();
-}
-
-function initCompareBarEvents() {
-  var bar = document.getElementById('compareBar');
-  if (bar && !bar._evtSet) {
-    bar._evtSet = true;
-    bar.addEventListener('click', function(e) {
-      var cid = e.target.getAttribute('data-cid');
-      if (cid) toggleCompare(cid);
+  // Légende
+  var legendEl = document.getElementById('mapLegend');
+  if (legendEl) {
+    var regionLabels = {asie:'🌏 Asie',europe:'🇪🇺 Europe',afrique:'🌍 Afrique',amerique:'🌎 Amériques',premium:'💎 Premium'};
+    var regions = {};
+    filtered.forEach(function(d){ regions[d.region] = d.color; });
+    legendEl.innerHTML = '<span style="font-weight:600;color:var(--text);">Régions :</span>';
+    Object.keys(regionLabels).forEach(function(r){
+      if (!regions[r]) return;
+      legendEl.innerHTML += '<div class="map-legend-item"><div class="map-legend-dot" style="background:'+regions[r]+'"></div><span>'+regionLabels[r]+'</span></div>';
     });
+    legendEl.innerHTML += '<span style="margin-left:auto;color:var(--muted);font-size:10px;">Cliquez sur un marqueur</span>';
   }
 }
 
-function updateCompareBar() {
-  initCompareBarEvents();
-  for (var i = 0; i < 3; i++) {
-    var slot = document.getElementById('slot' + i);
-    if (!slot) continue;
-    if (i < compareList.length) {
-      var d = DEST.find(function(x){ return x.id === compareList[i]; });
-      var flag = d ? resolveFlag(d.flag) : '';
-      slot.className = 'compare-slot filled';
-      slot.innerHTML = '<span>' + flag + ' ' + (d ? d.name : '') + '</span>'
-        + '<button class="cs-remove" data-cid="' + compareList[i] + '">✕</button>';
-    } else {
-      slot.className = 'compare-slot';
-      slot.innerHTML = 'Destination ' + (i + 1);
+// ── Calculs slippy map ──────────────────────────────────
+function lon2x(lon, zoom) { return ((lon + 180) / 360) * Math.pow(2, zoom) * 256; }
+function lat2y(lat, zoom) {
+  var lr = lat * Math.PI / 180;
+  return (1 - Math.log(Math.tan(lr) + 1/Math.cos(lr)) / Math.PI) / 2 * Math.pow(2, zoom) * 256;
+}
+function x2lon(x, zoom) { return x / (Math.pow(2, zoom) * 256) * 360 - 180; }
+function y2lat(y, zoom) {
+  var n = Math.PI - 2 * Math.PI * y / (Math.pow(2, zoom) * 256);
+  return 180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+}
+
+function smapGetContainer() { return document.getElementById('slippyMap'); }
+function smapCenterPx() {
+  var el = smapGetContainer(); if (!el) return {x:0,y:0};
+  var s = window._smap;
+  return {
+    x: lon2x(s.lon, s.zoom) - el.offsetWidth  / 2,
+    y: lat2y(s.lat, s.zoom) - el.offsetHeight / 2,
+  };
+}
+
+function smapRender() {
+  var s   = window._smap;
+  var el  = smapGetContainer(); if (!el) return;
+  var W   = el.offsetWidth, H = el.offsetHeight;
+  var z   = Math.round(s.zoom);
+  var ctr = smapCenterPx();
+  var tiles = document.getElementById('slippyTiles'); if (!tiles) return;
+
+  var tileMinX = Math.floor(ctr.x / 256);
+  var tileMinY = Math.floor(ctr.y / 256);
+  var tileMaxX = Math.ceil((ctr.x + W) / 256);
+  var tileMaxY = Math.ceil((ctr.y + H) / 256);
+  var nTiles   = Math.pow(2, z);
+  var offX     = -(ctr.x - tileMinX * 256);
+  var offY     = -(ctr.y - tileMinY * 256);
+
+  tiles.innerHTML = '';
+  tiles.style.transform = '';
+
+  var servers = ['a','b','c'];
+  for (var tx = tileMinX; tx < tileMaxX; tx++) {
+    for (var ty = tileMinY; ty < tileMaxY; ty++) {
+      var ntx = ((tx % nTiles) + nTiles) % nTiles;
+      var nty = ty;
+      if (nty < 0 || nty >= nTiles) continue;
+      var srv = servers[(Math.abs(ntx + nty)) % 3];
+      var img = document.createElement('img');
+      img.src = 'https://' + srv + '.basemaps.cartocdn.com/dark_all/' + z + '/' + ntx + '/' + nty + '.png';
+      img.style.left = ((tx - tileMinX) * 256 + offX) + 'px';
+      img.style.top  = ((ty - tileMinY) * 256 + offY) + 'px';
+      img.draggable = false;
+      tiles.appendChild(img);
     }
   }
-  var btn = document.getElementById('btnCompare');
-  if (btn) btn.disabled = compareList.length < 2;
 }
 
-function openCompare() {
-  if (compareList.length < 2) return;
-  var dests = compareList.map(function(id){ return DEST.find(function(d){ return d.id === id; }); }).filter(Boolean);
-  
-  var maxBudget = Math.max.apply(null, dests.map(function(d){ return getBudgetNum(d); }));
-  var cols = document.getElementById('compareCols');
-  cols.style.gridTemplateColumns = 'repeat(' + dests.length + ', 1fr)';
-  cols.innerHTML = '';
+function smapLonLatToScreen(lon, lat) {
+  var s   = window._smap;
+  var el  = smapGetContainer(); if (!el) return {x:0,y:0};
+  var W   = el.offsetWidth, H = el.offsetHeight;
+  var px  = lon2x(lon, s.zoom);
+  var py  = lat2y(lat, s.zoom);
+  var cpx = lon2x(s.lon, s.zoom);
+  var cpy = lat2y(s.lat, s.zoom);
+  return { x: px - cpx + W/2, y: py - cpy + H/2 };
+}
 
-  // Calculer les "winners" par categorie
-  var budgets = dests.map(function(d){ return getBudgetNum(d); });
-  var minBudget = Math.min.apply(null, budgets);
+function smapPlaceMarkers(filtered) {
+  var container = document.getElementById('mapMarkers'); if (!container) return;
+  container.innerHTML = '';
+  container.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;';
 
-  dests.forEach(function(dest, i) {
-    var flag  = resolveFlag(dest.flag);
-    var emoji = resolveEmoji(dest.emoji);
-    var budgetNum = getBudgetNum(dest);
-    var budgetPct = maxBudget > 0 ? Math.round(budgetNum / maxBudget * 100) : 0;
-    var isCheapest = budgetNum === minBudget;
+  var GPS = {
+    bali:[115.09,-8.34], vietnam:[108.27,14.06], maroc:[-7.09,31.79],
+    albanie:[19.83,41.33], thailande:[100.99,15.87], japon:[138.25,36.20],
+    usa:[-119.00,37.09], australie:[133.77,-25.27], islande:[-19.02,64.96],
+    canada:[-71.73,53.13], grece:[21.82,39.07], portugal:[-8.22,39.40],
+    mexique:[-102.55,23.63], perou:[-75.01,-9.19], tanzanie:[34.89,-6.37],
+    colombie:[-74.30,4.57], georgie:[43.35,42.31], java:[110.01,-7.61],
+    costarica:[-83.75,9.75], espagne:[-3.75,40.46], egypte:[30.80,26.82],
+  };
 
-    // Score activites (nb de tags)
-    var actScore = dest.tags ? dest.tags.length : 0;
-    var stars = '';
-    for (var s = 0; s < 5; s++) {
-      stars += '<span class="cc-star">' + (s < Math.min(5, actScore) ? '★' : '☆') + '</span>';
-    }
+  filtered.forEach(function(dest) {
+    var gps = GPS[dest.id]; if (!gps) return;
+    var pos = smapLonLatToScreen(gps[0], gps[1]);
+    var c   = dest.color;
+    var flag = resolveFlag(dest.flag);
 
-    var col = document.createElement('div');
-    col.className = 'compare-col';
-    col.innerHTML =
-      '<div class="cc-banner" style="background:linear-gradient(135deg,' + dest.colorDark + ' 0%,#0a0d12 100%);">'
-        + '<div class="cc-emoji-bg">' + emoji + '</div>'
-        + '<span class="cc-flag">' + flag + '</span>'
-        + '<div class="cc-name"><h3>' + dest.name + '</h3><div class="sub">' + dest.country + '</div></div>'
-      + '</div>'
-      + '<div class="cc-body">'
-        + '<div class="cc-row"><div class="cc-row-label">Budget / pers.</div>'
-          + '<div class="cc-row-val" style="color:' + dest.color + '">' + dest.budget + '</div>'
-          + '<div class="cc-row-bar" style="width:' + budgetPct + '%;background:' + dest.color + '"></div>'
-          + (isCheapest ? '<span class="winner-badge">🏆 Moins cher</span>' : '')
-        + '</div>'
-        + '<div class="cc-row"><div class="cc-row-label">Meilleure saison</div>'
-          + '<div class="cc-row-val">' + dest.bestSeason + '</div>'
-        + '</div>'
-        + '<div class="cc-row"><div class="cc-row-label">Activites</div>'
-          + '<div class="cc-score">' + stars + '</div>'
-          + '<div class="cc-tags" style="margin-top:6px;">'
-            + dest.tags.map(function(t){ return '<span class="cc-tag">' + t + '</span>'; }).join('')
-          + '</div>'
-        + '</div>'
-        + '<div class="cc-row"><div class="cc-row-label">Region</div>'
-          + '<div class="cc-row-val">' + dest.region.charAt(0).toUpperCase() + dest.region.slice(1) + '</div>'
-        + '</div>'
-        + '<div class="cc-row"><div class="cc-row-label">Description</div>'
-          + '<div style="font-size:11px;color:var(--muted);line-height:1.5;margin-top:4px;">' + dest.description + '</div>'
-        + '</div>'
-        + '<div class="cc-row">'
-          + '<button data-prog="' + dest.id + '" style="width:100%;margin-top:4px;background:linear-gradient(135deg,' + dest.color + ',#0a0d12 200%);border:1px solid ' + dest.color + ';border-radius:8px;padding:9px;font-family:Outfit,sans-serif;font-size:12px;font-weight:600;color:#000;cursor:pointer;">Voir le programme</button>'
-        + '</div>'
-      + '</div>';
+    var marker = document.createElement('div');
+    marker.className = 'map-marker';
+    marker.style.left = pos.x + 'px';
+    marker.style.top  = pos.y + 'px';
+    marker.style.pointerEvents = 'auto';
+    marker.innerHTML =
+      '<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">' +
+        '<circle cx="20" cy="20" r="18" fill="' + c + '" opacity="0.2"/>' +
+        '<circle cx="20" cy="20" r="13" fill="' + c + '"/>' +
+        '<circle cx="20" cy="20" r="13" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>' +
+        '<circle cx="15" cy="15" r="4" fill="rgba(255,255,255,0.3)"/>' +
+        '<circle cx="20" cy="20" r="3.5" fill="rgba(255,255,255,0.9)"/>' +
+      '</svg>';
 
-    cols.appendChild(col);
-  });
+    marker.addEventListener('click', (function(d, lon, lat) {
+      return function(e) {
+        e.stopPropagation();
+        showMapPopup(d, lon, lat);
+      };
+    })(dest, gps[0], gps[1]));
 
-  document.getElementById('compareModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-
-  // Event delegation pour les boutons dans la modale
-  document.getElementById('compareCols').addEventListener('click', function(e) {
-    var prog = e.target.getAttribute('data-prog');
-    if (prog) { closeCompare(); openProg(prog); }
+    container.appendChild(marker);
   });
 }
 
-function closeCompare() {
-  document.getElementById('compareModal').classList.remove('open');
-  document.body.style.overflow = '';
+function showMapPopup(dest, lon, lat) {
+  var popup = document.getElementById('mapPopup'); if (!popup) return;
+  var pos   = smapLonLatToScreen(lon, lat);
+  var flag  = resolveFlag(dest.flag);
+  var c     = dest.color;
+  var tagsHtml = dest.tags.slice(0,3).map(function(t){
+    return '<span style="background:#232840;border-radius:5px;padding:2px 7px;font-size:10px;color:#9ba3c0;margin-right:3px;">' + t + '</span>';
+  }).join('');
+
+  popup.innerHTML =
+    '<button onclick="document.getElementById(\'mapPopup\').style.display=\'none\'" ' +
+      'style="position:absolute;top:8px;right:10px;background:none;border:none;color:#6b7280;font-size:16px;cursor:pointer;padding:2px 6px;border-radius:4px;">✕</button>' +
+    '<div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#e8eaf0;">' + flag + ' ' + dest.name + '</div>' +
+    '<div style="font-size:11px;color:#6b7280;margin-bottom:8px;">' + dest.country + ' &bull; ' + dest.bestSeason + '</div>' +
+    '<div style="font-size:17px;font-weight:700;margin-bottom:10px;color:' + c + '">' + dest.budget +
+      '<span style="font-size:11px;color:#6b7280;font-weight:400;"> / pers.</span></div>' +
+    '<div style="margin-bottom:12px;">' + tagsHtml + '</div>';
+
+  var btn = document.createElement('button');
+  btn.style.cssText = 'width:100%;background:linear-gradient(135deg,#f5c842,#e8833a);color:#000;border:none;border-radius:8px;padding:9px;font-weight:700;font-size:13px;cursor:pointer;';
+  btn.textContent = 'Voir le programme →';
+  btn.addEventListener('click', (function(id) {
+    return function() {
+      document.getElementById('mapPopup').style.display = 'none';
+      openProg(id);
+    };
+  })(dest.id));
+  popup.appendChild(btn);
+
+  popup.style.display = 'block';
+  popup.style.left = pos.x + 'px';
+  popup.style.top  = pos.y + 'px';
 }
 
-function showToast2(msg) {
-  var t = document.getElementById('toast2');
-  if (!t) {
-    t = document.createElement('div');
-    t.id = 'toast2';
-    t.style.cssText = 'position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:#1e2535;border:1px solid #2a2f42;color:#e8eaf2;padding:10px 20px;border-radius:10px;font-size:13px;box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;';
-    document.body.appendChild(t);
+// ── Drag ────────────────────────────────────────────────
+function smapDragStart(e) {
+  var s = window._smap; if (!s) return;
+  s.dragging = true;
+  s.startX = e.clientX; s.startY = e.clientY;
+  s.startLon = s.lon; s.startLat = s.lat;
+}
+function smapDragMove(e) {
+  var s = window._smap; if (!s || !s.dragging) return;
+  var el = smapGetContainer(); if (!el) return;
+  var dx = e.clientX - s.startX;
+  var dy = e.clientY - s.startY;
+  var scale = 256 * Math.pow(2, s.zoom);
+  s.lon = s.startLon - dx / scale * 360;
+  s.lat = y2lat(lat2y(s.startLat, s.zoom) - dy, s.zoom);
+  s.lon = Math.max(-180, Math.min(180, s.lon));
+  smapRender();
+  smapPlaceMarkers(window._smapFiltered || []);
+}
+function smapDragEnd() { if (window._smap) window._smap.dragging = false; }
+
+// ── Touch ───────────────────────────────────────────────
+function smapTouchStart(e) {
+  if (e.touches.length === 1) {
+    smapDragStart({clientX: e.touches[0].clientX, clientY: e.touches[0].clientY});
   }
-  t.textContent = msg; t.style.opacity = '1';
-  clearTimeout(t._t); t._t = setTimeout(function(){ t.style.opacity = '0'; }, 2600);
+}
+function smapTouchMove(e) {
+  e.preventDefault();
+  if (e.touches.length === 1) {
+    smapDragMove({clientX: e.touches[0].clientX, clientY: e.touches[0].clientY});
+  }
+}
+function smapTouchEnd() { smapDragEnd(); }
+
+// ── Zoom ────────────────────────────────────────────────
+function smapWheel(e) {
+  e.preventDefault();
+  slippyZoom(e.deltaY < 0 ? 0.5 : -0.5);
+}
+function slippyZoom(delta) {
+  var s = window._smap; if (!s) return;
+  s.zoom = Math.max(1, Math.min(8, s.zoom + delta));
+  smapRender();
+  smapPlaceMarkers(window._smapFiltered || []);
 }
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeModal(); closeCompare(); }
+// Fermer popup au clic sur la carte
+document.addEventListener('click', function(e) {
+  var popup = document.getElementById('mapPopup');
+  if (popup && !popup.contains(e.target) && !e.target.closest('.map-marker')) {
+    popup.style.display = 'none';
+  }
 });
-
-// Init budget count
-document.getElementById('budgetCount').textContent = DEST.length + ' / ' + DEST.length + ' destinations';
-renderCards('all');
 </script>
 </body>
 </html>
