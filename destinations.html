@@ -222,7 +222,7 @@ input[type=range] { flex:1; min-width:150px; accent-color:var(--accent); cursor:
 <!-- BARRE BUDGET -->
 <div class="budget-filter-bar" id="budgetBar">
   <label>Budget max :</label>
-  <input type="range" id="budgetSlider" min="500" max="3500" step="100" value="3500" oninput="onBudgetSlider()">
+  <input type="range" id="budgetSlider" min="500" max="4000" step="100" value="4000" oninput="onBudgetSlider()">
   <span class="budget-val" id="budgetVal">Tous</span>
   <span class="budget-count" id="budgetCount"></span>
 </div>
@@ -1974,8 +1974,17 @@ var currentFilter = 'all';
 
 function renderCards(filter) {
   var grid = document.getElementById('destGrid');
+  if (!grid) return;
   grid.innerHTML = '';
-  var filtered = filter === 'all' ? DEST : DEST.filter(function(d) { return d.region === filter; });
+  var filtered = getFilteredDest();
+
+  var countEl = document.getElementById('budgetCount');
+  if (countEl) countEl.textContent = filtered.length + ' / ' + DEST.length + ' destinations';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--muted);font-size:14px;">Aucune destination dans ce budget. Augmentez le slider !</div>';
+    return;
+  }
 
   filtered.forEach(function(dest, i) {
     var card = document.createElement('div');
@@ -1983,9 +1992,12 @@ function renderCards(filter) {
     card.style.animationDelay = (i * 0.07) + 's';
     if (dest.premium) card.style.border = '1px solid rgba(245,200,66,0.35)';
 
-    var flag = resolveFlag(dest.flag);
+    var flag  = resolveFlag(dest.flag);
     var emoji = resolveEmoji(dest.emoji);
     var premiumBadge = dest.premium ? '<div class="premium-tag">Destination Premium</div>' : '';
+    var inCompare  = compareList.indexOf(dest.id) >= 0;
+    var cmpClass   = 'compare-add-btn' + (inCompare ? ' in-compare' : '');
+    var cmpLabel   = inCompare ? '✕ Retirer' : '+ Comparer';
 
     card.innerHTML =
       '<div class="dest-banner" style="background:linear-gradient(135deg,' + dest.colorDark + ' 0%,#0a0d12 100%);">' +
@@ -2002,9 +2014,20 @@ function renderCards(filter) {
           '<div class="qi"><div class="qi-val">' + dest.bestSeason + '</div><div class="qi-lbl">Saison</div></div>' +
         '</div>' +
         '<div class="tags">' + dest.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
-        '<p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px;">' + dest.description + '</p>' +
-        '<button class="btn-prog" onclick="openProg(\'' + dest.id + '\')">Voir le programme 10 jours</button>' +
+        '<p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;">' + dest.description + '</p>' +
+        '<div style="display:flex;gap:8px;">' +
+          '<button class="btn-prog" style="flex:1" onclick="openProg(\'' + dest.id + '\')">Voir le programme</button>' +
+          '<button class="' + cmpClass + '" data-cmpid="' + dest.id + '">' + cmpLabel + '</button>' +
+        '</div>' +
       '</div>';
+
+    // Event listener pour le bouton comparer
+    var cmpBtn = card.querySelector('[data-cmpid]');
+    if (cmpBtn) {
+      cmpBtn.addEventListener('click', function() {
+        toggleCompare(dest.id);
+      });
+    }
 
     grid.appendChild(card);
   });
@@ -2105,17 +2128,18 @@ var DEST_COORDS = {
 
 // Budget numerique pour chaque destination
 function getBudgetNum(dest) {
-  var s = dest.budget.replace(/[^0-9 ]/g, '').trim().split(' ')[0];
+  // Enlever tout sauf les chiffres -> "~1 200 EUR" devient "1200"
+  var s = dest.budget.replace(/[^0-9]/g, '');
   return parseInt(s) || 0;
 }
 
 // ══ BUDGET SLIDER ══════════════════════════════════
-var currentBudgetMax = 9999;
+var currentBudgetMax = 99999;
 function onBudgetSlider() {
   var val = parseInt(document.getElementById('budgetSlider').value);
-  currentBudgetMax = val;
+  currentBudgetMax = val >= 4000 ? 99999 : val;
   var valEl = document.getElementById('budgetVal');
-  valEl.textContent = val >= 3500 ? 'Tous' : val + ' EUR';
+  valEl.textContent = val >= 4000 ? 'Tous' : val + ' EUR';
   renderCurrentView();
 }
 
